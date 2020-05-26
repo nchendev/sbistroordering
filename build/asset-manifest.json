@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/sbistro/ordering/static/css/main.5f361e03.chunk.css",
-    "main.js": "/sbistro/ordering/static/js/main.548c2e02.chunk.js",
-    "main.js.map": "/sbistro/ordering/static/js/main.548c2e02.chunk.js.map",
-    "runtime-main.js": "/sbistro/ordering/static/js/runtime-main.86291240.js",
-    "runtime-main.js.map": "/sbistro/ordering/static/js/runtime-main.86291240.js.map",
-    "static/js/2.7a7190c1.chunk.js": "/sbistro/ordering/static/js/2.7a7190c1.chunk.js",
-    "static/js/2.7a7190c1.chunk.js.map": "/sbistro/ordering/static/js/2.7a7190c1.chunk.js.map",
-    "index.html": "/sbistro/ordering/index.html",
-    "precache-manifest.7705d818a272c5a6c5134a8ea8c1df30.js": "/sbistro/ordering/precache-manifest.7705d818a272c5a6c5134a8ea8c1df30.js",
-    "service-worker.js": "/sbistro/ordering/service-worker.js",
-    "static/css/main.5f361e03.chunk.css.map": "/sbistro/ordering/static/css/main.5f361e03.chunk.css.map",
-    "static/js/2.7a7190c1.chunk.js.LICENSE.txt": "/sbistro/ordering/static/js/2.7a7190c1.chunk.js.LICENSE.txt",
-    "static/media/logo.svg": "/sbistro/ordering/static/media/logo.5d5d9eef.svg"
+    "main.css": "/sbistroordering/static/css/main.5f361e03.chunk.css",
+    "main.js": "/sbistroordering/static/js/main.81a2ece3.chunk.js",
+    "main.js.map": "/sbistroordering/static/js/main.81a2ece3.chunk.js.map",
+    "runtime-main.js": "/sbistroordering/static/js/runtime-main.53b169fc.js",
+    "runtime-main.js.map": "/sbistroordering/static/js/runtime-main.53b169fc.js.map",
+    "static/js/2.7a7190c1.chunk.js": "/sbistroordering/static/js/2.7a7190c1.chunk.js",
+    "static/js/2.7a7190c1.chunk.js.map": "/sbistroordering/static/js/2.7a7190c1.chunk.js.map",
+    "index.html": "/sbistroordering/index.html",
+    "precache-manifest.3937e222294c8122fe4135b785d433ca.js": "/sbistroordering/precache-manifest.3937e222294c8122fe4135b785d433ca.js",
+    "service-worker.js": "/sbistroordering/service-worker.js",
+    "static/css/main.5f361e03.chunk.css.map": "/sbistroordering/static/css/main.5f361e03.chunk.css.map",
+    "static/js/2.7a7190c1.chunk.js.LICENSE.txt": "/sbistroordering/static/js/2.7a7190c1.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/sbistroordering/static/media/logo.5d5d9eef.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.86291240.js",
+    "static/js/runtime-main.53b169fc.js",
     "static/js/2.7a7190c1.chunk.js",
     "static/css/main.5f361e03.chunk.css",
-    "static/js/main.548c2e02.chunk.js"
+    "static/js/main.81a2ece3.chunk.js"
   ]
 }
