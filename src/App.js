@@ -1,41 +1,26 @@
-import React from 'react'
-import {Component} from 'react';
-import Menu from './components/Menu.js';
-import Order from './components/Order.js';
-
-//import logo from './logo.svg';
+import React from 'react';
+import logo from './logo.svg';
 import './App.css';
 
-class App extends Component {
-  //fetch("https://www.neckch.in/sbistro/menu.json")
-  //  .then(res => res.json())
-  //  .then(response => this.setState(response));
-  state = {
-    categories: {
-      Appetizer: [
-        {
-          spicy: 0,
-          english: 'Egg Roll',
-          chinese: '蛋卷',
-          price: '2.10'
-        },
-        {
-          spicy: 1,
-          english: 'Spring Roll',
-          chinese: '春卷',
-          price: '4.00'
-        }
-      ]
-    }
-  }
-  render() {
-    return (
-      <div className="App">
-        <Menu/>
-        <Order/>
-      </div>
-    );
-  }
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
+  );
 }
 
 export default App;
