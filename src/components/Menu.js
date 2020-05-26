@@ -1,62 +1,38 @@
-import React from 'react';
-import {Component} from 'react';
+import React, { Component } from 'react'
 import MenuCategory from './MenuCategory';
-import MenuItem from './MenuItem';
+import PropTypes from 'prop-types'
 
-export class Menu extends Component{
+class Menu extends Component{
   render() {
     console.log(this.props.menu);
     console.log(Object.keys(this.props.menu));
-    return Object.keys(this.props.menu).map((menuCategory, menuIndex) => (
+    return (
       <div>
-        <h1>{menuCategory}</h1>
-        <MenuCategory menuCategory = {this.props.menu[menuCategory]}/>
+        <h1>Menu</h1>
+        {
+          Object.keys(this.props.menu).map((menuCategory, menuIndex) => 
+          <div>
+              <h2>{menuCategory}</h2>
+              <div className="categorycontainer" style={categorycontainerstyle}>
+              <MenuCategory menuCategory = {this.props.menu[menuCategory]}/>
+            </div>
+          </div>
+          )
+        }
       </div>
-      
-      /**<ul>
-        {this.props.menu.menuCategory.map((menuItem) => 
-          <li>
-            <h2>{menuItem.english}</h2>
-          </li> 
-        )}
-      </ul>**/
-      
-      //<TodoItem key={todo.id} todo={todo} markComplete={this.props.markComplete} delTodo={this.props.delTodo} />
-    ));
-    /**return(
-      
-      Object.keys(menu).map((menuCategory, menuItems) => (
-        menuItems.map((menuItem) => (
-          menuItem.english
-        ))
-      ))
     );
-    return (Object.keys(menu).map((menuCategory, menuItems) => ({
-      menuItems.map((menuItem) => ({
-        <div>menuItem.english</div>
-      }))
-    ));**/
-    /**return menu.map((menuCategory) => 
-    <div>
-      {menuCategory}
-      <ul>
-        {menuCategory}
-      </ul>
-    </div>
-    )**/
-    /**return menu.map((menuCategory) => {
-      menuCategory.map((menuItem) => {
-        console.log(menuItem);
-      })
-      console.log(menuCategory);
-    })**/
-    /**return menu.forEach((menuCategory, menuItems) => {
-      console.log(menuCategory);
-      menuItems.forEach((menuItem) => {
-          <MenuItem menuItem={menuItem}/>
-      })
-    });**/
   }
 }
 
+// PropTypes
+Menu.propTypes = {
+  menu: PropTypes.object.isRequired
+}
+
+const categorycontainerstyle = {
+  display: "flex",
+  flexflow: "row wrap",
+  padding: "5px 5px 5px 5px",
+  margins: "5px 5px 5px 5px",
+}
 export default Menu;

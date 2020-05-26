@@ -35,6 +35,13 @@ class App extends Component {
           chinese: 'lazy',
           price: '2.10',
           sizes:'1'
+        },
+        {
+          spicy: 1,
+          english: 'Hot and Sour Soup',
+          chinese: 'lazy',
+          price: '2.10',
+          sizes:'1'
         }
       ]
     }
