@@ -23,7 +23,7 @@ class App extends Component {
 
   componentDidMount() {
     axios.get('https://www.neckch.in/sbistro/menu.json')
-      .then(res => this.setState({menu: res.data}))
+      .then(res => this.setState({todos: ...res.data}))
   }
   render() {
     console.log(this.state.menu)
