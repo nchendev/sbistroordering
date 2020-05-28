@@ -21,13 +21,13 @@ class Menu extends Component{
         {
           Object.keys(this.props.menu).map((menuCategory, menuIndex) => 
           <Paper>
-            <ExpansionPanel>
+            <ExpansionPanel TransitionProps={{ unmountOnExit: true }}>
               <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"
                 id="panel1a-header"
               >
-                <h2>{menuCategory}</h2>
+                <p>{menuCategory}</p>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
                 <Grid

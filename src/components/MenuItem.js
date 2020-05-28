@@ -11,7 +11,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 
-
 export class MenuItem extends Component {
 
   render() {
