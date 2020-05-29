@@ -1,5 +1,4 @@
-import React from 'react'
-import {Component} from 'react';
+import React, { useState, useEffect } from 'react';
 import {BrowserRouter as Router, Route } from 'react-router-dom';
 import axios from 'axios';
 
@@ -12,31 +11,40 @@ import './App.css';
 import 'typeface-roboto';
 import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
 import ThreeDRotation from '@material-ui/icons/ThreeDRotation';
+import { faBoxTissue } from '@fortawesome/free-solid-svg-icons';
 
-class App extends Component {
-  //fetch("https://www.neckch.in/sbistro/menu.json")
-  //  .then(res => res.json())
-  //  .then(response => this.setState(response));
-  state = {
-    menu: {} // {}
+function App() {
+
+  const [menu, setMenu] = React.useState({});
+  const [order, setOrder] = React.useState([{"english":"Spring Roll (4)","chinese":"春卷 (4)","spicy":"0","price":"$4.00","amount":1,"note":""}]);
+
+  const addToOrder = (orderItem) => {
+    console.log(JSON.stringify(orderItem));
+    setOrder([...order, orderItem]);
+    //let menuCopy = this.state.menu;
+    //let orderCopy = this.state.order;
+    //this.setState({ 
+    //  menu: menuCopy,
+    //  order: {...orderCopy, orderItem}
+    //});
+    //this.state.order= {...this.state.order, orderItem};
+    console.log(JSON.stringify(order));
   }
 
-  componentDidMount() {
+  useEffect(() => {
+    console.log('trigger use effect hook');
     axios.get('https://www.neckch.in/sbistro/menu.json')
-      .then(res => this.setState({menu: res.data}))
-  }
-  render() {
-    console.log(this.state.menu)
-    console.log(typeof(this.state.menu))
-    return (
-      <Router>
-        <div className="App">
-          <Menu menu={this.state.menu}/>
-          <Order/>
-        </div>
-      </Router>
-    );
-  }
+      .then(res => setMenu(res.data,))
+    }, []);
+
+  return (
+    <Router>
+      <div className="App">
+        <Menu menu={menu} addToOrder={addToOrder}/>
+        <Order order={order}/>
+      </div>
+    </Router>
+  );
 }
 
 export default App;
