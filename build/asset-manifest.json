@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/sbistroordering/static/css/main.050523cc.chunk.css",
-    "main.js": "/sbistroordering/static/js/main.a9a425a9.chunk.js",
-    "main.js.map": "/sbistroordering/static/js/main.a9a425a9.chunk.js.map",
-    "runtime-main.js": "/sbistroordering/static/js/runtime-main.53b169fc.js",
-    "runtime-main.js.map": "/sbistroordering/static/js/runtime-main.53b169fc.js.map",
-    "static/css/2.c5c85673.chunk.css": "/sbistroordering/static/css/2.c5c85673.chunk.css",
-    "static/js/2.8ea25f0d.chunk.js": "/sbistroordering/static/js/2.8ea25f0d.chunk.js",
-    "static/js/2.8ea25f0d.chunk.js.map": "/sbistroordering/static/js/2.8ea25f0d.chunk.js.map",
-    "index.html": "/sbistroordering/index.html",
-    "precache-manifest.351ee519a9c74e8119199a1b001460e3.js": "/sbistroordering/precache-manifest.351ee519a9c74e8119199a1b001460e3.js",
-    "service-worker.js": "/sbistroordering/service-worker.js",
-    "static/css/2.c5c85673.chunk.css.map": "/sbistroordering/static/css/2.c5c85673.chunk.css.map",
-    "static/css/main.050523cc.chunk.css.map": "/sbistroordering/static/css/main.050523cc.chunk.css.map",
-    "static/js/2.8ea25f0d.chunk.js.LICENSE.txt": "/sbistroordering/static/js/2.8ea25f0d.chunk.js.LICENSE.txt",
-    "static/media/index.css": "/sbistroordering/static/media/roboto-latin-900italic.ebf6d164.woff2"
+    "main.css": "/sbordering/static/css/main.050523cc.chunk.css",
+    "main.js": "/sbordering/static/js/main.d9693027.chunk.js",
+    "main.js.map": "/sbordering/static/js/main.d9693027.chunk.js.map",
+    "runtime-main.js": "/sbordering/static/js/runtime-main.531a60e2.js",
+    "runtime-main.js.map": "/sbordering/static/js/runtime-main.531a60e2.js.map",
+    "static/css/2.c45f7f3e.chunk.css": "/sbordering/static/css/2.c45f7f3e.chunk.css",
+    "static/js/2.8ea25f0d.chunk.js": "/sbordering/static/js/2.8ea25f0d.chunk.js",
+    "static/js/2.8ea25f0d.chunk.js.map": "/sbordering/static/js/2.8ea25f0d.chunk.js.map",
+    "index.html": "/sbordering/index.html",
+    "precache-manifest.d25f77262f75e6f929575859fb291c49.js": "/sbordering/precache-manifest.d25f77262f75e6f929575859fb291c49.js",
+    "service-worker.js": "/sbordering/service-worker.js",
+    "static/css/2.c45f7f3e.chunk.css.map": "/sbordering/static/css/2.c45f7f3e.chunk.css.map",
+    "static/css/main.050523cc.chunk.css.map": "/sbordering/static/css/main.050523cc.chunk.css.map",
+    "static/js/2.8ea25f0d.chunk.js.LICENSE.txt": "/sbordering/static/js/2.8ea25f0d.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/sbordering/static/media/roboto-latin-900italic.ebf6d164.woff2"
   },
   "entrypoints": [
-    "static/js/runtime-main.53b169fc.js",
-    "static/css/2.c5c85673.chunk.css",
+    "static/js/runtime-main.531a60e2.js",
+    "static/css/2.c45f7f3e.chunk.css",
     "static/js/2.8ea25f0d.chunk.js",
     "static/css/main.050523cc.chunk.css",
-    "static/js/main.a9a425a9.chunk.js"
+    "static/js/main.d9693027.chunk.js"
   ]
 }
