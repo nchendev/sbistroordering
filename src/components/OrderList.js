@@ -10,6 +10,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
+import OrderItem from './OrderItem';
 
 import { faPepperHot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -31,6 +32,22 @@ function OrderList(props) {
   return (
     <div>
       <h2>Order List</h2>
+      {
+        props.order.map((orderItem, itemIndex) =>(
+          <Grid
+            container
+            direction="column"
+            justify="flex-start"
+            alignItems="flex-start"
+            //xs={4} sm = {2} md = {2} lg = {1}
+            // implement editing orders and prettier display and shit here in future, get rid of table
+          >
+            
+            <OrderItem orderItem={orderItem}/>
+          </Grid>
+        ))
+      }
+
       <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
