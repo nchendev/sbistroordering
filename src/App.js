@@ -16,7 +16,7 @@ import { faBoxTissue } from '@fortawesome/free-solid-svg-icons';
 function App() {
 
   const [menu, setMenu] = React.useState({});
-  const [order, setOrder] = React.useState([{"english":"Spring Roll (4)","chinese":"春卷 (4)","spicy":"0","price":"$4.00","amount":1,"note":""}]);
+  const [order, setOrder] = React.useState([]);
 
   const addToOrder = (orderItem) => {
     console.log(JSON.stringify(orderItem));
@@ -31,6 +31,16 @@ function App() {
     console.log(JSON.stringify(order));
   }
 
+  const removeFromOrder = (itemIndex) => {
+    console.log(itemIndex);
+    let cpy = order.slice(0);
+    setOrder([...(cpy.slice(0, itemIndex)),...(cpy.slice(itemIndex+1))]);
+    //order.splice(itemIndex, 1);
+  }
+
+  const editOrder= () => {
+    
+  }
   useEffect(() => {
     console.log('trigger use effect hook');
     axios.get('https://www.neckch.in/sbistro/menu.json')
@@ -41,7 +51,7 @@ function App() {
     <Router>
       <div className="App">
         <Menu menu={menu} addToOrder={addToOrder}/>
-        <Order order={order}/>
+        <Order order={order} removeFromOrder={removeFromOrder} editOrder={editOrder}/>
       </div>
     </Router>
   );

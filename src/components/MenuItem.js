@@ -82,7 +82,7 @@ function MenuItem (props) {
           <div className="itemcentered">{props.menuItem.english}</div>
         </Paper>
       </Grid>
-
+      
       <Dialog open={showDialog} onClose={handleClick} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">
           {props.menuItem.id + " "}
