@@ -44,6 +44,9 @@ const useStyles = makeStyles((theme) => ({
   fabSpace: {
     height: '160px',
     bottom: 0,
+  },
+  cat: {
+    marginTop: theme.spacing(1),
   }
 }));
 
@@ -73,7 +76,7 @@ function Menu(props) {
           </GridList>
 
           {/* Items within category */}
-          <MenuCategory className={classes.heading} menuCategory = {selectedCategory} addToOrder = {props.addToOrder}/>
+          <MenuCategory className={classes.cat} menuCategory = {selectedCategory} addToOrder = {props.addToOrder}/>
           
           {/* Space for Fab */}
           {/*<Paper className={classes.fabSpace}/>*/}

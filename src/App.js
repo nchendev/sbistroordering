@@ -24,6 +24,7 @@ import 'typeface-roboto';
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    direction: 'column',
     flexGrow: 1,
     justifyContent : 'space-between',
   },
@@ -116,13 +117,14 @@ function App() {
         // ordering step
         <div className={classes.root}>
           {/** Header**/}
-          <AppBar position="sticky">
+          <AppBar position="fixed">
             <Toolbar>
               <Typography variant="h6" className={classes.title}>
                 Menu
               </Typography>
             </Toolbar>
-          </AppBar>
+          </AppBar> 
+          <Toolbar/>
 
           {/** Content **/}
           <Paper elevation={2} className={classes.paper}>

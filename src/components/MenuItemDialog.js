@@ -76,7 +76,6 @@ export default function MenuItemDialog(props) {
               title={props.menuItem.english}
             />
             <TextField
-              autoFocus
               margin="dense"
               id="order-amount"
               label="Number to Order"
@@ -103,11 +102,11 @@ export default function MenuItemDialog(props) {
             </TextField>
             
             <TextField
-              autoFocus
               margin="dense"
               id="customer-note"
               label="Note/Modifications"
               text="test"
+              placeholder=" "
               value={note}
               onChange={handleChangeNote}
               fullWidth
