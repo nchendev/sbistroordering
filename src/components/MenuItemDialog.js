@@ -67,8 +67,8 @@ export default function MenuItemDialog(props) {
           <DialogTitle id="form-dialog-title">
             {props.menuItem.id +". "}
             {props.menuItem.english + " "}  
-            {[...Array(parseInt(props.menuItem.spicy))].map((e, i) => <FontAwesomeIcon icon={faPepperHot} style={{color:"red"}}/>)
-          }</DialogTitle>
+            {[...Array(parseInt(props.menuItem.spicy))].map((e, i) => <FontAwesomeIcon icon={faPepperHot} style={{color:"red"}}/>)}
+          </DialogTitle>
           <DialogContent dividers>
             <CardMedia
               className={classes.media}
