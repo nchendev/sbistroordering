@@ -6,7 +6,6 @@ import Grid from '@material-ui/core/Grid';
 import MenuItem from './MenuItem';
 
 function MenuCategory(props) {
-
   console.log(typeof(props.menuCategory))
   return props.menuCategory.map((menuItem) => ( 
     <Grid 

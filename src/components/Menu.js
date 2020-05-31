@@ -9,42 +9,74 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Typography from '@material-ui/core/Typography';
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
+import GridListTileBar from '@material-ui/core/GridListTileBar';
+import ListSubheader from '@material-ui/core/ListSubheader';
 
 import MenuCategory from './MenuCategory';
 
+const useStyles = makeStyles((theme) => ({
+  exproot: {
+    width: '100%',
+  },
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
+    backgroundColor: theme.palette.background.paper,
+  },
+  gridList: {
+    flexWrap: 'nowrap',
+    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+    transform: 'translateZ(0)',
+    
+  },
+  title: {
+    color: theme.palette.primary.light,
+  },
+  titleBar: {
+    background:
+      'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
+  },
+  fabSpace: {
+    height: '160px',
+    bottom: 0,
+  }
+}));
 
 function Menu(props) {
+  console.log(typeof(props.menu['Appetizer']));
   const classes = useStyles();
-  
+  const [selectedCategory, setSelectedCategory] = React.useState([]);
+
+  const handleTileClick = (menuCategory) => {
+    console.log(typeof(menuCategory));
+    console.log(menuCategory.menuCategory);
+
+    setSelectedCategory(props.menu[menuCategory.menuCategory]);
+  }
+
   return (
-    <div className={classes.root}>
-      <h1>Menu</h1>
+    <div >
       {
-        Object.keys(props.menu).map((menuCategory, menuIndex) => 
-        <Paper square>
-          <ExpansionPanel square TransitionProps={{ unmountOnExit: true }}>
-            <ExpansionPanelSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              <Typography className={classes.heading}>{menuCategory}</Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              <Grid
-                container
-                direction="row"
-                justify="flex-start"
-                alignItems="flex-start"
-                flexwrap="wrap"
-                spacing={2}
-              >
-                <MenuCategory className={classes.heading} menuCategory = {props.menu[menuCategory]} addToOrder = {props.addToOrder}/>
-              </Grid>
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
-        </Paper>
-        )
+        <div className={classes.root}>
+          {/* Categories */}
+          <GridList cellHeight={180} className={classes.gridList}>
+            { Object.keys(props.menu).map((menuCategory, menuIndex) =>(
+              <GridListTile key={menuCategory} style={{ height: 'fixed', width: 'auto' }} onClick={() => handleTileClick({menuCategory})}>
+                <ListSubheader component="div">{menuCategory}</ListSubheader>
+              </GridListTile>
+            ))}
+          </GridList>
+
+          {/* Items within category */}
+          <MenuCategory className={classes.heading} menuCategory = {selectedCategory} addToOrder = {props.addToOrder}/>
+          
+          {/* Space for Fab */}
+          {/*<Paper className={classes.fabSpace}/>*/}
+        </div>
       }
     </div>
   );
@@ -61,14 +93,4 @@ const categorycontainerstyle = {
   padding: "5px 5px 5px 5px",
   margins: "5px 5px 5px 5px",
 }
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular,
-  },
-}));
 export default Menu;

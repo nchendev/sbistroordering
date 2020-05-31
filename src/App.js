@@ -2,7 +2,17 @@ import React, { useState, useEffect } from 'react';
 import {BrowserRouter as Router, Route } from 'react-router-dom';
 import axios from 'axios';
 
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import Grid from '@material-ui/core/Grid';
 
 import Menu from './components/Menu.js';
 import Order from './components/Order.js';
@@ -12,7 +22,36 @@ import './App.css';
 
 import 'typeface-roboto';
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    justifyContent : 'space-between',
+  },
+  paper: {
+    padding: 5,
+    textAlign: "center",
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+  margin: {
+    margin: theme.spacing(1),
+  },
+  fab: {
+    margin: 0,
+    top: 'auto',
+    right: 20,
+    bottom: 20,
+    left: 'auto',
+    position: 'fixed',
+  },
+}));
+
 function App() {
+  const classes = useStyles();
 
   const [menu, setMenu] = React.useState({});
   const [order, setOrder] = React.useState([]);
@@ -72,13 +111,51 @@ function App() {
     case 1:
       return (
         // ordering step
-        <div>
-          <Menu menu={menu} addToOrder={addToOrder}/>
-          <Order order={order} removeFromOrder={removeFromOrder} editOrder={editOrder}/>
-          <Button onClick={nextStep}>Continue</Button>
+        <div className={classes.root}>
+          {/** Header**/}
+          <AppBar position="static">
+            <Toolbar>
+              <Typography variant="h6" className={classes.title}>
+                Menu
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          
+
+          {/** Content **/}
+          <Paper elevation={2} className={classes.paper}>
+            <Menu menu={menu} addToOrder={addToOrder}/>
+          </Paper>
+          
+          {/** Navigation **/}
+          <Grid container justify="center">
+            <Paper className={classes.fab}>
+              <Fab 
+                variant="extended" 
+                color="primary" 
+                aria-label="add" 
+                className={classes.margin, classes.fab}
+                onClick={nextStep}
+              >
+                Review Order
+              </Fab>
+            </Paper>
+            
+          </Grid>
+          
         </div>
+        
       );
-    case 2:
+      case 2:
+        return (
+          // review order step
+          <div>
+            <Order order={order} removeFromOrder={removeFromOrder} editOrder={editOrder}/>
+            <Button onClick={prevStep}>Edit/View Order</Button>
+            <Button onClick={nextStep}>Continue</Button>
+          </div>
+        )
+    case 3:
       return (
         // information step
         <div>
@@ -88,7 +165,7 @@ function App() {
           <Button onClick={prevStep}>Edit/View Order</Button>
         </div>
       )
-    case 3:
+    case 4:
       return (
         // confirmation step
         <div>
@@ -98,7 +175,7 @@ function App() {
           <Button onClick={prevStep}>Edit Details</Button>
         </div>
       )
-    case 4:
+    case 5:
       return (
         // confirmed step
         <div>
