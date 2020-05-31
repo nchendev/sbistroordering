@@ -42,12 +42,15 @@ const useStyles = makeStyles((theme) => ({
   },
   fab: {
     margin: 0,
-    top: 'auto',
-    right: 20,
-    bottom: 20,
+    bottom: theme.spacing(1),
     left: 'auto',
     position: 'fixed',
+    minWidth: '50vw'
   },
+  fabSpace: {
+    margin: theme.spacing(1), 
+    height:'40px'
+  }
 }));
 
 function App() {
@@ -113,20 +116,22 @@ function App() {
         // ordering step
         <div className={classes.root}>
           {/** Header**/}
-          <AppBar position="static">
+          <AppBar position="sticky">
             <Toolbar>
               <Typography variant="h6" className={classes.title}>
                 Menu
               </Typography>
             </Toolbar>
           </AppBar>
-          
 
           {/** Content **/}
           <Paper elevation={2} className={classes.paper}>
             <Menu menu={menu} addToOrder={addToOrder}/>
           </Paper>
           
+          {/* Fab Space */}
+          <Paper elevation={0} className={classes.fabSpace}/>
+
           {/** Navigation **/}
           <Grid container justify="center">
             <Paper className={classes.fab}>
@@ -139,8 +144,7 @@ function App() {
               >
                 Review Order
               </Fab>
-            </Paper>
-            
+            </Paper>  
           </Grid>
           
         </div>
