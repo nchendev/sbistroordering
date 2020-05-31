@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import MenuItem from './MenuItem';
+import React from 'react'
 import PropTypes from 'prop-types'
-import Box from '@material-ui/core/Box';
+
 import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
+
+import MenuItem from './MenuItem';
 
 function MenuCategory(props) {
   

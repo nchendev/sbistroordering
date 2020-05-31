@@ -2,17 +2,15 @@ import React, { useState, useEffect } from 'react';
 import {BrowserRouter as Router, Route } from 'react-router-dom';
 import axios from 'axios';
 
+import Button from '@material-ui/core/Button';
+
 import Menu from './components/Menu.js';
 import Order from './components/Order.js';
-import Button from '@material-ui/core/Button';
 import Information from './components/Information.js';
 import Confirmation from './components/Confirmation.js';
 import './App.css';
 
 import 'typeface-roboto';
-import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
-import ThreeDRotation from '@material-ui/icons/ThreeDRotation';
-import { faBoxTissue } from '@fortawesome/free-solid-svg-icons';
 
 function App() {
 
@@ -32,13 +30,6 @@ function App() {
   const addToOrder = (orderItem) => {
     console.log(JSON.stringify(orderItem));
     setOrder([...order, orderItem]);
-    //let menuCopy = this.state.menu;
-    //let orderCopy = this.state.order;
-    //this.setState({ 
-    //  menu: menuCopy,
-    //  order: {...orderCopy, orderItem}
-    //});
-    //this.state.order= {...this.state.order, orderItem};
     console.log(JSON.stringify(order));
   }
 

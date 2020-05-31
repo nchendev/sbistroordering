@@ -1,18 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import ItemDialog from './ItemDialog'
-import { makeStyles } from '@material-ui/core/styles';
-import Input from '@material-ui/core/Input';
 
+import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -20,10 +11,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
-import Select from '@material-ui/core/Select';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import NativeSelect from '@material-ui/core/NativeSelect';
 
 import { faPepperHot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
