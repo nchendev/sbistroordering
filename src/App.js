@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import {BrowserRouter as Router, Route } from 'react-router-dom';
+import React, { useState, useEffect, Fragment } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import axios from 'axios';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -18,179 +18,345 @@ import Menu from './components/Menu.js';
 import Order from './components/Order.js';
 import Information from './components/Information.js';
 import Confirmation from './components/Confirmation.js';
+import OrderDetails from './components/OrderDetails';
+import OrderOptions from './components/OrderOptions';
 import './App.css';
 
 import 'typeface-roboto';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    direction: 'column',
-    flexGrow: 1,
-    justifyContent : 'space-between',
-  },
-  paper: {
-    padding: 5,
-    textAlign: "center",
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-  margin: {
-    margin: theme.spacing(1),
-  },
-  fab: {
-    margin: 0,
-    bottom: theme.spacing(1),
-    left: 'auto',
-    position: 'fixed',
-    minWidth: '50vw'
-  },
-  fabSpace: {
-    margin: theme.spacing(1), 
-    height:'40px'
-  }
+	root: {
+		direction: 'column',
+		flexGrow: 1,
+		justifyContent: 'space-between',
+	},
+	paper: {
+		padding: theme.spacing(1),
+		marginTop: theme.spacing(1),
+		marginBottom: theme.spacing(1),
+	},
+	menuButton: {
+		marginRight: theme.spacing(2),
+	},
+	title: {
+		flexGrow: 1,
+	},
+	margin: {
+		margin: theme.spacing(1),
+	},
+	fab: {
+		margin: 0,
+		bottom: theme.spacing(1),
+		left: 'auto',
+		position: 'fixed',
+		minWidth: '80vw',
+	},
+	fab2: {
+		margin: 0,
+		bottom: theme.spacing(1),
+		left: 'auto',
+		position: 'fixed',
+		minWidth: '40vw',
+	},
+	fabSpace: {
+		margin: theme.spacing(1),
+		height: '40px',
+	},
 }));
 
 function App() {
-  const classes = useStyles();
+	const classes = useStyles();
 
-  const [menu, setMenu] = React.useState({});
-  const [order, setOrder] = React.useState([]);
-  const [information, setInformation] = React.useState(
-    {
-      name: "",
-      address: "",
-      driverNotes: "",
-      cc: "",
-      exp: "",
-      cvv: ""
-    }
-  );
-  const[step, setStep] = React.useState(1);
-  const addToOrder = (orderItem) => {
-    console.log(JSON.stringify(orderItem));
-    setOrder([...order, orderItem]);
-    console.log(JSON.stringify(order));
-  }
+	const [orderOptions, setOrderOptions] = React.useState({
+		language: 1,
+		pd: 1,
+	});
+	const [menu, setMenu] = React.useState({});
+	const [order, setOrder] = React.useState([]);
+	const [information, setInformation] = React.useState({
+		name: '',
+		address: '',
+		driverNotes: '',
+		cc: '',
+		exp: '',
+		cvv: '',
+	});
+	const [step, setStep] = React.useState(1);
+	const addToOrder = (orderItem) => {
+		console.log(JSON.stringify(orderItem));
+		setOrder([...order, orderItem]);
+		console.log(JSON.stringify(order));
+	};
 
-   // Proceed to next step
-  const nextStep = () => {
-    setStep(step+1)
-  };
+	// Proceed to next step
+	const nextStep = () => {
+		setStep(step + 1);
+	};
 
-  // Go back to prev step
-  const prevStep = () => {
-    setStep(step-1)
-  };
+	// Go back to prev step
+	const prevStep = () => {
+		setStep(step - 1);
+	};
 
-  const removeFromOrder = (itemIndex) => {
-    console.log(itemIndex)
-    let cpy = order.slice(0)
-    setOrder([...(cpy.slice(0, itemIndex)),...(cpy.slice(itemIndex+1))])
-    //order.splice(itemIndex, 1);
-  }
+	const removeFromOrder = (itemIndex) => {
+		console.log(itemIndex);
+		let cpy = order.slice(0);
+		setOrder([...cpy.slice(0, itemIndex), ...cpy.slice(itemIndex + 1)]);
+		//order.splice(itemIndex, 1);
+	};
 
-  const editOrder = () => {
-    console.log("editing order")
-  }
+	const editInOrder = (itemIndex, amount, note) => {
+		console.log('editing order');
+		let cpy = order[itemIndex];
+		cpy.amount = amount;
+		cpy.note = note;
+		setOrder([
+			...order.slice(0, itemIndex),
+			cpy,
+			...order.slice(itemIndex + 1),
+		]);
+	};
 
-  const handleContinue = () => {
+	const handleInfoChange = (input) => (e) => {
+		information[input] = e.target.value;
+		setInformation(information);
+	};
 
-  }
+	const handleOrderOptionsChange = (input) => (e) => {
+		orderOptions[input] = parseInt(e.target.value);
+		setOrderOptions(orderOptions);
+		console.log(orderOptions);
+	};
 
-  const handleInfoChange = input => e => {
-    information[input] = e.target.value ;
-    setInformation(information);
-  }
-  useEffect(() => {
-    console.log('trigger use effect hook');
-    axios.get('https://www.neckch.in/sbistro/menu.json')
-      .then(res => setMenu(res.data,))
-    }, []);
+	useEffect(() => {
+		console.log('trigger use effect hook');
+		axios
+			.get('https://www.neckch.in/sbistro/menu.json')
+			.then((res) => setMenu(res.data));
+	}, []);
 
-  switch(step) {
-    case 1:
-      return (
-        // ordering step
-        <div className={classes.root}>
-          {/** Header**/}
-          <AppBar position="fixed">
-            <Toolbar>
-              <Typography variant="h6" className={classes.title}>
-                Menu
-              </Typography>
-            </Toolbar>
-          </AppBar> 
-          <Toolbar/>
+	const headerFrag = <Fragment></Fragment>;
+	switch (step) {
+		case 1:
+			return (
+				// pickup or delivery step
+				<div className={classes.root}>
+					{/** Header**/}
+					<AppBar position='fixed'>
+						<Toolbar>
+							<Typography variant='h6' className={classes.title}>
+								Order Options
+							</Typography>
+						</Toolbar>
+					</AppBar>
+					<Toolbar />
 
-          {/** Content **/}
-          <Paper elevation={2} className={classes.paper}>
-            <Menu menu={menu} addToOrder={addToOrder}/>
-          </Paper>
-          
-          {/* Fab Space */}
-          <Paper elevation={0} className={classes.fabSpace}/>
+					{/* OrderOptions */}
+					<OrderOptions
+						orderOptions={orderOptions}
+						handleOrderOptionsChange={handleOrderOptionsChange}
+					/>
 
-          {/** Navigation **/}
-          <Grid container justify="center">
-            <Paper className={classes.fab}>
-              <Fab 
-                variant="extended" 
-                color="primary" 
-                aria-label="add" 
-                className={classes.margin, classes.fab}
-                onClick={nextStep}
-              >
-                Review Order
-              </Fab>
-            </Paper>  
-          </Grid>
-          
-        </div>
-        
-      );
-      case 2:
-        return (
-          // review order step
-          <div>
-            <Order order={order} removeFromOrder={removeFromOrder} editOrder={editOrder}/>
-            <Button onClick={prevStep}>Edit/View Order</Button>
-            <Button onClick={nextStep}>Continue</Button>
-          </div>
-        )
-    case 3:
-      return (
-        // information step
-        <div>
-          second step!!
-          <Information information={information} handleInfoChange={handleInfoChange}/>
-          <Button onClick={nextStep}>Continue</Button>
-          <Button onClick={prevStep}>Edit/View Order</Button>
-        </div>
-      )
-    case 4:
-      return (
-        // confirmation step
-        <div>
-          third step!!
-          <Confirmation information={information}/>
-          <Button onClick={nextStep}>Confirm</Button>
-          <Button onClick={prevStep}>Edit Details</Button>
-        </div>
-      )
-    case 5:
-      return (
-        // confirmed step
-        <div>
-          order confirmed! We will be in contact shortly, blah blah
-          <Button onClick={prevStep}>Temp back button for testing</Button>
-        </div>
-      )
-  }
-  
+					{/* Fab Space */}
+					<Paper elevation={0} className={classes.fabSpace} />
+
+					{/** Navigation **/}
+					<Grid container justify='center'>
+						<Paper className={classes.fab}>
+							<Fab
+								variant='extended'
+								color='primary'
+								aria-label='add'
+								className={(classes.margin, classes.fab)}
+								onClick={nextStep}
+							>
+								Continue to Order
+							</Fab>
+						</Paper>
+					</Grid>
+				</div>
+			);
+		case 2:
+			return (
+				// ordering step
+				<div className={classes.root}>
+					{/** Header**/}
+					<AppBar position='fixed'>
+						<Toolbar>
+							<Typography variant='h6' className={classes.title}>
+								Menu
+							</Typography>
+						</Toolbar>
+					</AppBar>
+					<Toolbar />
+
+					{/** Content **/}
+					<Paper elevation={2} className={classes.paper}>
+						<Menu menu={menu} addToOrder={addToOrder} />
+					</Paper>
+
+					{/* Fab Space */}
+					<Paper elevation={0} className={classes.fabSpace} />
+
+					{/** Navigation **/}
+					{/** Navigation **/}
+					<Grid container justify='center'>
+						<Paper className={classes.fab}>
+							<Fab
+								variant='extended'
+								color='primary'
+								aria-label='add'
+								className={(classes.margin, classes.fab2)}
+								onClick={prevStep}
+							>
+								Options
+							</Fab>
+						</Paper>
+						<Paper>
+							<Fab
+								variant='extended'
+								color='primary'
+								aria-label='add'
+								className={(classes.margin, classes.fab2)}
+								onClick={nextStep}
+							>
+								Review Order
+							</Fab>
+						</Paper>
+					</Grid>
+				</div>
+			);
+		case 3:
+			return (
+				// review order step
+				<div className={classes.root}>
+					{/** Header**/}
+					<AppBar position='fixed'>
+						<Toolbar>
+							<Typography variant='h6' className={classes.title}>
+								Review Order
+							</Typography>
+						</Toolbar>
+					</AppBar>
+					<Toolbar />
+
+					{/* Order */}
+					<Paper elevation={2} className={classes.paper}>
+						<Typography
+							variant='h6'
+							className={(classes.title, classes.margin)}
+						>
+							Your Order
+						</Typography>
+						<Order
+							order={order}
+							removeFromOrder={removeFromOrder}
+							editInOrder={editInOrder}
+						/>
+					</Paper>
+					<Paper>
+						<OrderDetails order={order} />
+					</Paper>
+
+					{/* Fab Space */}
+					<Paper elevation={0} className={classes.fabSpace} />
+
+					{/** Navigation **/}
+					<Grid container justify='center'>
+						<Paper className={classes.fab}>
+							<Fab
+								variant='extended'
+								color='primary'
+								aria-label='add'
+								className={(classes.margin, classes.fab2)}
+								onClick={prevStep}
+							>
+								Add Items
+							</Fab>
+						</Paper>
+						<Paper>
+							<Fab
+								variant='extended'
+								color='primary'
+								aria-label='add'
+								className={(classes.margin, classes.fab2)}
+								onClick={nextStep}
+							>
+								Continue
+							</Fab>
+						</Paper>
+					</Grid>
+				</div>
+			);
+		case 4:
+			return (
+				// information step
+				<div>
+					{/** Header**/}
+					<AppBar position='fixed'>
+						<Toolbar>
+							<Typography variant='h6' className={classes.title}>
+								Contact and Payment Details
+							</Typography>
+						</Toolbar>
+					</AppBar>
+					<Toolbar />
+
+					{/* Information */}
+					<Information
+						information={information}
+						handleInfoChange={handleInfoChange}
+					/>
+
+					{/* Fab Space */}
+					<Paper elevation={0} className={classes.fabSpace} />
+
+					{/** Navigation **/}
+					<Grid container justify='center'>
+						<Paper className={classes.fab}>
+							<Fab
+								variant='extended'
+								color='primary'
+								aria-label='add'
+								className={(classes.margin, classes.fab2)}
+								onClick={prevStep}
+							>
+								Review Order
+							</Fab>
+						</Paper>
+						<Paper>
+							<Fab
+								variant='extended'
+								color='primary'
+								aria-label='add'
+								className={(classes.margin, classes.fab2)}
+								onClick={nextStep}
+							>
+								Continue
+							</Fab>
+						</Paper>
+					</Grid>
+				</div>
+			);
+		case 5:
+			return (
+				// confirmation step
+				<div>
+					third step!!
+					<Confirmation information={information} />
+					<Button onClick={nextStep}>Confirm</Button>
+					<Button onClick={prevStep}>Edit Details</Button>
+				</div>
+			);
+		case 6:
+			return (
+				// confirmed step
+				<div>
+					order confirmed! We will be in contact shortly, blah blah
+					<Button onClick={prevStep}>Temp back button for testing</Button>
+				</div>
+			);
+	}
 }
 
 export default App;
