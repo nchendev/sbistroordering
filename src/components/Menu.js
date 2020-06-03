@@ -35,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
 		overflowX: 'scroll',
 	},
 	title: {
-		color: theme.palette.primary.light,
 		padding: 5,
 		margin: 5,
 	},

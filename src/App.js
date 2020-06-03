@@ -76,6 +76,7 @@ function App() {
 	const [information, setInformation] = React.useState({
 		name: '',
 		address: '',
+		phone: '',
 		driverNotes: '',
 		cc: '',
 		exp: '',
@@ -198,7 +199,6 @@ function App() {
 					{/* Fab Space */}
 					<Paper elevation={0} className={classes.fabSpace} />
 
-					{/** Navigation **/}
 					{/** Navigation **/}
 					<Grid container justify='center'>
 						<Paper className={classes.fab}>
@@ -340,20 +340,95 @@ function App() {
 			);
 		case 5:
 			return (
-				// confirmation step
-				<div>
-					third step!!
-					<Confirmation information={information} />
-					<Button onClick={nextStep}>Confirm</Button>
-					<Button onClick={prevStep}>Edit Details</Button>
+				// Confirm Order step
+				<div className={classes.root}>
+					{/** Header**/}
+					<AppBar position='fixed'>
+						<Toolbar>
+							<Typography variant='h6' className={classes.title}>
+								Confirm Order
+							</Typography>
+						</Toolbar>
+					</AppBar>
+					<Toolbar />
+
+					{/* Confirm Order */}
+					<Typography variant='h6' className={(classes.title, classes.margin)}>
+						Are you sure you're ready to place your order? This is your last
+						chance to make any changes!
+					</Typography>
+
+					{/* Fab Space */}
+					<Paper elevation={0} className={classes.fabSpace} />
+
+					{/** Navigation **/}
+					<Grid container justify='center'>
+						<Paper className={classes.fab}>
+							<Fab
+								variant='extended'
+								color='primary'
+								aria-label='add'
+								className={(classes.margin, classes.fab2)}
+								onClick={prevStep}
+							>
+								Make Changes
+							</Fab>
+						</Paper>
+						<Paper>
+							<Fab
+								variant='extended'
+								color='primary'
+								aria-label='add'
+								className={(classes.margin, classes.fab2)}
+								onClick={nextStep}
+							>
+								Send Order!
+							</Fab>
+						</Paper>
+					</Grid>
 				</div>
 			);
 		case 6:
 			return (
-				// confirmed step
-				<div>
-					order confirmed! We will be in contact shortly, blah blah
-					<Button onClick={prevStep}>Temp back button for testing</Button>
+				// Confirmed Step
+				<div className={classes.root}>
+					{/** Header**/}
+					<AppBar position='fixed'>
+						<Toolbar>
+							<Typography variant='h6' className={classes.title}>
+								Order Submitted
+							</Typography>
+						</Toolbar>
+					</AppBar>
+					<Toolbar />
+
+					{/* Confirm Order */}
+					<Typography variant='h6' className={(classes.title, classes.margin)}>
+						Thank you for ordering from Szechuan Bistro! We will be in contact
+						shortly through phone by 405-752-8889 to confirm your order!
+						Deliveries should be made within the hour, and pickup orders should
+						be ready in 15 minutes. <br /> Thank you for your patronage, we hope
+						to serve you again soon.
+					</Typography>
+
+					{/* Fab Space */}
+					<Paper elevation={0} className={classes.fabSpace} />
+
+					{/** Navigation **/}
+					{/**</div><Grid container justify='center'>
+						<Paper className={classes.fab}>
+							<Fab
+								variant='extended'
+								color='primary'
+								aria-label='add'
+								className={(classes.margin, classes.fab)}
+								onClick=!!!
+							>
+								Return to Website
+							</Fab>
+						</Paper>
+					</Grid>
+					**/}
 				</div>
 			);
 	}

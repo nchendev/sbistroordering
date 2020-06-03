@@ -18,9 +18,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import OrderItem from './OrderItem';
 
 const useStyles = makeStyles((theme) => ({
-	title: {
-		color: theme.palette.primary.light,
-	},
+	title: {},
 	orderItem: {
 		minWidth: '100%',
 		flexGrow: 1,
