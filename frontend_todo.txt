@@ -1,0 +1,4 @@
+change language of menu items on selection
+update delivery fee based on pickup/delivery option
+Option for choosing how to pay (ie card or cash)
+form validation. Required fields are filled before continuing
