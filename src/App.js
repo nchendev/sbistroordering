@@ -82,7 +82,26 @@ function App() {
 		exp: '',
 		cvv: '',
 	});
+	const [price, setPrice] = React.useState({
+		subtotal: '0',
+		tax: '0',
+		fee: '0',
+		total: '0',
+	});
 	const [step, setStep] = React.useState(1);
+
+	const callAPI = () => {
+		var orderJSON = {
+			orderOptions,
+			order,
+			information,
+			price,
+		};
+		// call API
+		// todo
+		console.log(orderJSON);
+		return JSON.stringify(orderJSON);
+	};
 	const addToOrder = (orderItem) => {
 		console.log(JSON.stringify(orderItem));
 		setOrder([...order, orderItem]);
@@ -122,7 +141,11 @@ function App() {
 		information[input] = e.target.value;
 		setInformation(information);
 	};
-
+	const handlePriceChange = (input, value) => {
+		console.log('hit');
+		price[input] = value;
+		setPrice(price);
+	};
 	const handleOrderOptionsChange = (input) => (e) => {
 		orderOptions[input] = parseInt(e.target.value);
 		setOrderOptions(orderOptions);
@@ -255,7 +278,12 @@ function App() {
 						/>
 					</Paper>
 					<Paper>
-						<OrderDetails order={order} />
+						<OrderDetails
+							order={order}
+							price={price}
+							handlePriceChange={handlePriceChange}
+							pd={orderOptions.pd}
+						/>
 					</Paper>
 
 					{/* Fab Space */}
@@ -410,6 +438,9 @@ function App() {
 						be ready in 15 minutes. <br /> Thank you for your patronage, we hope
 						to serve you again soon.
 					</Typography>
+
+					{/* call API */}
+					{callAPI()}
 
 					{/* Fab Space */}
 					<Paper elevation={0} className={classes.fabSpace} />

@@ -22,7 +22,7 @@ export default function OrderDetails(props) {
 	const classes = useStyles();
 
 	const calcSubtotal = () => {
-		let subtotal = 0;
+		var subtotal = 0;
 		props.order.forEach((orderItem) => {
 			subtotal += parseInt(orderItem.amount) * parseInt(orderItem.price);
 		});
@@ -30,14 +30,28 @@ export default function OrderDetails(props) {
 	};
 
 	const calcTax = () => {
-		return calcSubtotal() * taxRate;
+		var tax = calcSubtotal() * taxRate;
+		return tax;
 	};
 
 	const calcDeliveryFee = () => {
-		return 0;
+		if (props.pd == 2) {
+			return 3;
+		} else {
+			return 0;
+		}
 	};
 	const calcTotal = () => {
-		return calcSubtotal() + calcTax() + calcDeliveryFee();
+		var subtotal = calcSubtotal();
+		var tax = calcTax();
+		var fee = calcDeliveryFee();
+		var total = subtotal + tax + fee;
+		props.handlePriceChange('subtotal', subtotal.toFixed(2));
+		props.handlePriceChange('tax', tax.toFixed(2));
+		props.handlePriceChange('fee', fee.toFixed(2));
+		props.handlePriceChange('total', total.toFixed(2));
+
+		return total;
 	};
 
 	return (
