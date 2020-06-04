@@ -3,8 +3,8 @@ import {Component} from 'react';
 import {BrowserRouter as Router, Route } from 'react-router-dom';
 import axios from 'axios';
 
-import Menu from './components/Menu.js';
-import Order from './components/Order.js';
+import Menu from './components/Menu.js.js';
+import Order from './components/Order.js.js';
 
 //import logo from './logo.svg';
 import './App.css';

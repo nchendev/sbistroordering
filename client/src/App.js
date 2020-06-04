@@ -105,16 +105,6 @@ function App() {
 			.catch((err) => {
 				console.error(err);
 			});
-		/**fetch('http://localhost:9000/twilio', {
-			method: 'POST',
-			mode: 'cors',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(orderJSON),
-		})
-			.then((response) => console.log(response))
-			.then((data) => console.log('data:' + data));**/
 
 		// log
 		console.log(orderJSON);
