@@ -100,7 +100,7 @@ function App() {
 		// call API
 		console.log('calling api');
 		axios
-			.post('http://sbordering.herokuapp.com/twilio', orderJSON)
+			.post('https://sbordering.herokuapp.com/twilio', orderJSON)
 			.then((res) => console.log(res.data))
 			.catch((err) => {
 				console.error(err);
