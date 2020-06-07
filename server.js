@@ -1,16 +1,29 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var cors = require('cors');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const cors = require('cors');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv').config();
+const passport = require('passport');
+//const indexRouter = require('./routes/index');
+//const usersRouter = require('./routes/users');
+//const indexRouter = require('../client');
 
-var dotenv = require('dotenv').config();
+// Passport Config
+require('./config/passport')(passport);
 
-//var indexRouter = require('./routes/index');
-//var usersRouter = require('./routes/users');
-//var indexRouter = require('../client');
-var app = express();
+// DB Config
+const db = process.env.MONGO_URI;
+
+// Connect to Mongo
+mongoose
+	.connect(db, { useNewUrlParser: true })
+	.then(console.log('MongoDB connected'))
+	.catch((err) => console.log(err));
+// Express
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,9 +36,22 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
+app.use(
+	session({
+		secret: process.env.EXPRESS_SESSSION_SECRET,
+		resave: true,
+		saveUninitialized: true,
+		cookie: { secure: http },
+	})
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
-// Twilio API Routes
-app.use('/twilio', require('./routes/twilio'));
+// Twilio API Route
+app.use('/api/twilio', require('./routes/api/twilio'));
+
+// User API Route (Login, Register)
+app.use('/api/user', require('./routes/api/user'));
 
 // Client routing
 if (process.env.NODE_ENV === 'production') {

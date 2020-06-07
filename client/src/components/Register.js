@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import {
 	BrowserRouter as Router,
 	Route,
@@ -65,9 +66,53 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Register(props) {
 	const classes = useStyles();
+	const [ans, setAns] = React.useState({
+		fname: '',
+		lname: '',
+		email: '',
+		password: '',
+		password2: '',
+	});
+
 	const handleRedirectToLogin = (e) => {
 		props.history.push('/');
 		//return <Redirect to='/OrderingSystem' />;
+	};
+
+	const handleRegisterSubmit = (e) => {
+		var registerJSON = ans;
+		// call API
+		console.log('calling api');
+		axios
+			//.post('https://sbordering.herokuapp.com/api/register', registerJSON)
+			.post('http://localhost:3000/api/user/register', registerJSON)
+			.then((res) => {
+				// if there are errors
+				if (Object.keys(res.data).length > 1) {
+					console.log('there was errors!');
+					res.data.errors.forEach((error) => {
+						// display errors with mui alert
+						console.log('error: ' + error);
+					});
+				}
+				// if there were no errors
+				else {
+					// green mui alert successfully registered
+					// clear form
+					console.log('there were no errors');
+				}
+			})
+			.catch((err) => {
+				console.error(err);
+			});
+
+		// log
+		console.log(registerJSON);
+	};
+	const handleInfoChange = (input) => (e) => {
+		ans[input] = e.target.value;
+		setAns(ans);
+		console.log(ans);
 	};
 	return (
 		<Grid container component='main' className={classes.root}>
@@ -91,6 +136,7 @@ export default function Register(props) {
 									id='firstName'
 									label='First Name'
 									autoFocus
+									onChange={handleInfoChange('fname')}
 								/>
 							</Grid>
 							<Grid item xs={12} sm={6}>
@@ -102,6 +148,7 @@ export default function Register(props) {
 									label='Last Name'
 									name='lastName'
 									autoComplete='lname'
+									onChange={handleInfoChange('lname')}
 								/>
 							</Grid>
 							<Grid item xs={12}>
@@ -113,6 +160,7 @@ export default function Register(props) {
 									label='Email Address'
 									name='email'
 									autoComplete='email'
+									onChange={handleInfoChange('email')}
 								/>
 							</Grid>
 							<Grid item xs={12}>
@@ -125,23 +173,30 @@ export default function Register(props) {
 									type='password'
 									id='password'
 									autoComplete='current-password'
+									onChange={handleInfoChange('password')}
 								/>
 							</Grid>
 							<Grid item xs={12}>
-								<FormControlLabel
-									control={
-										<Checkbox value='allowExtraEmails' color='primary' />
-									}
-									label='I want to receive inspiration, marketing promotions and updates via email.'
+								<TextField
+									variant='outlined'
+									required
+									fullWidth
+									name='password2'
+									label='Confirm Password'
+									type='password'
+									id='password2'
+									autoComplete='current-password'
+									onChange={handleInfoChange('password2')}
 								/>
 							</Grid>
 						</Grid>
 						<Button
-							type='submit'
+							type='button'
 							fullWidth
 							variant='contained'
 							color='primary'
 							className={classes.submit}
+							onClick={() => handleRegisterSubmit()}
 						>
 							Register
 						</Button>
