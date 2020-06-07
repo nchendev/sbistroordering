@@ -95,7 +95,7 @@ export default function OrderSystem() {
 		// call API
 		console.log('calling api');
 		axios
-			.post('https://sbordering.herokuapp.com/api/twilio', orderJSON)
+			.post(process.env.SERVER_DOMAIN + '/api/twilio', orderJSON)
 			.then((res) => console.log(res.data))
 			.catch((err) => {
 				console.error(err);

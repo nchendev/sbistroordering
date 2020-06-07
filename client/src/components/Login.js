@@ -76,7 +76,7 @@ export default function Login(props) {
 		console.log('calling api');
 		axios
 			//.post('https://sbordering.herokuapp.com/api/register', registerJSON)
-			.post('http://localhost:3000/api/user/login', loginJSON)
+			.post('/api/user/login', loginJSON)
 			.then((res) => {
 				// if logged in
 				if (res.status == 200) {

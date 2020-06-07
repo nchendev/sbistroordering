@@ -85,7 +85,7 @@ export default function Register(props) {
 		console.log('calling api');
 		axios
 			//.post('https://sbordering.herokuapp.com/api/register', registerJSON)
-			.post('http://localhost:3000/api/user/register', registerJSON)
+			.post('/api/user/register', registerJSON)
 			.then((res) => {
 				// if there are errors
 				if (Object.keys(res.data).length > 1) {
