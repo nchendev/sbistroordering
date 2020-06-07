@@ -95,7 +95,7 @@ export default function OrderSystem() {
 		// call API
 		console.log('calling api');
 		axios
-			.post(process.env.REACT_APP_BASEURL + '/api/twilio', orderJSON)
+			.post(process.env.REACT_APP_BASEURL + 'api/twilio', orderJSON)
 			.then((res) => console.log(res.data))
 			.catch((err) => {
 				console.error(err);
