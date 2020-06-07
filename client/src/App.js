@@ -33,6 +33,7 @@ import Link from '@material-ui/core/Link';
 import './App.css';
 
 import 'typeface-roboto';
+
 function Copyright() {
 	return (
 		<Typography variant='body2' color='textSecondary' align='center'>

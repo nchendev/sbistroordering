@@ -73,6 +73,7 @@ export default function Register(props) {
 		password: '',
 		password2: '',
 	});
+	const [registerErrors, setRegisterErrors] = React.useState('');
 
 	const handleRedirectToLogin = (e) => {
 		props.history.push('/');
@@ -87,12 +88,15 @@ export default function Register(props) {
 			//.post('https://sbordering.herokuapp.com/api/register', registerJSON)
 			.post('/api/user/register', registerJSON)
 			.then((res) => {
+				let errors = '';
+
 				// if there are errors
 				if (Object.keys(res.data).length > 1) {
 					console.log('there was errors!');
 					res.data.errors.forEach((error) => {
 						// display errors with mui alert
 						console.log('error: ' + error);
+						errors += error + '\n';
 					});
 				}
 				// if there were no errors
@@ -101,6 +105,7 @@ export default function Register(props) {
 					// clear form
 					console.log('there were no errors');
 				}
+				setRegisterErrors(errors);
 			})
 			.catch((err) => {
 				console.error(err);
@@ -188,6 +193,13 @@ export default function Register(props) {
 									autoComplete='current-password'
 									onChange={handleInfoChange('password2')}
 								/>
+							</Grid>
+						</Grid>
+						<Grid container>
+							<Grid item xs>
+								<Typography variant='body2' color='error'>
+									{registerErrors}
+								</Typography>
 							</Grid>
 						</Grid>
 						<Button

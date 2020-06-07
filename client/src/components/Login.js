@@ -70,6 +70,7 @@ export default function Login(props) {
 		email: '',
 		password: '',
 	});
+	const [loginError, setLoginError] = React.useState('');
 	const handleLoginSubmit = (e) => {
 		var loginJSON = ans;
 		// call API
@@ -79,14 +80,17 @@ export default function Login(props) {
 			.post('/api/user/login', loginJSON)
 			.then((res) => {
 				// if logged in
+				setLoginError('');
 				if (res.status == 200) {
 					console.log(res.data);
 				}
+				// redirect
 			})
 			// if not logged in
 			.catch((err) => {
 				console.error('error:' + err);
 				console.log(err.response.data);
+				setLoginError(err.response.data.message);
 			});
 
 		// log
@@ -150,6 +154,14 @@ export default function Login(props) {
 							control={<Checkbox value='remember' color='primary' />}
 							label='Remember me'
 						/>
+						<Grid container>
+							<Grid item xs>
+								<Typography variant='body2' color='error'>
+									{loginError}
+								</Typography>
+							</Grid>
+						</Grid>
+
 						<Button
 							type='button'
 							fullWidth

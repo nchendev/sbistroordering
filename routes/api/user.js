@@ -17,12 +17,12 @@ router.post('/register', (req, res) => {
 		!ans.password ||
 		!ans.password2
 	) {
-		errors.push('Please fill in all fields');
+		errors.push('Please fill in all fields.');
 	}
 
 	// Check passwords math
 	if (ans.password !== ans.password2) {
-		errors.push('passwords do not match');
+		errors.push('Passwords do not match.');
 	}
 
 	// Do other required checks ie casing length etc
@@ -39,13 +39,13 @@ router.post('/register', (req, res) => {
 			password: ans.password,
 			password2: ans.password2,
 		});
-		console.log('user failed to be registered');
+		console.log('User failed to be registered.');
 	} else {
 		// check if user already exists in the database
 		User.findOne({ email: ans.email }).then((user) => {
 			console.log(user === null);
 			if (user !== null) {
-				errors.push('User exists. Email already in use!');
+				errors.push('Email already in use.');
 				res.json({
 					errors,
 					fname: ans.fname,
@@ -78,7 +78,7 @@ router.post('/register', (req, res) => {
 							.catch((err) => {
 								console.log(err);
 								res.json({
-									errors: 'failed to add new user. PLease try again',
+									errors: 'Failed to add new user. PLease try again',
 									error,
 								});
 							});
@@ -98,7 +98,7 @@ router.post('/login', (req, res, next) => {
 		info
 	) {
 		if (err) {
-			console.log('found unexpectederror');
+			console.log('Found unexpectederror');
 			return next(err);
 		}
 		if (!user) {
