@@ -76,8 +76,7 @@ export default function Login(props) {
 		// call API
 		console.log('calling api');
 		axios
-			//.post('https://sbordering.herokuapp.com/api/register', registerJSON)
-			.post(process.env.REACT_APP_BASEURL + 'api/user/login', loginJSON)
+			.post('/api/user/login', loginJSON)
 			.then((res) => {
 				// if logged in
 				setLoginError('');
