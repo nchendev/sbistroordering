@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import {
 	BrowserRouter as Router,
 	Route,
@@ -65,7 +66,37 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login(props) {
 	const classes = useStyles();
+	const [ans, setAns] = React.useState({
+		email: '',
+		password: '',
+	});
+	const handleLoginSubmit = (e) => {
+		var loginJSON = ans;
+		// call API
+		console.log('calling api');
+		axios
+			//.post('https://sbordering.herokuapp.com/api/register', registerJSON)
+			.post('http://localhost:3000/api/user/login', loginJSON)
+			.then((res) => {
+				// if logged in
+				if (res.status == 200) {
+					console.log(res.data);
+				}
+			})
+			// if not logged in
+			.catch((err) => {
+				console.error('error:' + err);
+				console.log(err.response.data);
+			});
 
+		// log
+		console.log(loginJSON);
+	};
+	const handleInfoChange = (input) => (e) => {
+		ans[input] = e.target.value;
+		setAns(ans);
+		console.log(ans);
+	};
 	const handleRedirectToOrderingSystem = (e) => {
 		props.history.push('/ordersystem');
 		//return <Redirect to='/OrderingSystem' />;
@@ -101,6 +132,7 @@ export default function Login(props) {
 							name='email'
 							autoComplete='email'
 							autoFocus
+							onChange={handleInfoChange('email')}
 						/>
 						<TextField
 							variant='outlined'
@@ -112,17 +144,19 @@ export default function Login(props) {
 							type='password'
 							id='password'
 							autoComplete='current-password'
+							onChange={handleInfoChange('password')}
 						/>
 						<FormControlLabel
 							control={<Checkbox value='remember' color='primary' />}
 							label='Remember me'
 						/>
 						<Button
-							type='submit'
+							type='button'
 							fullWidth
 							variant='contained'
 							color='primary'
 							className={classes.submit}
+							onClick={handleLoginSubmit}
 						>
 							Log In
 						</Button>

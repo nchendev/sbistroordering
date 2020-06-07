@@ -91,8 +91,24 @@ router.post('/register', (req, res) => {
 });
 
 // process login attempt
-router.post('/login', passport.authenticate('local'), (req, res) => {
-	console.log('logged in', req.user);
-	req.send(user);
+router.post('/login', (req, res, next) => {
+	passport.authenticate('local', { session: false }, function (
+		err,
+		user,
+		info
+	) {
+		if (err) {
+			console.log('found unexpectederror');
+			return next(err);
+		}
+		if (!user) {
+			console.log('found error');
+			return res.status(401).json(info);
+		} else {
+			console.log('logged in', req.user);
+
+			res.send({ msg: 'success' });
+		}
+	})(req, res, next);
 });
 module.exports = router;

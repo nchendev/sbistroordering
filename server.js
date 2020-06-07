@@ -7,6 +7,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
 const passport = require('passport');
+
 //const indexRouter = require('./routes/index');
 //const usersRouter = require('./routes/users');
 //const indexRouter = require('../client');
@@ -19,7 +20,7 @@ const db = process.env.MONGO_URI;
 
 // Connect to Mongo
 mongoose
-	.connect(db, { useNewUrlParser: true })
+	.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
 	.then(console.log('MongoDB connected'))
 	.catch((err) => console.log(err));
 // Express
@@ -36,14 +37,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
-app.use(
-	session({
-		secret: process.env.EXPRESS_SESSSION_SECRET,
-		resave: true,
-		saveUninitialized: true,
-		cookie: { secure: http },
-	})
-);
+
 app.use(passport.initialize());
 app.use(passport.session());
 
