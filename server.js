@@ -47,6 +47,8 @@ app.use('/api/twilio', require('./routes/api/twilio'));
 // User API Route (Login, Register)
 app.use('/api/user', require('./routes/api/user'));
 
+// Image API Route
+app.use('/api/image', require('./routes/api/image'));
 // Client routing
 if (process.env.NODE_ENV === 'production') {
 	// set static folder
