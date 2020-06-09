@@ -2,24 +2,12 @@ import React from "react";
 import {
   makeStyles,
   Paper,
-  Button,
   AppBar,
   Toolbar,
   Typography,
-  IconButton,
-  MenuIcon,
   Fab,
-  AddIcon,
   Grid,
-} from "../../components/MaterialUI";
-import {
-  Menu,
-  Order,
-  Information,
-  Confirmation,
-  OrderDetails,
-  OrderOptions,
-} from "../../components/index";
+} from "../../../components/mui_index";
 const useStyles = makeStyles((theme) => ({
   root: {
     direction: "column",
@@ -59,25 +47,26 @@ const useStyles = makeStyles((theme) => ({
     height: "40px",
   },
 }));
-export default function Order() {
+export default function ConfirmView(props) {
+  const classes = useStyles();
   return (
     <div>
-      // ordering step
       <div className={classes.root}>
         {/** Header**/}
         <AppBar position='fixed'>
           <Toolbar>
             <Typography variant='h6' className={classes.title}>
-              Menu
+              Confirm Order
             </Typography>
           </Toolbar>
         </AppBar>
         <Toolbar />
 
-        {/** Content **/}
-        <Paper elevation={2} className={classes.paper}>
-          <Menu menu={menu} addToOrder={addToOrder} />
-        </Paper>
+        {/* Confirm Order */}
+        <Typography variant='h6' className={(classes.title, classes.margin)}>
+          Are you sure you're ready to place your order? This is your last
+          chance to make any changes!
+        </Typography>
 
         {/* Fab Space */}
         <Paper elevation={0} className={classes.fabSpace} />
@@ -90,9 +79,9 @@ export default function Order() {
               color='primary'
               aria-label='add'
               className={(classes.margin, classes.fab2)}
-              onClick={prevStep}
+              onClick={props.prevStep}
             >
-              Options
+              Make Changes
             </Fab>
           </Paper>
           <Paper>
@@ -101,9 +90,9 @@ export default function Order() {
               color='primary'
               aria-label='add'
               className={(classes.margin, classes.fab2)}
-              onClick={nextStep}
+              onClick={props.nextStep}
             >
-              Review Order
+              Send Order!
             </Fab>
           </Paper>
         </Grid>

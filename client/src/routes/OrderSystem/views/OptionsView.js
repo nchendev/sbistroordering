@@ -2,24 +2,13 @@ import React from "react";
 import {
   makeStyles,
   Paper,
-  Button,
   AppBar,
   Toolbar,
   Typography,
-  IconButton,
-  MenuIcon,
   Fab,
-  AddIcon,
   Grid,
-} from "../../components/MaterialUI";
-import {
-  Menu,
-  Order,
-  Information,
-  Confirmation,
-  OrderDetails,
-  OrderOptions,
-} from "../../components/index";
+} from "../../../components/mui_index";
+import { OrderOptions } from "../../../components/index";
 const useStyles = makeStyles((theme) => ({
   root: {
     direction: "column",
@@ -59,51 +48,44 @@ const useStyles = makeStyles((theme) => ({
     height: "40px",
   },
 }));
-export default function Confirmed() {
+export default function OptionsView(props) {
+  const classes = useStyles();
   return (
     <div>
-      // Confirmed Step
       <div className={classes.root}>
         {/** Header**/}
         <AppBar position='fixed'>
           <Toolbar>
             <Typography variant='h6' className={classes.title}>
-              Order Submitted
+              Order Options
             </Typography>
           </Toolbar>
         </AppBar>
         <Toolbar />
 
-        {/* Confirm Order */}
-        <Typography variant='h6' className={(classes.title, classes.margin)}>
-          Thank you for ordering from Szechuan Bistro! We will be in contact
-          shortly through phone by 405-752-8889 to confirm your order!
-          Deliveries should be made within the hour, and pickup orders should be
-          ready in 15 minutes. <br /> Thank you for your patronage, we hope to
-          serve you again soon.
-        </Typography>
-
-        {/* call API */}
-        {props.callAPI()}
+        {/* OrderOptions */}
+        <OrderOptions
+          orderOptions={props.orderOptions}
+          handleOrderOptionsChange={props.handleOrderOptionsChange}
+        />
 
         {/* Fab Space */}
         <Paper elevation={0} className={classes.fabSpace} />
 
         {/** Navigation **/}
-        {/**</div><Grid container justify='center'>
-						<Paper className={classes.fab}>
-							<Fab
-								variant='extended'
-								color='primary'
-								aria-label='add'
-								className={(classes.margin, classes.fab)}
-								onClick=!!!
-							>
-								Return to Website
-							</Fab>
-						</Paper>
-					</Grid>
-					**/}
+        <Grid container justify='center'>
+          <Paper className={classes.fab}>
+            <Fab
+              variant='extended'
+              color='primary'
+              aria-label='add'
+              className={(classes.margin, classes.fab)}
+              onClick={props.nextStep}
+            >
+              Continue to Order
+            </Fab>
+          </Paper>
+        </Grid>
       </div>
     </div>
   );

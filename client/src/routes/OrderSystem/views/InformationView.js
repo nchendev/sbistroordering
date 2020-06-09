@@ -2,24 +2,13 @@ import React from "react";
 import {
   makeStyles,
   Paper,
-  Button,
   AppBar,
   Toolbar,
   Typography,
-  IconButton,
-  MenuIcon,
   Fab,
-  AddIcon,
   Grid,
-} from "../../components/MaterialUI";
-import {
-  Menu,
-  Order,
-  Information,
-  Confirmation,
-  OrderDetails,
-  OrderOptions,
-} from "../../components/index";
+} from "../../../components/mui_index";
+import { Information } from "../../../components/index";
 const useStyles = makeStyles((theme) => ({
   root: {
     direction: "column",
@@ -59,7 +48,8 @@ const useStyles = makeStyles((theme) => ({
     height: "40px",
   },
 }));
-export default function Information() {
+export default function InformationView(props) {
+  const classes = useStyles();
   return (
     <div>
       <div>
@@ -90,7 +80,7 @@ export default function Information() {
               color='primary'
               aria-label='add'
               className={(classes.margin, classes.fab2)}
-              onClick={prevStep}
+              onClick={props.prevStep}
             >
               Review Order
             </Fab>
@@ -101,7 +91,7 @@ export default function Information() {
               color='primary'
               aria-label='add'
               className={(classes.margin, classes.fab2)}
-              onClick={nextStep}
+              onClick={props.nextStep}
             >
               Continue
             </Fab>

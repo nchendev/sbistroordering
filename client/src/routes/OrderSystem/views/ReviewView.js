@@ -2,24 +2,13 @@ import React from "react";
 import {
   makeStyles,
   Paper,
-  Button,
   AppBar,
   Toolbar,
   Typography,
-  IconButton,
-  MenuIcon,
   Fab,
-  AddIcon,
   Grid,
-} from "../../components/MaterialUI";
-import {
-  Menu,
-  Order,
-  Information,
-  Confirmation,
-  OrderDetails,
-  OrderOptions,
-} from "../../components/index";
+} from "../../../components/mui_index";
+import { Order, OrderDetails } from "../../../components/index";
 const useStyles = makeStyles((theme) => ({
   root: {
     direction: "column",
@@ -59,11 +48,11 @@ const useStyles = makeStyles((theme) => ({
     height: "40px",
   },
 }));
-export default function Review() {
+export default function ReviewView(props) {
+  const classes = useStyles();
   return (
     <div>
       {" "}
-      // review order step
       <div className={classes.root}>
         {/** Header**/}
         <AppBar position='fixed'>
@@ -91,7 +80,7 @@ export default function Review() {
             order={props.order}
             price={props.price}
             handlePriceChange={props.handlePriceChange}
-            pd={(props, orderOptions.pd)}
+            pd={props.pd}
           />
         </Paper>
 
@@ -106,7 +95,7 @@ export default function Review() {
               color='primary'
               aria-label='add'
               className={(classes.margin, classes.fab2)}
-              onClick={prevStep}
+              onClick={props.prevStep}
             >
               Add Items
             </Fab>
@@ -117,7 +106,7 @@ export default function Review() {
               color='primary'
               aria-label='add'
               className={(classes.margin, classes.fab2)}
-              onClick={nextStep}
+              onClick={props.nextStep}
             >
               Continue
             </Fab>

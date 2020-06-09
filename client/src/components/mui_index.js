@@ -1,4 +1,4 @@
-export { default as makeStyles } from "@material-ui/core/styles";
+export { makeStyles } from "@material-ui/core/styles";
 export { default as Paper } from "@material-ui/core/Paper";
 export { default as Button } from "@material-ui/core/Button";
 export { default as AppBar } from "@material-ui/core/AppBar";

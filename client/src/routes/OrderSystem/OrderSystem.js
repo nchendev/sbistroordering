@@ -1,12 +1,12 @@
 import React, { useState, useEffect, Fragment } from "react";
 import axios from "axios";
 import {
-  Confirm,
-  Confirmed,
-  Information,
-  Options,
-  Order,
-  Review,
+  ConfirmView,
+  ConfirmedView,
+  InformationView,
+  OptionsView,
+  OrderView,
+  ReviewView,
 } from "./views/index";
 
 export default function OrderSystem(props) {
@@ -113,7 +113,7 @@ export default function OrderSystem(props) {
   switch (step) {
     case 1:
       return (
-        <Options
+        <OptionsView
           orderOptions={orderOptions}
           handleOrderOptionsChange={handleOrderOptionsChange}
           nextStep={nextStep}
@@ -121,7 +121,7 @@ export default function OrderSystem(props) {
       );
     case 2:
       return (
-        <Order
+        <OrderView
           menu={menu}
           addToOrder={addToOrder}
           prevStep={prevStep}
@@ -130,7 +130,7 @@ export default function OrderSystem(props) {
       );
     case 3:
       return (
-        <Review
+        <ReviewView
           order={order}
           removeFromOrder={removeFromOrder}
           editInOrder={editInOrder}
@@ -143,7 +143,7 @@ export default function OrderSystem(props) {
       );
     case 4:
       return (
-        <Information
+        <InformationView
           information={information}
           handleInfoChange={handleInfoChange}
           prevStep={prevStep}
@@ -151,8 +151,8 @@ export default function OrderSystem(props) {
         />
       );
     case 5:
-      return <Confirm prevStep={prevStep} nextStep={nextStep} />;
+      return <ConfirmView prevStep={prevStep} nextStep={nextStep} />;
     case 6:
-      return <Confirmed callAPI={callAPI} />;
+      return <ConfirmedView callAPI={callAPI} />;
   }
 }

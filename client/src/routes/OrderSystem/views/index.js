@@ -1,6 +1,6 @@
-export { default as Confirm } from "./Confirm";
-export { default as Confirmed } from "./Confirmed";
-export { default as Information } from "./Information";
-export { default as Options } from "./Options";
-export { default as Order } from "./Order";
-export { default as Review } from "./Review";
+export { default as ConfirmView } from "./ConfirmView";
+export { default as ConfirmedView } from "./ConfirmedView";
+export { default as InformationView } from "./InformationView";
+export { default as OptionsView } from "./OptionsView";
+export { default as OrderView } from "./OrderView";
+export { default as ReviewView } from "./ReviewView";

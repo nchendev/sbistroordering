@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {
   BrowserRouter as Router,
@@ -20,7 +20,7 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import Logo from "../images/logo.png";
+import Logo from "../../images/logo.png";
 
 function Copyright() {
   return (
@@ -66,12 +66,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login(props) {
   const classes = useStyles();
-  const [ans, setAns] = React.useState({
+  const [ans, setAns] = useState({
     email: "",
     password: "",
   });
-  const [loginError, setLoginError] = React.useState("");
-  const [remember, setRemember] = React.useState(false);
+  const [loginError, setLoginError] = useState("");
+  const [remember, setRemember] = useState(false);
 
   useEffect(() => {
     // check if user already logged in
