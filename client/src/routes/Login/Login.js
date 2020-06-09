@@ -149,7 +149,7 @@ export default function Login(props) {
     return (
       <Redirect
         to={{
-          pathname: "/OrderingSystem",
+          pathname: "/ordersystem",
           state: { data: data },
         }}
       />

@@ -26,7 +26,7 @@ import Confirmation from "./components/Confirmation.js";
 import OrderDetails from "./components/OrderDetails";
 import OrderOptions from "./components/OrderOptions";
 import Login from "./routes/Login/Login";
-import OrderSystem from "./routes/OrderingSystem/OrderSystem";
+import OrderSystem from "./routes/OrderSystem/OrderSystem";
 import Register from "./routes/Register/Register";
 import Link from "@material-ui/core/Link";
 
