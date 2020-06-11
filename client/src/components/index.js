@@ -10,3 +10,4 @@ export { default as OrderItem } from "./OrderItem";
 export { default as OrderItemDialog } from "./OrderItemDialog";
 export { default as OrderList } from "./OrderList";
 export { default as OrderOptions } from "./OrderOptions";
+export { default as Header } from "./Header";

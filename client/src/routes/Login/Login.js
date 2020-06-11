@@ -76,12 +76,18 @@ export default function Login(props) {
   useEffect(() => {
     // check if user already logged in
     // local storage
-    if (localStorage.getItem("information") != null) {
-      handleLoggedInRedirect(JSON.parse(localStorage.getItem("information")));
+    if (
+      localStorage.getItem("information") !== "undefined" &&
+      localStorage.getItem("information") !== null
+    ) {
+      handleLoggedInRedirect(localStorage.getItem("information"));
     }
     // session storage
-    if (sessionStorage.getItem("information") != null) {
-      handleLoggedInRedirect(JSON.parse(sessionStorage.getItem("information")));
+    if (
+      sessionStorage.getItem("information") !== "undefined" &&
+      sessionStorage.getItem("information") !== null
+    ) {
+      handleLoggedInRedirect(sessionStorage.getItem("information"));
     }
   });
 
@@ -97,13 +103,9 @@ export default function Login(props) {
       .then((res) => {
         // if logged in
         setLoginError("");
-        if (res.status == 200) {
-          console.log(res.data);
-          // redirect
-          handleSuccessfulLogin(res.data);
-        }
-        // error?
-        console.log("some kinda error??? Not status 200 :((");
+        console.log(res.data);
+        // redirect
+        handleSuccessfulLogin(res.data);
       })
       // if not logged in
       .catch((err) => {
@@ -146,14 +148,17 @@ export default function Login(props) {
 
   const handleLoggedInRedirect = (data) => {
     // redirect to ordering system
-    return (
+    props.history.push({
+      pathname: "/ordersystem",
+    });
+    /**return (
       <Redirect
         to={{
           pathname: "/ordersystem",
           state: { data: data },
         }}
       />
-    );
+    );**/
   };
 
   const handleSignOut = () => {

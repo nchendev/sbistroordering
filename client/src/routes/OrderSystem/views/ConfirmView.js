@@ -8,6 +8,7 @@ import {
   Fab,
   Grid,
 } from "../../../components/mui_index";
+import { Header } from "../../../components/index";
 const useStyles = makeStyles((theme) => ({
   root: {
     direction: "column",
@@ -53,14 +54,10 @@ export default function ConfirmView(props) {
     <div>
       <div className={classes.root}>
         {/** Header**/}
-        <AppBar position='fixed'>
-          <Toolbar>
-            <Typography variant='h6' className={classes.title}>
-              Confirm Order
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <Toolbar />
+        <Header
+          title='Confirm'
+          resetInformationState={props.resetInformationState}
+        />
 
         {/* Confirm Order */}
         <Typography variant='h6' className={(classes.title, classes.margin)}>

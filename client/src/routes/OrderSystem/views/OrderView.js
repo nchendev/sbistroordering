@@ -8,7 +8,7 @@ import {
   Fab,
   Grid,
 } from "../../../components/mui_index";
-import { Menu } from "../../../components/index";
+import { Menu, Header } from "../../../components/index";
 const useStyles = makeStyles((theme) => ({
   root: {
     direction: "column",
@@ -54,14 +54,10 @@ export default function OrderView(props) {
     <div>
       <div className={classes.root}>
         {/** Header**/}
-        <AppBar position='fixed'>
-          <Toolbar>
-            <Typography variant='h6' className={classes.title}>
-              Menu
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <Toolbar />
+        <Header
+          title='Order from our menu'
+          resetInformationState={props.resetInformationState}
+        />
 
         {/** Content **/}
         <Paper elevation={2} className={classes.paper}>

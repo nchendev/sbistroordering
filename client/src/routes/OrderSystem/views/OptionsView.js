@@ -8,7 +8,7 @@ import {
   Fab,
   Grid,
 } from "../../../components/mui_index";
-import { OrderOptions } from "../../../components/index";
+import { OrderOptions, Header } from "../../../components/index";
 const useStyles = makeStyles((theme) => ({
   root: {
     direction: "column",
@@ -54,14 +54,10 @@ export default function OptionsView(props) {
     <div>
       <div className={classes.root}>
         {/** Header**/}
-        <AppBar position='fixed'>
-          <Toolbar>
-            <Typography variant='h6' className={classes.title}>
-              Order Options
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <Toolbar />
+        <Header
+          title='Order Options'
+          resetInformationState={props.resetInformationState}
+        />
 
         {/* OrderOptions */}
         <OrderOptions

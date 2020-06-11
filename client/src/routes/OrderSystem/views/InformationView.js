@@ -8,7 +8,7 @@ import {
   Fab,
   Grid,
 } from "../../../components/mui_index";
-import { Information } from "../../../components/index";
+import { Information, Header } from "../../../components/index";
 const useStyles = makeStyles((theme) => ({
   root: {
     direction: "column",
@@ -50,18 +50,46 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function InformationView(props) {
   const classes = useStyles();
+
+  const evalData = () => {
+    // determine if session/local
+    let storage = localStorage;
+    if (
+      storage.getItem("information") === "undefined" ||
+      storage.getItem("information") === null
+    ) {
+      storage = sessionStorage;
+    }
+    // if session/local storage of information exists
+    if (
+      storage.getItem("information") !== "undefined" &&
+      storage.getItem("information") !== null
+    ) {
+      // check if info changed
+      if (props.information !== JSON.parse(storage.getItem("information"))) {
+        // update session/localstorage values
+        storage.setItem("information", JSON.stringify(props.information));
+        // update database
+        // TODO
+      }
+    }
+  };
+  const handlePrev = () => {
+    evalData();
+    props.prevStep();
+  };
+  const handleNext = () => {
+    evalData();
+    props.nextStep();
+  };
   return (
     <div>
       <div>
         {/** Header**/}
-        <AppBar position='fixed'>
-          <Toolbar>
-            <Typography variant='h6' className={classes.title}>
-              Contact and Payment Details
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <Toolbar />
+        <Header
+          title='Contact and Payment Details'
+          resetInformationState={props.resetInformationState}
+        />
 
         {/* Information */}
         <Information
@@ -80,7 +108,7 @@ export default function InformationView(props) {
               color='primary'
               aria-label='add'
               className={(classes.margin, classes.fab2)}
-              onClick={props.prevStep}
+              onClick={handlePrev}
             >
               Review Order
             </Fab>
@@ -91,7 +119,7 @@ export default function InformationView(props) {
               color='primary'
               aria-label='add'
               className={(classes.margin, classes.fab2)}
-              onClick={props.nextStep}
+              onClick={handleNext}
             >
               Continue
             </Fab>

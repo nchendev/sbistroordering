@@ -6,6 +6,8 @@ import {
   Toolbar,
   Typography,
 } from "../../../components/mui_index";
+import { Header } from "../../../components/index";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     direction: "column",
@@ -51,14 +53,10 @@ export default function ConfirmedView(props) {
     <div>
       <div className={classes.root}>
         {/** Header**/}
-        <AppBar position='fixed'>
-          <Toolbar>
-            <Typography variant='h6' className={classes.title}>
-              Order Submitted
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <Toolbar />
+        <Header
+          title='Confirmed'
+          resetInformationState={props.resetInformationState}
+        />
 
         {/* Confirm Order */}
         <Typography variant='h6' className={(classes.title, classes.margin)}>

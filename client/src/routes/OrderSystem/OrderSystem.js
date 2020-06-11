@@ -33,6 +33,30 @@ export default function OrderSystem(props) {
   });
   const [step, setStep] = React.useState(1);
 
+  useEffect(() => {
+    console.log("trigger use effect hook");
+    // load menu
+    axios
+      .get("https://www.neckch.in/sbistro/menu.json")
+      .then((res) => setMenu(res.data));
+
+    // load information, if logged in
+    // local storage
+    if (
+      localStorage.getItem("information") !== "undefined" &&
+      localStorage.getItem("information") !== null
+    ) {
+      setInformation(JSON.parse(localStorage.getItem("information")));
+    }
+    // session storage
+    else if (
+      sessionStorage.getItem("information") !== "undefined" &&
+      sessionStorage.getItem("information") !== null
+    ) {
+      setInformation(JSON.parse(sessionStorage.getItem("information")));
+    }
+  }, []);
+
   const callAPI = () => {
     var orderJSON = {
       orderOptions,
@@ -103,13 +127,17 @@ export default function OrderSystem(props) {
     console.log(orderOptions);
   };
 
-  useEffect(() => {
-    console.log("trigger use effect hook");
-    axios
-      .get("https://www.neckch.in/sbistro/menu.json")
-      .then((res) => setMenu(res.data));
-  }, []);
-
+  const resetInformationState = () => {
+    setInformation({
+      name: "",
+      address: "",
+      phone: "",
+      driverNotes: "",
+      cc: "",
+      exp: "",
+      cvv: "",
+    });
+  };
   switch (step) {
     case 1:
       return (
@@ -117,6 +145,7 @@ export default function OrderSystem(props) {
           orderOptions={orderOptions}
           handleOrderOptionsChange={handleOrderOptionsChange}
           nextStep={nextStep}
+          resetInformationState={resetInformationState}
         />
       );
     case 2:
@@ -126,6 +155,7 @@ export default function OrderSystem(props) {
           addToOrder={addToOrder}
           prevStep={prevStep}
           nextStep={nextStep}
+          resetInformationState={resetInformationState}
         />
       );
     case 3:
@@ -139,6 +169,7 @@ export default function OrderSystem(props) {
           pd={orderOptions.pd}
           prevStep={prevStep}
           nextStep={nextStep}
+          resetInformationState={resetInformationState}
         />
       );
     case 4:
@@ -148,11 +179,23 @@ export default function OrderSystem(props) {
           handleInfoChange={handleInfoChange}
           prevStep={prevStep}
           nextStep={nextStep}
+          resetInformationState={resetInformationState}
         />
       );
     case 5:
-      return <ConfirmView prevStep={prevStep} nextStep={nextStep} />;
+      return (
+        <ConfirmView
+          prevStep={prevStep}
+          nextStep={nextStep}
+          resetInformationState={resetInformationState}
+        />
+      );
     case 6:
-      return <ConfirmedView callAPI={callAPI} />;
+      return (
+        <ConfirmedView
+          callAPI={callAPI}
+          resetInformationState={resetInformationState}
+        />
+      );
   }
 }
