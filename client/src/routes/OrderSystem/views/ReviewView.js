@@ -8,7 +8,12 @@ import {
   Fab,
   Grid,
 } from "../../../components/mui_index";
-import { Order, OrderDetails, Header } from "../../../components/index";
+import {
+  Order,
+  OrderDetails,
+  Header,
+  OrderDev,
+} from "../../../components/index";
 const useStyles = makeStyles((theme) => ({
   root: {
     direction: "column",
@@ -59,7 +64,17 @@ export default function ReviewView(props) {
           title='Review your Order'
           resetInformationState={props.resetInformationState}
         />
-
+        <OrderDev
+          order={props.order}
+          removeFromOrder={props.removeFromOrder}
+          editInOrder={props.editInOrder}
+          price={props.price}
+          handlePriceChange={props.handlePriceChange}
+          pd={props.pd}
+          prevStep={props.prevStep}
+          nextStep={props.nextStep}
+          resetInformationState={props.resetInformationState}
+        />
         {/* Order */}
         <Paper elevation={2} className={classes.paper}>
           <Typography variant='h6' className={(classes.title, classes.margin)}>

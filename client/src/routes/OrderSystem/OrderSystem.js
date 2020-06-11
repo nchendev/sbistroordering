@@ -7,6 +7,7 @@ import {
   OptionsView,
   OrderView,
   ReviewView,
+  CheckoutView,
 } from "./views/index";
 
 export default function OrderSystem(props) {
@@ -173,6 +174,8 @@ export default function OrderSystem(props) {
         />
       );
     case 4:
+      return <CheckoutView />;
+    case 5:
       return (
         <InformationView
           information={information}
@@ -182,7 +185,7 @@ export default function OrderSystem(props) {
           resetInformationState={resetInformationState}
         />
       );
-    case 5:
+    case 6:
       return (
         <ConfirmView
           prevStep={prevStep}
@@ -190,7 +193,7 @@ export default function OrderSystem(props) {
           resetInformationState={resetInformationState}
         />
       );
-    case 6:
+    case 7:
       return (
         <ConfirmedView
           callAPI={callAPI}
