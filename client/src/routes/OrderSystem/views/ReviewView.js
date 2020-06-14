@@ -90,12 +90,13 @@ export default function ReviewView(props) {
                 Review Order
               </Typography>
               <Typography
+                disablePadding
                 component='h4'
                 variant='subtitle1'
                 align='center'
                 className={classes.text}
               >
-                To make changes to or remove item, click on it
+                To make changes to or remove an item, click on it
               </Typography>
               <OrderDev
                 order={props.order}
@@ -104,8 +105,6 @@ export default function ReviewView(props) {
                 price={props.price}
                 handlePriceChange={props.handlePriceChange}
                 pd={props.pd}
-                prevStep={props.prevStep}
-                nextStep={props.nextStep}
                 resetInformationState={props.resetInformationState}
               />
             </Paper>

@@ -5,27 +5,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Grid from "@material-ui/core/Grid";
-
-const products = [
-  { name: "Product 1", desc: "A nice thing", price: "$9.99" },
-  { name: "Product 2", desc: "Another thing", price: "$3.45" },
-  { name: "Product 3", desc: "Something else", price: "$6.51" },
-  { name: "Product 4", desc: "Best thing of all", price: "$14.11" },
-  { name: "Shipping", desc: "", price: "Free" },
-];
-const addresses = [
-  "1 Material-UI Drive",
-  "Reactville",
-  "Anytown",
-  "99999",
-  "USA",
-];
-const payments = [
-  { name: "Card type", detail: "Visa" },
-  { name: "Card holder", detail: "Mr John Smith" },
-  { name: "Card number", detail: "xxxx-xxxx-xxxx-1234" },
-  { name: "Expiry date", detail: "04/2024" },
-];
+import { OrderDev } from "../components/index";
 
 const useStyles = makeStyles((theme) => ({
   listItem: {
@@ -39,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Review() {
+export default function Review(props) {
   const classes = useStyles();
 
   return (
@@ -47,44 +27,82 @@ export default function Review() {
       <Typography variant='h6' gutterBottom>
         Order summary
       </Typography>
-      <List disablePadding>
-        {products.map((product) => (
-          <ListItem className={classes.listItem} key={product.name}>
-            <ListItemText primary={product.name} secondary={product.desc} />
-            <Typography variant='body2'>{product.price}</Typography>
-          </ListItem>
-        ))}
-        <ListItem className={classes.listItem}>
-          <ListItemText primary='Total' />
-          <Typography variant='subtitle1' className={classes.total}>
-            $34.06
-          </Typography>
-        </ListItem>
-      </List>
+      <OrderDev
+        order={props.order}
+        removeFromOrder={props.removeFromOrder}
+        editInOrder={props.editInOrder}
+        price={props.price}
+        handlePriceChange={props.handlePriceChange}
+        pd={props.pd}
+        resetInformationState={props.resetInformationState}
+      />
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <Typography variant='h6' gutterBottom className={classes.title}>
-            Shipping
+            Delivery
           </Typography>
-          <Typography gutterBottom>John Smith</Typography>
-          <Typography gutterBottom>{addresses.join(", ")}</Typography>
+          {props.information.pickup ? (
+            <div>You will come pick your order up</div>
+          ) : (
+            <div>
+              <Typography gutterBottom>
+                {props.information.fname + " " + props.information.lname}
+              </Typography>
+              <Typography gutterBottom>{props.information.phone}</Typography>
+              <Typography gutterBottom>{props.information.address}</Typography>
+              <Typography gutterBottom>
+                {props.information.city +
+                  "\n" +
+                  props.information.state +
+                  "\n" +
+                  props.information.zip}
+              </Typography>
+              <Typography gutterBottom>
+                note: {props.information.driverNote}
+              </Typography>
+            </div>
+          )}
         </Grid>
         <Grid item container direction='column' xs={12} sm={6}>
           <Typography variant='h6' gutterBottom className={classes.title}>
             Payment details
           </Typography>
-          <Grid container>
-            {payments.map((payment) => (
-              <React.Fragment key={payment.name}>
+          {props.payment.cash ? (
+            <div>
+              <Typography gutterBottom>
+                You will pay for your order with cash
+              </Typography>
+            </div>
+          ) : (
+            <div>
+              <Grid container>
                 <Grid item xs={6}>
-                  <Typography gutterBottom>{payment.name}</Typography>
+                  <Typography gutterBottom>Card Holder</Typography>
                 </Grid>
                 <Grid item xs={6}>
-                  <Typography gutterBottom>{payment.detail}</Typography>
+                  <Typography gutterBottom>{props.payment.name}</Typography>
                 </Grid>
-              </React.Fragment>
-            ))}
-          </Grid>
+                <Grid item xs={6}>
+                  <Typography gutterBottom>Card Number</Typography>
+                </Grid>
+                <Grid item xs={6}>
+                  <Typography gutterBottom>{props.payment.cc}</Typography>
+                </Grid>
+                <Grid item xs={6}>
+                  <Typography gutterBottom>Expiry Date</Typography>
+                </Grid>
+                <Grid item xs={6}>
+                  <Typography gutterBottom>{props.payment.exp}</Typography>
+                </Grid>
+                <Grid item xs={6}>
+                  <Typography gutterBottom>CVV</Typography>
+                </Grid>
+                <Grid item xs={6}>
+                  <Typography gutterBottom>{props.payment.cvv}</Typography>
+                </Grid>
+              </Grid>
+            </div>
+          )}
         </Grid>
       </Grid>
     </React.Fragment>

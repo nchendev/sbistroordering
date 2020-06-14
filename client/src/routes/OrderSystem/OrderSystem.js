@@ -18,10 +18,19 @@ export default function OrderSystem(props) {
   const [menu, setMenu] = React.useState({});
   const [order, setOrder] = React.useState([]);
   const [information, setInformation] = React.useState({
-    name: "",
-    address: "",
+    pickup: false,
+    fname: "",
+    lname: "",
     phone: "",
+    address: "",
+    city: "",
+    state: "OK",
+    zip: "",
     driverNotes: "",
+  });
+  const [payment, setPayment] = React.useState({
+    cash: false,
+    name: "",
     cc: "",
     exp: "",
     cvv: "",
@@ -67,16 +76,20 @@ export default function OrderSystem(props) {
     };
     // call API
     console.log("calling api");
+    let success = false;
     axios
       .post("/api/twilio", orderJSON)
-      .then((res) => console.log(res.data))
+      .then((res) => {
+        console.log(res.data);
+        success = true;
+      })
       .catch((err) => {
         console.error(err);
       });
 
     // log
     console.log(orderJSON);
-    return JSON.stringify(orderJSON);
+    return success;
   };
   const addToOrder = (orderItem) => {
     console.log(JSON.stringify(orderItem));
@@ -115,6 +128,18 @@ export default function OrderSystem(props) {
 
   const handleInfoChange = (input) => (e) => {
     information[input] = e.target.value;
+    setInformation(information);
+  };
+  const handlePaymentChange = (input) => (e) => {
+    payment[input] = e.target.value;
+    setPayment(payment);
+  };
+  const handleCardCashToggle = () => {
+    payment["cash"] = !payment["cash"];
+    setPayment(payment);
+  };
+  const handlePickupDeliveryToggle = () => {
+    information["pickup"] = !information["pickup"];
     setInformation(information);
   };
   const handlePriceChange = (input, value) => {
@@ -174,7 +199,26 @@ export default function OrderSystem(props) {
         />
       );
     case 4:
-      return <CheckoutView prevStep={prevStep} />;
+      return (
+        <CheckoutView
+          handleInfoChange={handleInfoChange}
+          prevStep={prevStep}
+          information={information}
+          resetInformationState={resetInformationState}
+          payment={payment}
+          handlePaymentChange={handlePaymentChange}
+          handleCardCashToggle={handleCardCashToggle}
+          order={order}
+          callAPI={callAPI}
+          order={order}
+          removeFromOrder={removeFromOrder}
+          editInOrder={editInOrder}
+          price={price}
+          handlePriceChange={handlePriceChange}
+          pd={orderOptions.pd}
+          handlePickupDeliveryToggle={handlePickupDeliveryToggle}
+        />
+      );
     case 5:
       return (
         <InformationView

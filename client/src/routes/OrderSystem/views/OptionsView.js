@@ -10,15 +10,30 @@ import {
 } from "../../../components/mui_index";
 import { OrderOptions, Header } from "../../../components/index";
 const useStyles = makeStyles((theme) => ({
+  layout: {
+    width: "fill",
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
+      width: "80vw",
+      marginLeft: "auto",
+      marginRight: "auto",
+    },
+  },
+  paper: {
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3),
+    padding: theme.spacing(2),
+    [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
+      marginTop: theme.spacing(6),
+      marginBottom: theme.spacing(6),
+      padding: theme.spacing(3),
+    },
+  },
   root: {
     direction: "column",
     flexGrow: 1,
     justifyContent: "space-between",
-  },
-  paper: {
-    padding: theme.spacing(1),
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -52,37 +67,39 @@ export default function OptionsView(props) {
   const classes = useStyles();
   return (
     <div>
-      <div className={classes.root}>
-        {/** Header**/}
-        <Header
-          title='Order Options'
-          resetInformationState={props.resetInformationState}
-        />
+      {/** Header**/}
+      <Header
+        title='Order Options'
+        resetInformationState={props.resetInformationState}
+      />
 
-        {/* OrderOptions */}
-        <OrderOptions
-          orderOptions={props.orderOptions}
-          handleOrderOptionsChange={props.handleOrderOptionsChange}
-        />
+      {/* OrderOptions */}
+      <main className={classes.layout}>
+        <Paper className={classes.paper}>
+          <OrderOptions
+            orderOptions={props.orderOptions}
+            handleOrderOptionsChange={props.handleOrderOptionsChange}
+          />
+        </Paper>
+      </main>
 
-        {/* Fab Space */}
-        <Paper elevation={0} className={classes.fabSpace} />
+      {/* Fab Space */}
+      <Paper elevation={0} className={classes.fabSpace} />
 
-        {/** Navigation **/}
-        <Grid container justify='center'>
-          <Paper className={classes.fab}>
-            <Fab
-              variant='extended'
-              color='primary'
-              aria-label='add'
-              className={(classes.margin, classes.fab)}
-              onClick={props.nextStep}
-            >
-              Continue to Order
-            </Fab>
-          </Paper>
-        </Grid>
-      </div>
+      {/** Navigation **/}
+      <Grid container justify='center'>
+        <Paper className={classes.fab}>
+          <Fab
+            variant='extended'
+            color='primary'
+            aria-label='add'
+            className={(classes.margin, classes.fab)}
+            onClick={props.nextStep}
+          >
+            Continue to Order
+          </Fab>
+        </Paper>
+      </Grid>
     </div>
   );
 }

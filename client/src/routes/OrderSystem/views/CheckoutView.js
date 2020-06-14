@@ -89,19 +89,6 @@ const useStyles = makeStyles((theme) => ({
 
 const steps = ["Address", "Payment", "Review your order"];
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <AddressForm />;
-    case 1:
-      return <PaymentForm />;
-    case 2:
-      return <Review />;
-    default:
-      throw new Error("Unknown step");
-  }
-}
-
 export default function Checkout(props) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -115,6 +102,43 @@ export default function Checkout(props) {
     else setActiveStep(activeStep - 1);
   };
 
+  function getStepContent(step) {
+    switch (step) {
+      case 0:
+        return (
+          <AddressForm
+            handleInfoChange={props.handleInfoChange}
+            information={props.information}
+            handlePickupDeliveryToggle={props.handlePickupDeliveryToggle}
+          />
+        );
+      case 1:
+        return (
+          <PaymentForm
+            handlePaymentChange={props.handlePaymentChange}
+            payment={props.payment}
+            handleCardCashToggle={props.handleCardCashToggle}
+          />
+        );
+      case 2:
+        return (
+          <Review
+            information={props.information}
+            payment={props.payment}
+            callAPI={props.callAPI}
+            order={props.order}
+            removeFromOrder={props.removeFromOrder}
+            editInOrder={props.editInOrder}
+            price={props.price}
+            handlePriceChange={props.handlePriceChange}
+            pd={props.pd}
+            resetInformationState={props.resetInformationState}
+          />
+        );
+      default:
+        throw new Error("Unknown step");
+    }
+  }
   return (
     <React.Fragment>
       <CssBaseline />
@@ -137,16 +161,25 @@ export default function Checkout(props) {
             </Stepper>
             <React.Fragment>
               {activeStep === steps.length ? (
-                <React.Fragment>
-                  <Typography variant='h5' gutterBottom>
-                    Thank you for your order.
-                  </Typography>
-                  <Typography variant='subtitle1'>
-                    Your order number is #2001539. We have emailed your order
-                    confirmation, and will send you an update when your order
-                    has shipped.
-                  </Typography>
-                </React.Fragment>
+                (props.callAPI() ? (
+                  <React.Fragment>
+                    <Typography variant='h5' gutterBottom>
+                      Thank you for ordering from Szechuan Bistro!
+                    </Typography>
+                    <Typography variant='subtitle1'>
+                      We will be in contact shortly through phone by
+                      405-752-8889 to confirm your order! Deliveries should be
+                      made within the hour, and pickup orders should be ready in
+                      15 minutes. <br /> Thank you for your patronage, we hope
+                      to serve you again soon.
+                    </Typography>
+                  </React.Fragment>
+                ) : (
+                  <div>
+                    Sorry, but something went wrong and your order wasn't
+                    placed! Please try again, or give us a call at 405 752 8889.
+                  </div>
+                ))()
               ) : (
                 <React.Fragment>{getStepContent(activeStep)}</React.Fragment>
               )}

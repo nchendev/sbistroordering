@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
@@ -6,14 +6,11 @@ import Button from "@material-ui/core/Button";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 
-export default function PaymentForm() {
+export default function PaymentForm(props) {
   // hooks
-  const [cashSelected, setCashSelected] = React.useState(false);
+  const [cashSelected, setCashSelected] = React.useState(props.payment.cash);
   const [cashButtonColor, setCashButtonColor] = React.useState("default");
   const [cardButtonColor, setCardButtonColor] = React.useState("primary");
-  // refs
-  const cashButton = useRef();
-  const cardButton = useRef();
 
   const toggleCashCard = () => {
     setCashSelected(!cashSelected);
@@ -21,7 +18,17 @@ export default function PaymentForm() {
     else setCashButtonColor("default");
     if (cardButtonColor === "default") setCardButtonColor("primary");
     else setCardButtonColor("default");
+    props.handleCardCashToggle();
   };
+  useEffect(() => {
+    if (cashSelected) {
+      setCashButtonColor("primary");
+      setCardButtonColor("default");
+    } else {
+      setCardButtonColor("primary");
+      setCashButtonColor("default");
+    }
+  }, []);
   return (
     <React.Fragment>
       <Typography variant='h6' gutterBottom>
@@ -35,7 +42,6 @@ export default function PaymentForm() {
         </Grid>
         <Grid item xs={4} md={8}>
           <Button
-            ref={cashButton}
             variant='contained'
             color={cashButtonColor}
             onClick={toggleCashCard}
@@ -43,7 +49,6 @@ export default function PaymentForm() {
             Cash
           </Button>
           <Button
-            ref={cardButton}
             variant='contained'
             color={cardButtonColor}
             onClick={toggleCashCard}
@@ -65,6 +70,8 @@ export default function PaymentForm() {
                 fullWidth
                 autoComplete='cc-name'
                 disabled={cashSelected}
+                onChange={props.handlePaymentChange("name")}
+                defaultValue={props.payment.name}
               />
             </Grid>
             <Grid item xs={12} md={6}>
@@ -75,6 +82,8 @@ export default function PaymentForm() {
                 fullWidth
                 autoComplete='cc-number'
                 disabled={cashSelected}
+                onChange={props.handlePaymentChange("cc")}
+                defaultValue={props.payment.cc}
               />
             </Grid>
             <Grid item xs={12} md={6}>
@@ -85,6 +94,8 @@ export default function PaymentForm() {
                 fullWidth
                 autoComplete='cc-exp'
                 disabled={cashSelected}
+                onChange={props.handlePaymentChange("exp")}
+                defaultValue={props.payment.exp}
               />
             </Grid>
             <Grid item xs={12} md={6}>
@@ -96,6 +107,8 @@ export default function PaymentForm() {
                 fullWidth
                 autoComplete='cc-csc'
                 disabled={cashSelected}
+                onChange={props.handlePaymentChange("cvv")}
+                defaultValue={props.payment.cvv}
               />
             </Grid>
             <Grid item xs={12}>
