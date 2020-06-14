@@ -19,3 +19,4 @@ export { default as ClickAwayListener } from "@material-ui/core/ClickAwayListene
 export { default as Grow } from "@material-ui/core/Grow";
 export { default as MenuList } from "@material-ui/core/MenuList";
 export { default as Popper } from "@material-ui/core/Popper";
+export { default as Divider } from "@material-ui/core/Divider";

@@ -18,13 +18,6 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import Grid from "@material-ui/core/Grid";
-
-import Menu from "./components/Menu.js";
-import Order from "./components/Order.js";
-import Information from "./components/Information.js";
-import Confirmation from "./components/Confirmation.js";
-import OrderDetails from "./components/OrderDetails";
-import OrderOptions from "./components/OrderOptions";
 import Login from "./routes/Login/Login";
 import OrderSystem from "./routes/OrderSystem/OrderSystem";
 import Register from "./routes/Register/Register";

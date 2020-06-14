@@ -7,6 +7,7 @@ import {
   Typography,
   Fab,
   Grid,
+  Divider,
 } from "../../../components/mui_index";
 import { Menu, Header } from "../../../components/index";
 import OrderDev from "../../../components/OrderDev";
@@ -16,10 +17,25 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     justifyContent: "space-between",
   },
+  layout: {
+    width: "fill",
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
+      width: "80vw",
+      marginLeft: "auto",
+      marginRight: "auto",
+    },
+  },
   paper: {
-    padding: theme.spacing(1),
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3),
+    padding: theme.spacing(2),
+    [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
+      marginTop: theme.spacing(6),
+      marginBottom: theme.spacing(6),
+      padding: theme.spacing(3),
+    },
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -48,12 +64,15 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     height: "40px",
   },
+  text: {
+    padding: theme.spacing(1),
+  },
 }));
 export default function OrderView(props) {
   const classes = useStyles();
   return (
     <div>
-      <div className={classes.root}>
+      <div className={classes.layout}>
         {/** Header**/}
         <Header
           title='Order from our menu'
@@ -62,6 +81,15 @@ export default function OrderView(props) {
 
         {/** Content **/}
         <Paper elevation={2} className={classes.paper}>
+          <Typography
+            component='h1'
+            variant='h4'
+            align='center'
+            className={classes.text}
+          >
+            Menu
+          </Typography>
+          <Divider />
           <Menu menu={props.menu} addToOrder={props.addToOrder} />
         </Paper>
 

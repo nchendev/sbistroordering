@@ -10,12 +10,15 @@ import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
+import Fab from "@material-ui/core/Fab";
 import {
   AddressForm,
   PaymentForm,
   Review,
   Header,
 } from "../../../components/index";
+
 function Copyright() {
   return (
     <Typography variant='body2' color='textSecondary' align='center'>
@@ -64,6 +67,24 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
     marginLeft: theme.spacing(1),
   },
+  fab: {
+    margin: 0,
+    bottom: theme.spacing(1),
+    left: "auto",
+    position: "fixed",
+    minWidth: "80vw",
+  },
+  fab2: {
+    margin: 0,
+    bottom: theme.spacing(1),
+    left: "auto",
+    position: "fixed",
+    minWidth: "40vw",
+  },
+  fabSpace: {
+    margin: theme.spacing(1),
+    height: "40px",
+  },
 }));
 
 const steps = ["Address", "Payment", "Review your order"];
@@ -90,7 +111,8 @@ export default function Checkout(props) {
   };
 
   const handleBack = () => {
-    setActiveStep(activeStep - 1);
+    if (activeStep === 0) props.prevStep();
+    else setActiveStep(activeStep - 1);
   };
 
   return (
@@ -126,30 +148,42 @@ export default function Checkout(props) {
                   </Typography>
                 </React.Fragment>
               ) : (
-                <React.Fragment>
-                  {getStepContent(activeStep)}
-                  <div className={classes.buttons}>
-                    {activeStep !== 0 && (
-                      <Button onClick={handleBack} className={classes.button}>
-                        Back
-                      </Button>
-                    )}
-                    <Button
-                      variant='contained'
-                      color='primary'
-                      onClick={handleNext}
-                      className={classes.button}
-                    >
-                      {activeStep === steps.length - 1 ? "Place order" : "Next"}
-                    </Button>
-                  </div>
-                </React.Fragment>
+                <React.Fragment>{getStepContent(activeStep)}</React.Fragment>
               )}
             </React.Fragment>
           </Paper>
           <Copyright />
         </main>
       </div>
+      {/* Fab Space */}
+      <div elevation={0} className={classes.fabSpace} />
+      {/** Navigation **/}
+      {activeStep != steps.length && (
+        <Grid container justify='center'>
+          <Paper className={classes.fab}>
+            <Fab
+              variant='extended'
+              color='primary'
+              aria-label='add'
+              className={(classes.margin, classes.fab2)}
+              onClick={handleBack}
+            >
+              {activeStep === 0 ? "Edit Order" : "Back"}
+            </Fab>
+          </Paper>
+          <Paper>
+            <Fab
+              variant='extended'
+              color='primary'
+              aria-label='add'
+              className={(classes.margin, classes.fab2)}
+              onClick={handleNext}
+            >
+              {activeStep === steps.length - 1 ? "Place order" : "Next"}
+            </Fab>
+          </Paper>
+        </Grid>
+      )}
     </React.Fragment>
   );
 }

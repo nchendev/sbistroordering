@@ -174,7 +174,7 @@ export default function OrderSystem(props) {
         />
       );
     case 4:
-      return <CheckoutView />;
+      return <CheckoutView prevStep={prevStep} />;
     case 5:
       return (
         <InformationView

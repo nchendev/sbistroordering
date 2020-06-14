@@ -5,8 +5,31 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import Divider from "@material-ui/core/Divider";
 
+import { OrderItem } from "../components/index";
 const useStyles = makeStyles((theme) => ({
+  layout: {
+    width: "fill",
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
+      width: "80vw",
+      marginLeft: "auto",
+      marginRight: "auto",
+    },
+  },
+  paper: {
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3),
+    padding: theme.spacing(2),
+    [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
+      marginTop: theme.spacing(6),
+      marginBottom: theme.spacing(6),
+      padding: theme.spacing(3),
+    },
+  },
   listItem: {
     padding: theme.spacing(1, 0),
   },
@@ -59,16 +82,14 @@ export default function OrderDev(props) {
     <div>
       <List disablePadding>
         {props.order.map((orderItem, itemIndex) => (
-          <ListItem className={classes.listItem} key={orderItem.english}>
-            <ListItemText
-              primary={orderItem.english}
-              secondary={orderItem.note}
-            />
-            <Typography variant='body2'>
-              {orderItem.amount} x ${orderItem.price}
-            </Typography>
-          </ListItem>
+          <OrderItem
+            itemIndex={itemIndex}
+            orderItem={orderItem}
+            removeFromOrder={props.removeFromOrder}
+            editInOrder={props.editInOrder}
+          />
         ))}
+        <Divider />
         <ListItem className={classes.listItem}>
           <ListItemText primary='Estimated Subtotal' />
           <Typography variant='subtitle1' className={classes.total}>
