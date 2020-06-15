@@ -11,6 +11,7 @@ import {
 } from "./views/index";
 
 export default function OrderSystem(props) {
+  // react hooks
   const [orderOptions, setOrderOptions] = React.useState({
     language: 1,
     pd: 1,
@@ -43,6 +44,7 @@ export default function OrderSystem(props) {
   });
   const [step, setStep] = React.useState(1);
 
+  // runs once page loads
   useEffect(() => {
     console.log("trigger use effect hook");
     // load menu
@@ -67,20 +69,26 @@ export default function OrderSystem(props) {
     }
   }, []);
 
+  /*
+   * @desc calls twilio API on the backend
+   * @params
+   * @return bool - order sent in successfully or not
+   */
   const callAPI = () => {
-    var orderJSON = {
+    // json object to send to backend
+    let orderJSON = {
       orderOptions,
       order,
       information,
       price,
     };
     // call API
-    console.log("calling api");
+    console.log("sending in order: " + JSON.stringify(orderJSON));
     let success = false;
     axios
       .post("/api/twilio", orderJSON)
       .then((res) => {
-        console.log(res.data);
+        console.log("api reply: " + res.data.msg);
         success = true;
       })
       .catch((err) => {
@@ -88,34 +96,65 @@ export default function OrderSystem(props) {
       });
 
     // log
-    console.log(orderJSON);
     return success;
   };
+
+  /*
+   * @desc adds item to order
+   * @params object - orderItem
+   * @return
+   */
   const addToOrder = (orderItem) => {
-    console.log(JSON.stringify(orderItem));
+    console.log("adding " + JSON.stringify(orderItem) + " to order");
     setOrder([...order, orderItem]);
-    console.log(JSON.stringify(order));
   };
 
-  // Proceed to next step
+  /*
+   * @desc proceeds to next step
+   * @params
+   * @return
+   */
   const nextStep = () => {
+    console.log("proceeding to next step");
     setStep(step + 1);
   };
 
-  // Go back to prev step
+  /*
+   * @desc go back to prev step
+   * @params
+   * @return
+   */
   const prevStep = () => {
+    console.log("proceeding to next step");
     setStep(step - 1);
   };
 
+  /*
+   * @desc removes item from order
+   * @params object - orderItem
+   * @return
+   */
   const removeFromOrder = (itemIndex) => {
-    console.log(itemIndex);
+    console.log("removing order item at index" + itemIndex);
     let cpy = order.slice(0);
     setOrder([...cpy.slice(0, itemIndex), ...cpy.slice(itemIndex + 1)]);
-    //order.splice(itemIndex, 1);
+    console.log("order after removing item: " + JSON.stringify(order));
   };
 
+  /*
+   * @desc edit item in order
+   * @params int - itemIndex, int - amount, string - note
+   * @return
+   */
   const editInOrder = (itemIndex, amount, note) => {
-    console.log("editing order");
+    console.log(
+      "editing item at index" +
+        itemIndex +
+        "; amount: " +
+        amount +
+        ", note: " +
+        note
+    );
     let cpy = order[itemIndex];
     cpy.amount = amount;
     cpy.note = note;
@@ -125,34 +164,72 @@ export default function OrderSystem(props) {
       ...order.slice(itemIndex + 1),
     ]);
   };
+  /*
+   * @desc edit part of information
+   * @params string - input, event - e
+   * @return
+   */
 
   const handleInfoChange = (input) => (e) => {
+    console.log("editing information." + input + " to be " + e.target.value);
     information[input] = e.target.value;
     setInformation(information);
   };
+  /*
+   * @desc edit part of payment
+   * @params string - input, event - e
+   * @return
+   */
   const handlePaymentChange = (input) => (e) => {
+    console.log("editing payment." + input + " to be " + e.target.value);
     payment[input] = e.target.value;
     setPayment(payment);
   };
+  /*
+   * @desc toggle whether user is paying with cash or card
+   * @params
+   * @return
+   */
   const handleCardCashToggle = () => {
+    console.log("user paying with cash: " + payment["cash"]);
     payment["cash"] = !payment["cash"];
     setPayment(payment);
   };
+  /*
+   * @desc toggle whether user is picking up order or wanting delivery
+   * @params
+   * @return
+   */
   const handlePickupDeliveryToggle = () => {
+    console.log("user picking up: " + information["cash"]);
     information["pickup"] = !information["pickup"];
     setInformation(information);
   };
+  /*
+   * @desc edit part of price
+   * @params string - input, string - price
+   * @return
+   */
   const handlePriceChange = (input, value) => {
     console.log("hit");
     price[input] = value;
     setPrice(price);
   };
+  /*
+   * @desc edit part of OrderOptions
+   * @params string - input, event - e
+   * @return
+   */
   const handleOrderOptionsChange = (input) => (e) => {
     orderOptions[input] = parseInt(e.target.value);
     setOrderOptions(orderOptions);
     console.log(orderOptions);
   };
-
+  /*
+   * @desc reset information (used when logging user out)
+   * @params
+   * @return
+   */
   const resetInformationState = () => {
     setInformation({
       name: "",
@@ -164,6 +241,8 @@ export default function OrderSystem(props) {
       cvv: "",
     });
   };
+
+  // display the appropriate view depending on the current step
   switch (step) {
     case 1:
       return (
@@ -217,31 +296,6 @@ export default function OrderSystem(props) {
           handlePriceChange={handlePriceChange}
           pd={orderOptions.pd}
           handlePickupDeliveryToggle={handlePickupDeliveryToggle}
-        />
-      );
-    case 5:
-      return (
-        <InformationView
-          information={information}
-          handleInfoChange={handleInfoChange}
-          prevStep={prevStep}
-          nextStep={nextStep}
-          resetInformationState={resetInformationState}
-        />
-      );
-    case 6:
-      return (
-        <ConfirmView
-          prevStep={prevStep}
-          nextStep={nextStep}
-          resetInformationState={resetInformationState}
-        />
-      );
-    case 7:
-      return (
-        <ConfirmedView
-          callAPI={callAPI}
-          resetInformationState={resetInformationState}
         />
       );
   }

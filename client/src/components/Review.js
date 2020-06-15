@@ -5,7 +5,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Grid from "@material-ui/core/Grid";
-import { OrderDev } from "../components/index";
+import { OrderList } from "../components/index";
 
 const useStyles = makeStyles((theme) => ({
   listItem: {
@@ -27,7 +27,7 @@ export default function Review(props) {
       <Typography variant='h6' gutterBottom>
         Order summary
       </Typography>
-      <OrderDev
+      <OrderList
         order={props.order}
         removeFromOrder={props.removeFromOrder}
         editInOrder={props.editInOrder}

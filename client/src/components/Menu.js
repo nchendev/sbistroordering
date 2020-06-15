@@ -2,24 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Typography from "@material-ui/core/Typography";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
-import GridListTileBar from "@material-ui/core/GridListTileBar";
 import ListSubheader from "@material-ui/core/ListSubheader";
+import Grid from "@material-ui/core/Grid";
 
-import MenuCategory from "./MenuCategory";
+import MenuItem from "./MenuItem";
 
+// mui styling
 const useStyles = makeStyles((theme) => ({
-  exproot: {
-    width: "100%",
-  },
   root: {
     display: "flex",
     flexWrap: "wrap",
@@ -34,19 +26,7 @@ const useStyles = makeStyles((theme) => ({
     transform: "translateZ(0)",
     overflowX: "scroll",
   },
-  title: {
-    padding: 5,
-    margin: 5,
-  },
-  titleBar: {
-    background:
-      "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
-  },
-  fabSpace: {
-    height: "160px",
-    bottom: 0,
-  },
-  cat: {
+  category: {
     marginTop: theme.spacing(1),
   },
   text: {
@@ -55,63 +35,70 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Menu(props) {
-  console.log(typeof props.menu["Appetizer"]);
   const classes = useStyles();
+
+  // react hooks
   const [selectedCategory, setSelectedCategory] = React.useState([]);
 
+  /*
+   * @desc handle category selection
+   * @params
+   * @return
+   */
   const handleTileClick = (menuCategory) => {
-    console.log(typeof menuCategory);
-    console.log(menuCategory.menuCategory);
-
+    console.log(menuCategory.menuCategory + " selected");
     setSelectedCategory(props.menu[menuCategory.menuCategory]);
   };
 
   return (
-    <div>
-      {
-        <div className={classes.root}>
-          <Typography
-            disablePadding
-            component='h4'
-            variant='subtitle1'
-            align='center'
-            className={classes.text}
+    <div className={classes.root}>
+      <Typography
+        disablePadding
+        component='h4'
+        variant='subtitle1'
+        align='center'
+        className={classes.text}
+      >
+        1. Select Category
+      </Typography>
+      {/* Categories */}
+      <GridList cellHeight={180} className={classes.gridList}>
+        {Object.keys(props.menu).map((menuCategory, menuIndex) => (
+          <GridListTile
+            key={menuCategory}
+            style={{ height: "fixed", width: "auto" }}
+            onClick={() => handleTileClick({ menuCategory })}
           >
-            1. Select Category
-          </Typography>
-          {/* Categories */}
-          <GridList cellHeight={180} className={classes.gridList}>
-            {Object.keys(props.menu).map((menuCategory, menuIndex) => (
-              <GridListTile
-                key={menuCategory}
-                style={{ height: "fixed", width: "auto" }}
-                onClick={() => handleTileClick({ menuCategory })}
-              >
-                <ListSubheader component='div'>{menuCategory}</ListSubheader>
-              </GridListTile>
-            ))}
-          </GridList>
+            <ListSubheader component='div'>{menuCategory}</ListSubheader>
+          </GridListTile>
+        ))}
+      </GridList>
 
-          {/* Items within category */}
-          <Typography
-            disablePadding
-            component='h4'
-            variant='subtitle1'
-            align='center'
-            className={classes.text}
-          >
-            2. Choose Items
-          </Typography>
-          <MenuCategory
-            className={classes.cat}
-            menuCategory={selectedCategory}
+      {/* Display Items within category */}
+      <Typography
+        disablePadding
+        component='h4'
+        variant='subtitle1'
+        align='center'
+        className={classes.text}
+      >
+        2. Choose Items
+      </Typography>
+      {selectedCategory.map((menuItem) => (
+        <Grid
+          container
+          direction='column'
+          justify='flex-start'
+          alignItems='stretch'
+          xs={12}
+        >
+          <MenuItem
+            key={menuItem.english}
+            menuItem={menuItem}
             addToOrder={props.addToOrder}
           />
-
-          {/* Space for Fab */}
-          {/*<Paper className={classes.fabSpace}/>*/}
-        </div>
-      }
+        </Grid>
+      ))}
     </div>
   );
 }

@@ -7,14 +7,12 @@ import {
   Typography,
   Fab,
   Grid,
+  Divider,
 } from "../../../components/mui_index";
-import { Header, OrderDev } from "../../../components/index";
+import { Header, OrderList } from "../../../components/index";
+
+// mui styles
 const useStyles = makeStyles((theme) => ({
-  root: {
-    direction: "column",
-    flexGrow: 1,
-    justifyContent: "space-between",
-  },
   layout: {
     width: "fill",
     marginLeft: theme.spacing(2),
@@ -34,12 +32,6 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: theme.spacing(6),
       padding: theme.spacing(3),
     },
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
   },
   margin: {
     margin: theme.spacing(1),
@@ -70,76 +62,75 @@ export default function ReviewView(props) {
   const classes = useStyles();
   return (
     <div>
-      <div className={classes.root}>
-        {/** Header**/}
-        <Header
-          title='Review your Order'
-          resetInformationState={props.resetInformationState}
-        />
+      {/** Header**/}
+      <Header
+        title='Review your Order'
+        resetInformationState={props.resetInformationState}
+      />
 
-        {/* Order */}
-        <div>
-          <main className={classes.layout}>
-            <Paper className={classes.paper}>
-              <Typography
-                component='h1'
-                variant='h4'
-                align='center'
-                className={classes.text}
-              >
-                Review Order
-              </Typography>
-              <Typography
-                disablePadding
-                component='h4'
-                variant='subtitle1'
-                align='center'
-                className={classes.text}
-              >
-                To make changes to or remove an item, click on it
-              </Typography>
-              <OrderDev
-                order={props.order}
-                removeFromOrder={props.removeFromOrder}
-                editInOrder={props.editInOrder}
-                price={props.price}
-                handlePriceChange={props.handlePriceChange}
-                pd={props.pd}
-                resetInformationState={props.resetInformationState}
-              />
-            </Paper>
-          </main>
-        </div>
-
-        {/* Fab Space */}
-        <Paper elevation={0} className={classes.fabSpace} />
-
-        {/** Navigation **/}
-        <Grid container justify='center'>
-          <Paper className={classes.fab}>
-            <Fab
-              variant='extended'
-              color='primary'
-              aria-label='add'
-              className={(classes.margin, classes.fab2)}
-              onClick={props.prevStep}
+      {/* Order */}
+      <div>
+        <main className={classes.layout}>
+          <Paper className={classes.paper}>
+            <Typography
+              component='h1'
+              variant='h4'
+              align='center'
+              className={classes.text}
             >
-              Add Items
-            </Fab>
-          </Paper>
-          <Paper>
-            <Fab
-              variant='extended'
-              color='primary'
-              aria-label='add'
-              className={(classes.margin, classes.fab2)}
-              onClick={props.nextStep}
+              Review Order
+            </Typography>
+            <Typography
+              disablePadding
+              component='h4'
+              variant='subtitle1'
+              align='center'
+              className={classes.text}
             >
-              Continue
-            </Fab>
+              To make changes to or remove an item, click on it
+            </Typography>
+            <Divider />
+            <OrderList
+              order={props.order}
+              removeFromOrder={props.removeFromOrder}
+              editInOrder={props.editInOrder}
+              price={props.price}
+              handlePriceChange={props.handlePriceChange}
+              pd={props.pd}
+              resetInformationState={props.resetInformationState}
+            />
           </Paper>
-        </Grid>
+        </main>
       </div>
+
+      {/* Fab Space */}
+      <div elevation={0} className={classes.fabSpace} />
+
+      {/** Navigation **/}
+      <Grid container justify='center'>
+        <Paper className={classes.fab}>
+          <Fab
+            variant='extended'
+            color='primary'
+            aria-label='add'
+            className={(classes.margin, classes.fab2)}
+            onClick={props.prevStep}
+          >
+            Add Items
+          </Fab>
+        </Paper>
+        <Paper>
+          <Fab
+            variant='extended'
+            color='primary'
+            aria-label='add'
+            className={(classes.margin, classes.fab2)}
+            onClick={props.nextStep}
+          >
+            Continue
+          </Fab>
+        </Paper>
+      </Grid>
     </div>
   );
 }

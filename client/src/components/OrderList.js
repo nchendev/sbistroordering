@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import List from "@material-ui/core/List";
@@ -8,42 +8,28 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Divider from "@material-ui/core/Divider";
 
-import { OrderItem } from "../components/index";
+import { OrderItem } from "./index";
+
+// constants
+const TAXRATE = 0.09;
+
 const useStyles = makeStyles((theme) => ({
-  layout: {
-    width: "fill",
-    marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-      width: "80vw",
-      marginLeft: "auto",
-      marginRight: "auto",
-    },
-  },
-  paper: {
-    marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(3),
-    padding: theme.spacing(2),
-    [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
-      marginTop: theme.spacing(6),
-      marginBottom: theme.spacing(6),
-      padding: theme.spacing(3),
-    },
-  },
   listItem: {
     padding: theme.spacing(1, 0),
   },
   total: {
     fontWeight: 700,
   },
-  title: {
-    marginTop: theme.spacing(2),
-  },
 }));
 
-export default function OrderDev(props) {
-  const taxRate = 0.09;
+export default function OrderList(props) {
   const classes = useStyles();
+
+  /*
+   * @desc calculate estimated subtotal
+   * @params
+   * @return
+   */
   const calcSubtotal = () => {
     let subtotal = 0;
     props.order.forEach((orderItem) => {
@@ -51,12 +37,20 @@ export default function OrderDev(props) {
     });
     return subtotal;
   };
-
+  /*
+   * @desc calculate estimated tax
+   * @params
+   * @return
+   */
   const calcTax = () => {
-    let tax = calcSubtotal() * taxRate;
+    let tax = calcSubtotal() * TAXRATE;
     return tax;
   };
-
+  /*
+   * @desc calculate estimated delivery fee
+   * @params
+   * @return
+   */
   const calcDeliveryFee = () => {
     if (props.pd == 2) {
       return 3;
@@ -64,7 +58,11 @@ export default function OrderDev(props) {
       return 0;
     }
   };
-
+  /*
+   * @desc calculated estimated total
+   * @params
+   * @return
+   */
   const calcTotal = () => {
     let subtotal = calcSubtotal();
     let tax = calcTax();
@@ -81,15 +79,19 @@ export default function OrderDev(props) {
   return (
     <div>
       <List disablePadding>
-        {props.order.map((orderItem, itemIndex) => (
-          <OrderItem
-            itemIndex={itemIndex}
-            orderItem={orderItem}
-            removeFromOrder={props.removeFromOrder}
-            editInOrder={props.editInOrder}
-          />
-        ))}
+        {
+          // order items
+          props.order.map((orderItem, itemIndex) => (
+            <OrderItem
+              itemIndex={itemIndex}
+              orderItem={orderItem}
+              removeFromOrder={props.removeFromOrder}
+              editInOrder={props.editInOrder}
+            />
+          ))
+        }
         <Divider />
+        {/* order pricing information */}
         <ListItem className={classes.listItem}>
           <ListItemText primary='Estimated Subtotal' />
           <Typography variant='subtitle1' className={classes.total}>

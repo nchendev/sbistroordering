@@ -2,21 +2,15 @@ import React from "react";
 import {
   makeStyles,
   Paper,
-  AppBar,
-  Toolbar,
   Typography,
   Fab,
   Grid,
   Divider,
 } from "../../../components/mui_index";
 import { Menu, Header } from "../../../components/index";
-import OrderDev from "../../../components/OrderDev";
+
+// mui styling
 const useStyles = makeStyles((theme) => ({
-  root: {
-    direction: "column",
-    flexGrow: 1,
-    justifyContent: "space-between",
-  },
   layout: {
     width: "fill",
     marginLeft: theme.spacing(2),
@@ -36,12 +30,6 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: theme.spacing(6),
       padding: theme.spacing(3),
     },
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
   },
   margin: {
     margin: theme.spacing(1),
@@ -68,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
   },
 }));
+
 export default function OrderView(props) {
   const classes = useStyles();
   return (
@@ -94,7 +83,7 @@ export default function OrderView(props) {
         </Paper>
 
         {/* Fab Space */}
-        <Paper elevation={0} className={classes.fabSpace} />
+        <div elevation={0} className={classes.fabSpace} />
 
         {/** Navigation **/}
         <Grid container justify='center'>

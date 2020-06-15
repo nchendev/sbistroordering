@@ -1,7 +1,6 @@
 export { default as Confirmation } from "./Confirmation";
 export { default as Information } from "./Information";
 export { default as Menu } from "./Menu";
-export { default as MenuCategory } from "./MenuCategory";
 export { default as MenuItem } from "./MenuItem";
 export { default as MenuItemDialog } from "./MenuItemDialog";
 export { default as OrderItem } from "./OrderItem";
@@ -11,4 +10,4 @@ export { default as Header } from "./Header";
 export { default as AddressForm } from "./AddressForm";
 export { default as PaymentForm } from "./PaymentForm";
 export { default as Review } from "./Review";
-export { default as OrderDev } from "./OrderDev";
+export { default as OrderList } from "./OrderList";
