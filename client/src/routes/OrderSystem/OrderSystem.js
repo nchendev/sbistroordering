@@ -10,16 +10,19 @@ import {
   CheckoutView,
 } from "./views/index";
 
+// constants
+const TAXRATE = 0.09;
+
 export default function OrderSystem(props) {
   // react hooks
-  const [orderOptions, setOrderOptions] = React.useState({
-    language: 1,
-    pd: 1,
+  const [options, setOptions] = React.useState({
+    english: true,
+    pickup: false,
+    cash: false,
   });
   const [menu, setMenu] = React.useState({});
   const [order, setOrder] = React.useState([]);
   const [information, setInformation] = React.useState({
-    pickup: false,
     fname: "",
     lname: "",
     phone: "",
@@ -30,17 +33,16 @@ export default function OrderSystem(props) {
     driverNotes: "",
   });
   const [payment, setPayment] = React.useState({
-    cash: false,
     name: "",
     cc: "",
     exp: "",
     cvv: "",
   });
   const [price, setPrice] = React.useState({
-    subtotal: "0",
-    tax: "0",
-    fee: "0",
-    total: "0",
+    subtotal: 0,
+    tax: 0,
+    dfee: "Not yet calculated",
+    total: 0,
   });
   const [step, setStep] = React.useState(1);
 
@@ -77,7 +79,7 @@ export default function OrderSystem(props) {
   const callAPI = () => {
     // json object to send to backend
     let orderJSON = {
-      orderOptions,
+      options,
       order,
       information,
       price,
@@ -106,7 +108,17 @@ export default function OrderSystem(props) {
    */
   const addToOrder = (orderItem) => {
     console.log("adding " + JSON.stringify(orderItem) + " to order");
+    // calculate change to price
+    let subtotal =
+      price.subtotal + parseInt(orderItem.amount) * parseFloat(orderItem.price);
+    let tax = subtotal * TAXRATE;
+    let dfee = price.dfee;
+    let total = subtotal + tax;
+    if (!isNaN(dfee)) total += dfee;
+    setPrice({ subtotal, tax, dfee, total });
+    // add item to order
     setOrder([...order, orderItem]);
+    console.log("order after adding item: " + JSON.stringify(order));
   };
 
   /*
@@ -136,6 +148,17 @@ export default function OrderSystem(props) {
    */
   const removeFromOrder = (itemIndex) => {
     console.log("removing order item at index" + itemIndex);
+    // calculate change to price
+    let subtotal =
+      price.subtotal -
+      parseInt(order[itemIndex].amount) * parseFloat(order[itemIndex].price);
+    let tax = subtotal * TAXRATE;
+    let dfee = price.dfee;
+    let total = subtotal + tax;
+    if (!isNaN(dfee)) total += dfee;
+    setPrice({ subtotal, tax, dfee, total });
+    // remove item from order
+
     let cpy = order.slice(0);
     setOrder([...cpy.slice(0, itemIndex), ...cpy.slice(itemIndex + 1)]);
     console.log("order after removing item: " + JSON.stringify(order));
@@ -146,35 +169,44 @@ export default function OrderSystem(props) {
    * @params int - itemIndex, int - amount, string - note
    * @return
    */
-  const editInOrder = (itemIndex, amount, note) => {
+  const editInOrder = (itemIndex, amountChange, note) => {
     console.log(
       "editing item at index" +
         itemIndex +
         "; amount: " +
-        amount +
+        amountChange +
         ", note: " +
         note
     );
+    // calculate change to price
+    let subtotal =
+      price.subtotal + amountChange * parseFloat(order[itemIndex].price);
+    let tax = subtotal * TAXRATE;
+    let dfee = price.dfee;
+    let total = subtotal + tax;
+    if (!isNaN(dfee)) total += dfee;
+    setPrice({ subtotal, tax, dfee, total });
+
+    // edit item in order
     let cpy = order[itemIndex];
-    cpy.amount = amount;
+    cpy.amount += amountChange;
     cpy.note = note;
-    setOrder([
-      ...order.slice(0, itemIndex),
-      cpy,
-      ...order.slice(itemIndex + 1),
-    ]);
+    order[itemIndex] = cpy;
+    setOrder(order);
+    console.log("order after editing item: " + JSON.stringify(order));
   };
+
   /*
    * @desc edit part of information
    * @params string - input, event - e
    * @return
    */
-
   const handleInfoChange = (input) => (e) => {
     console.log("editing information." + input + " to be " + e.target.value);
     information[input] = e.target.value;
     setInformation(information);
   };
+
   /*
    * @desc edit part of payment
    * @params string - input, event - e
@@ -185,16 +217,19 @@ export default function OrderSystem(props) {
     payment[input] = e.target.value;
     setPayment(payment);
   };
+
   /*
    * @desc toggle whether user is paying with cash or card
    * @params
    * @return
    */
+
   const handleCardCashToggle = () => {
     console.log("user paying with cash: " + payment["cash"]);
     payment["cash"] = !payment["cash"];
     setPayment(payment);
   };
+
   /*
    * @desc toggle whether user is picking up order or wanting delivery
    * @params
@@ -205,6 +240,7 @@ export default function OrderSystem(props) {
     information["pickup"] = !information["pickup"];
     setInformation(information);
   };
+
   /*
    * @desc edit part of price
    * @params string - input, string - price
@@ -215,16 +251,7 @@ export default function OrderSystem(props) {
     price[input] = value;
     setPrice(price);
   };
-  /*
-   * @desc edit part of OrderOptions
-   * @params string - input, event - e
-   * @return
-   */
-  const handleOrderOptionsChange = (input) => (e) => {
-    orderOptions[input] = parseInt(e.target.value);
-    setOrderOptions(orderOptions);
-    console.log(orderOptions);
-  };
+
   /*
    * @desc reset information (used when logging user out)
    * @params
@@ -244,40 +271,39 @@ export default function OrderSystem(props) {
 
   // display the appropriate view depending on the current step
   switch (step) {
-    case 1:
+    /**case 1:
       return (
         <OptionsView
-          orderOptions={orderOptions}
-          handleOrderOptionsChange={handleOrderOptionsChange}
+          options={options}
+          handleoptionsChange={handleoptionsChange}
           nextStep={nextStep}
           resetInformationState={resetInformationState}
         />
-      );
-    case 2:
+      );**/
+    case 1:
       return (
         <OrderView
           menu={menu}
           addToOrder={addToOrder}
+          resetInformationState={resetInformationState}
           prevStep={prevStep}
           nextStep={nextStep}
-          resetInformationState={resetInformationState}
         />
       );
-    case 3:
+    case 2:
       return (
         <ReviewView
           order={order}
+          price={price}
           removeFromOrder={removeFromOrder}
           editInOrder={editInOrder}
-          price={price}
           handlePriceChange={handlePriceChange}
-          pd={orderOptions.pd}
+          resetInformationState={resetInformationState}
           prevStep={prevStep}
           nextStep={nextStep}
-          resetInformationState={resetInformationState}
         />
       );
-    case 4:
+    case 3:
       return (
         <CheckoutView
           handleInfoChange={handleInfoChange}
@@ -294,7 +320,7 @@ export default function OrderSystem(props) {
           editInOrder={editInOrder}
           price={price}
           handlePriceChange={handlePriceChange}
-          pd={orderOptions.pd}
+          pd={options.pd}
           handlePickupDeliveryToggle={handlePickupDeliveryToggle}
         />
       );

@@ -10,9 +10,6 @@ import Divider from "@material-ui/core/Divider";
 
 import { OrderItem } from "./index";
 
-// constants
-const TAXRATE = 0.09;
-
 const useStyles = makeStyles((theme) => ({
   listItem: {
     padding: theme.spacing(1, 0),
@@ -24,57 +21,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function OrderList(props) {
   const classes = useStyles();
-
-  /*
-   * @desc calculate estimated subtotal
-   * @params
-   * @return
-   */
-  const calcSubtotal = () => {
-    let subtotal = 0;
-    props.order.forEach((orderItem) => {
-      subtotal += parseInt(orderItem.amount) * parseInt(orderItem.price);
-    });
-    return subtotal;
-  };
-  /*
-   * @desc calculate estimated tax
-   * @params
-   * @return
-   */
-  const calcTax = () => {
-    let tax = calcSubtotal() * TAXRATE;
-    return tax;
-  };
-  /*
-   * @desc calculate estimated delivery fee
-   * @params
-   * @return
-   */
-  const calcDeliveryFee = () => {
-    if (props.pd == 2) {
-      return 3;
-    } else {
-      return 0;
-    }
-  };
-  /*
-   * @desc calculated estimated total
-   * @params
-   * @return
-   */
-  const calcTotal = () => {
-    let subtotal = calcSubtotal();
-    let tax = calcTax();
-    let fee = calcDeliveryFee();
-    let total = subtotal + tax + fee;
-    props.handlePriceChange("subtotal", subtotal.toFixed(2));
-    props.handlePriceChange("tax", tax.toFixed(2));
-    props.handlePriceChange("fee", fee.toFixed(2));
-    props.handlePriceChange("total", total.toFixed(2));
-
-    return total;
-  };
 
   return (
     <div>
@@ -95,25 +41,29 @@ export default function OrderList(props) {
         <ListItem className={classes.listItem}>
           <ListItemText primary='Estimated Subtotal' />
           <Typography variant='subtitle1' className={classes.total}>
-            ${calcSubtotal()}
+            ${props.price.subtotal.toFixed(2)}
           </Typography>
         </ListItem>
         <ListItem className={classes.listItem}>
           <ListItemText primary='Estimated Tax' />
           <Typography variant='subtitle1' className={classes.total}>
-            ${calcTax()}
+            ${props.price.tax.toFixed(2)}
           </Typography>
         </ListItem>
         <ListItem className={classes.listItem}>
           <ListItemText primary='Estimated Delivery Fee' />
           <Typography variant='subtitle1' className={classes.total}>
-            ${calcDeliveryFee()}
+            {isNaN(props.price.dfee) ? (
+              <div>{props.price.dfee}</div>
+            ) : (
+              <div>${props.price.dfee.toFixed(2)}</div>
+            )}
           </Typography>
         </ListItem>
         <ListItem className={classes.listItem}>
           <ListItemText primary='Estimated Total' />
           <Typography variant='subtitle1' className={classes.total}>
-            ${calcTotal()}
+            ${props.price.total.toFixed(2)}
           </Typography>
         </ListItem>
       </List>

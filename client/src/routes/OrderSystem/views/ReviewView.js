@@ -92,12 +92,10 @@ export default function ReviewView(props) {
             <Divider />
             <OrderList
               order={props.order}
+              price={props.price}
               removeFromOrder={props.removeFromOrder}
               editInOrder={props.editInOrder}
-              price={props.price}
               handlePriceChange={props.handlePriceChange}
-              pd={props.pd}
-              resetInformationState={props.resetInformationState}
             />
           </Paper>
         </main>
