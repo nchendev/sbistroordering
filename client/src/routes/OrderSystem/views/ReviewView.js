@@ -64,7 +64,7 @@ export default function ReviewView(props) {
     <div>
       {/** Header**/}
       <Header
-        title='Review your Order'
+        title='Szechuan Bistro'
         resetInformationState={props.resetInformationState}
       />
 

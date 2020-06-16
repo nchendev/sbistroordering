@@ -82,7 +82,7 @@ export default function PaymentForm(props) {
                 defaultValue={props.payment.cc}
               />
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={6}>
               <TextField
                 required
                 id='expDate'
@@ -94,7 +94,7 @@ export default function PaymentForm(props) {
                 defaultValue={props.payment.exp}
               />
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={6}>
               <TextField
                 required
                 id='cvv'

@@ -276,8 +276,11 @@ export default function OrderSystem(props) {
     });
   };
   const setDeliveryFee = (dfee) => {
+    console.log("yup here");
     options.dfee = dfee;
-    //!isNaN(price.dfee) ? (price.dfee = dfee) : (dfee = dfee);
+    setOptions(options);
+    price.dfee = dfee;
+    setPrice(price);
   };
   // display the appropriate view depending on the current step
   switch (step) {

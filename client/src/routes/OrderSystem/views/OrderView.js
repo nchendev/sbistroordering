@@ -56,7 +56,7 @@ export default function OrderView(props) {
       <div className={classes.layout}>
         {/** Header**/}
         <Header
-          title='Order from our menu'
+          title='Szechuan Bistro'
           resetInformationState={props.resetInformationState}
         />
 

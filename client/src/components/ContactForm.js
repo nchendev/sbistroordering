@@ -24,7 +24,7 @@ export default function ContactForm(props) {
   const [deliveryButtonColor, setDeliveryButtonColor] = React.useState(
     !pickupSelected ? "primary" : "default"
   );
-
+  const [deliveryMessage, setDeliveryMessage] = React.useState("");
   const togglePickupDelivery = (e) => {
     setPickupSelected(!pickupSelected);
     if (pickupButtonColor === "default") setPickupButtonColor("primary");
@@ -35,6 +35,8 @@ export default function ContactForm(props) {
   };
 
   const calcDfee = () => {
+    setShowAlert(false);
+    props.setDeliveryMessage("");
     // if all inputs valid, calculate delivery fee
     // query backend for delivery fee
     let parametersJSON = {
@@ -61,9 +63,18 @@ export default function ContactForm(props) {
         console.log("api reply: ");
         console.log(res.data);
         if (res.data.status === "OK") {
-          setDeliveryFee(res.data.dfee);
+          props.setDeliveryFee(res.data.dfee);
+          setDeliveryMessage(
+            "The estimated delivery fee is $" +
+              res.data.dfee +
+              " for a delivery distance of " +
+              res.data.dist
+          );
         } else if (res.data.status === "FAILURE") {
-          setDeliveryFee(3);
+          props.setDeliveryFee(3);
+          setDeliveryMessage(
+            "Something went wrong and we couldn't verify your address. The estimated delivery fee has been set to $3.00"
+          );
         } else if (res.data.status === "INVALID") {
           setShowAlert(true);
         }
@@ -81,7 +92,7 @@ export default function ContactForm(props) {
   return (
     <React.Fragment>
       <Grid container spacing={3}>
-        <Grid item xs={6}>
+        <Grid item xs={6} md={4}>
           <TextField
             required
             id='firstName'
@@ -93,7 +104,7 @@ export default function ContactForm(props) {
             defaultValue={props.information.fname}
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={6} md={4}>
           <TextField
             required
             id='lastName'
@@ -105,7 +116,7 @@ export default function ContactForm(props) {
             defaultValue={props.information.lname}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} md={4}>
           <TextField
             required
             id='phone'
@@ -149,7 +160,7 @@ export default function ContactForm(props) {
             Delivery Address
           </Typography>
           <Grid container spacing={3}>
-            <Grid item xs={12}>
+            <Grid item xs={12} md={5}>
               <TextField
                 required
                 id='address'
@@ -162,7 +173,7 @@ export default function ContactForm(props) {
               />
             </Grid>
 
-            <Grid item xs={12} sm={6} md={4}>
+            <Grid item xs={12} sm={6} md={3}>
               <TextField
                 required
                 id='city'
@@ -174,7 +185,7 @@ export default function ContactForm(props) {
                 defaultValue={props.information.city}
               />
             </Grid>
-            <Grid item xs={6} sm={8} md={4}>
+            <Grid item xs={6} sm={8} md={1}>
               <TextField
                 id='state'
                 name='state'
@@ -184,7 +195,7 @@ export default function ContactForm(props) {
                 value={"OK"}
               />
             </Grid>
-            <Grid item xs={6} sm={4} md={4}>
+            <Grid item xs={6} sm={4} md={3}>
               <TextField
                 required
                 id='zip'
@@ -212,9 +223,7 @@ export default function ContactForm(props) {
               </Button>
             </Grid>
             <Grid item xs={6} md={9}>
-              <Typography gutterBottom>
-                Estimated fee: {props.price.dfee}
-              </Typography>
+              <Typography gutterBottom>{deliveryMessage}</Typography>
             </Grid>
             <Grid item xs={12}>
               <Collapse in={showAlert}>
