@@ -36,7 +36,7 @@ export default function ContactForm(props) {
 
   const calcDfee = () => {
     setShowAlert(false);
-    props.setDeliveryMessage("");
+    setDeliveryMessage("");
     // if all inputs valid, calculate delivery fee
     // query backend for delivery fee
     let parametersJSON = {
