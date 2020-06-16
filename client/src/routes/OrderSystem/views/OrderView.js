@@ -8,6 +8,10 @@ import {
   Divider,
 } from "../../../components/mui_index";
 import { Menu, Header } from "../../../components/index";
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
 // mui styling
 const useStyles = makeStyles((theme) => ({
@@ -51,6 +55,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default function OrderView(props) {
   const classes = useStyles();
+  // react hooks
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleNext = () => {
+    if (props.order.length == 0) {
+      setOpen(true);
+    } else {
+      props.nextStep();
+    }
+  };
   return (
     <div>
       <div className={classes.layout}>
@@ -85,12 +101,29 @@ export default function OrderView(props) {
               color='primary'
               aria-label='add'
               className={(classes.margin, classes.fab)}
-              onClick={props.nextStep}
+              onClick={handleNext}
             >
               Review Order
             </Fab>
           </Paper>
         </Grid>
+        {/* dialog */}
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby='alert-dialog-title'
+          aria-describedby='alert-dialog-description'
+        >
+          <DialogTitle id='alert-dialog-title'>
+            {"You haven't ordered anything yet!"}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id='alert-dialog-description'>
+              To order items, choose a category then select the item you want to
+              order.
+            </DialogContentText>
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );

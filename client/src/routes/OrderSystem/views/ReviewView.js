@@ -10,7 +10,10 @@ import {
   Divider,
 } from "../../../components/mui_index";
 import { Header, OrderList } from "../../../components/index";
-
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 // mui styles
 const useStyles = makeStyles((theme) => ({
   layout: {
@@ -60,6 +63,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function ReviewView(props) {
   const classes = useStyles();
+  // react hooks
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleNext = () => {
+    if (props.order.length == 0) {
+      setOpen(true);
+    } else {
+      props.nextStep();
+    }
+  };
   return (
     <div>
       {/** Header**/}
@@ -123,12 +138,28 @@ export default function ReviewView(props) {
             color='primary'
             aria-label='add'
             className={(classes.margin, classes.fab2)}
-            onClick={props.nextStep}
+            onClick={handleNext}
           >
             Continue
           </Fab>
         </Paper>
       </Grid>
+      {/* dialog */}
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby='alert-dialog-title'
+        aria-describedby='alert-dialog-description'
+      >
+        <DialogTitle id='alert-dialog-title'>
+          {"You haven't ordered anything yet!"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id='alert-dialog-description'>
+            To order items, go back to the previous page and add items.
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

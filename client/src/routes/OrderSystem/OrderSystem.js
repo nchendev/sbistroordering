@@ -297,6 +297,7 @@ export default function OrderSystem(props) {
       return (
         <OrderView
           menu={menu}
+          order={order}
           addToOrder={addToOrder}
           resetInformationState={resetInformationState}
           prevStep={prevStep}
