@@ -37,16 +37,8 @@ const useStyles = makeStyles((theme) => ({
   fab: {
     margin: 0,
     bottom: theme.spacing(1),
-    left: "auto",
     position: "fixed",
     minWidth: "80vw",
-  },
-  fab2: {
-    margin: 0,
-    bottom: theme.spacing(1),
-    left: "auto",
-    position: "fixed",
-    minWidth: "40vw",
   },
   fabSpace: {
     margin: theme.spacing(1),
@@ -86,24 +78,13 @@ export default function OrderView(props) {
         <div elevation={0} className={classes.fabSpace} />
 
         {/** Navigation **/}
-        <Grid container justify='center'>
-          <Paper className={classes.fab}>
-            <Fab
-              variant='extended'
-              color='primary'
-              aria-label='add'
-              className={(classes.margin, classes.fab2)}
-              onClick={props.prevStep}
-            >
-              Options
-            </Fab>
-          </Paper>
+        <Grid container>
           <Paper>
             <Fab
               variant='extended'
               color='primary'
               aria-label='add'
-              className={(classes.margin, classes.fab2)}
+              className={(classes.margin, classes.fab)}
               onClick={props.nextStep}
             >
               Review Order

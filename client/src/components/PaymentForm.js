@@ -8,9 +8,13 @@ import Checkbox from "@material-ui/core/Checkbox";
 
 export default function PaymentForm(props) {
   // hooks
-  const [cashSelected, setCashSelected] = React.useState(props.payment.cash);
-  const [cashButtonColor, setCashButtonColor] = React.useState("default");
-  const [cardButtonColor, setCardButtonColor] = React.useState("primary");
+  const [cashSelected, setCashSelected] = React.useState(props.options.cash);
+  const [cashButtonColor, setCashButtonColor] = React.useState(
+    cashSelected ? "primary" : "default"
+  );
+  const [cardButtonColor, setCardButtonColor] = React.useState(
+    !cashSelected ? "primary" : "default"
+  );
 
   const toggleCashCard = () => {
     setCashSelected(!cashSelected);
@@ -20,15 +24,7 @@ export default function PaymentForm(props) {
     else setCardButtonColor("default");
     props.handleCardCashToggle();
   };
-  useEffect(() => {
-    if (cashSelected) {
-      setCashButtonColor("primary");
-      setCardButtonColor("default");
-    } else {
-      setCardButtonColor("primary");
-      setCashButtonColor("default");
-    }
-  }, []);
+
   return (
     <React.Fragment>
       <Typography variant='h6' gutterBottom>

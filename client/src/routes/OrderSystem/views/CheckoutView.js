@@ -13,7 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Fab from "@material-ui/core/Fab";
 import {
-  AddressForm,
+  ContactForm,
   PaymentForm,
   Review,
   Header,
@@ -23,8 +23,8 @@ function Copyright() {
   return (
     <Typography variant='body2' color='textSecondary' align='center'>
       {"Copyright © "}
-      <Link color='inherit' href='https://material-ui.com/'>
-        Your Website
+      <Link color='inherit' href='https://www.nchen.dev/'>
+        Nick Chen | Szechuan Bistro
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -87,10 +87,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const steps = ["Address", "Payment", "Review your order"];
+// constants
+const steps = ["Contact", "Payment", "Review your order"];
 
 export default function Checkout(props) {
   const classes = useStyles();
+
+  // react hooks
   const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {
@@ -106,10 +109,13 @@ export default function Checkout(props) {
     switch (step) {
       case 0:
         return (
-          <AddressForm
-            handleInfoChange={props.handleInfoChange}
+          <ContactForm
             information={props.information}
+            handleInfoChange={props.handleInfoChange}
             handlePickupDeliveryToggle={props.handlePickupDeliveryToggle}
+            options={props.options}
+            price={props.price}
+            setDeliveryFee={props.setDeliveryFee}
           />
         );
       case 1:
@@ -118,6 +124,7 @@ export default function Checkout(props) {
             handlePaymentChange={props.handlePaymentChange}
             payment={props.payment}
             handleCardCashToggle={props.handleCardCashToggle}
+            options={props.options}
           />
         );
       case 2:
@@ -131,8 +138,7 @@ export default function Checkout(props) {
             editInOrder={props.editInOrder}
             price={props.price}
             handlePriceChange={props.handlePriceChange}
-            pd={props.pd}
-            resetInformationState={props.resetInformationState}
+            options={props.options}
           />
         );
       default:
@@ -161,7 +167,7 @@ export default function Checkout(props) {
             </Stepper>
             <React.Fragment>
               {activeStep === steps.length ? (
-                (props.callAPI() ? (
+                props.callAPI() === "success" ? (
                   <React.Fragment>
                     <Typography variant='h5' gutterBottom>
                       Thank you for ordering from Szechuan Bistro!
@@ -176,10 +182,13 @@ export default function Checkout(props) {
                   </React.Fragment>
                 ) : (
                   <div>
-                    Sorry, but something went wrong and your order wasn't
-                    placed! Please try again, or give us a call at 405 752 8889.
+                    <Typography variant='h5' gutterBottom>
+                      Sorry, but something went wrong and your order wasn't
+                      placed! Please try again, or give us a call at 405 752
+                      8889.
+                    </Typography>
                   </div>
-                ))()
+                )
               ) : (
                 <React.Fragment>{getStepContent(activeStep)}</React.Fragment>
               )}

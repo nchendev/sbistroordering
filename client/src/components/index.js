@@ -7,7 +7,7 @@ export { default as OrderItem } from "./OrderItem";
 export { default as OrderItemDialog } from "./OrderItemDialog";
 export { default as OrderOptions } from "./OrderOptions";
 export { default as Header } from "./Header";
-export { default as AddressForm } from "./AddressForm";
+export { default as ContactForm } from "./ContactForm";
 export { default as PaymentForm } from "./PaymentForm";
 export { default as Review } from "./Review";
 export { default as OrderList } from "./OrderList";

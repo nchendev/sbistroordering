@@ -19,6 +19,7 @@ export default function OrderSystem(props) {
     english: true,
     pickup: false,
     cash: false,
+    dfee: 0,
   });
   const [menu, setMenu] = React.useState({});
   const [order, setOrder] = React.useState([]);
@@ -82,10 +83,12 @@ export default function OrderSystem(props) {
       options,
       order,
       information,
+      payment,
       price,
     };
     // call API
-    console.log("sending in order: " + JSON.stringify(orderJSON));
+    console.log("sending in order: ");
+    console.log(orderJSON);
     let success = false;
     axios
       .post("/api/twilio", orderJSON)
@@ -206,7 +209,6 @@ export default function OrderSystem(props) {
     information[input] = e.target.value;
     setInformation(information);
   };
-
   /*
    * @desc edit part of payment
    * @params string - input, event - e
@@ -226,8 +228,8 @@ export default function OrderSystem(props) {
 
   const handleCardCashToggle = () => {
     console.log("user paying with cash: " + payment["cash"]);
-    payment["cash"] = !payment["cash"];
-    setPayment(payment);
+    options["cash"] = !options["cash"];
+    setOptions(options);
   };
 
   /*
@@ -237,8 +239,13 @@ export default function OrderSystem(props) {
    */
   const handlePickupDeliveryToggle = () => {
     console.log("user picking up: " + information["cash"]);
-    information["pickup"] = !information["pickup"];
-    setInformation(information);
+    options["pickup"] = !options["pickup"];
+    setOptions(options);
+    // set delivery fee
+    let initdfee = isNaN(price.dfee) ? 0 : price.dfee;
+    options.pickup ? (price.dfee = 0) : (price.dfee = options.dfee);
+    price.total += price.dfee - initdfee;
+    setPrice(price);
   };
 
   /*
@@ -268,7 +275,10 @@ export default function OrderSystem(props) {
       cvv: "",
     });
   };
-
+  const setDeliveryFee = (dfee) => {
+    options.dfee = dfee;
+    //!isNaN(price.dfee) ? (price.dfee = dfee) : (dfee = dfee);
+  };
   // display the appropriate view depending on the current step
   switch (step) {
     /**case 1:
@@ -306,6 +316,7 @@ export default function OrderSystem(props) {
     case 3:
       return (
         <CheckoutView
+          options={options}
           handleInfoChange={handleInfoChange}
           prevStep={prevStep}
           information={information}
@@ -322,6 +333,7 @@ export default function OrderSystem(props) {
           handlePriceChange={handlePriceChange}
           pd={options.pd}
           handlePickupDeliveryToggle={handlePickupDeliveryToggle}
+          setDeliveryFee={setDeliveryFee}
         />
       );
   }

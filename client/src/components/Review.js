@@ -33,22 +33,24 @@ export default function Review(props) {
         editInOrder={props.editInOrder}
         price={props.price}
         handlePriceChange={props.handlePriceChange}
-        pd={props.pd}
-        resetInformationState={props.resetInformationState}
       />
+
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <Typography variant='h6' gutterBottom className={classes.title}>
-            Delivery
+            Contact
           </Typography>
-          {props.information.pickup ? (
+          <Typography gutterBottom>
+            {props.information.fname + " " + props.information.lname}
+          </Typography>
+          <Typography gutterBottom>{props.information.phone}</Typography>
+          {props.options.pickup ? (
             <div>You will come pick your order up</div>
           ) : (
             <div>
-              <Typography gutterBottom>
-                {props.information.fname + " " + props.information.lname}
+              <Typography variant='h6' gutterBottom className={classes.title}>
+                Delivery Address
               </Typography>
-              <Typography gutterBottom>{props.information.phone}</Typography>
               <Typography gutterBottom>{props.information.address}</Typography>
               <Typography gutterBottom>
                 {props.information.city +
@@ -67,7 +69,7 @@ export default function Review(props) {
           <Typography variant='h6' gutterBottom className={classes.title}>
             Payment details
           </Typography>
-          {props.payment.cash ? (
+          {props.options.cash ? (
             <div>
               <Typography gutterBottom>
                 You will pay for your order with cash
