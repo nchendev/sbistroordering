@@ -80,6 +80,10 @@ export default function PaymentForm(props) {
                 disabled={cashSelected}
                 onChange={props.handlePaymentChange("cc")}
                 defaultValue={props.payment.cc}
+                inputProps={{ maxLength: 19 }}
+                onInput={(e) => {
+                  e.target.value = e.target.value.replace(/[^0-9]/g, "");
+                }}
               />
             </Grid>
             <Grid item xs={6}>
@@ -92,6 +96,7 @@ export default function PaymentForm(props) {
                 disabled={cashSelected}
                 onChange={props.handlePaymentChange("exp")}
                 defaultValue={props.payment.exp}
+                type='month'
               />
             </Grid>
             <Grid item xs={6}>
@@ -105,6 +110,10 @@ export default function PaymentForm(props) {
                 disabled={cashSelected}
                 onChange={props.handlePaymentChange("cvv")}
                 defaultValue={props.payment.cvv}
+                inputProps={{ maxLength: 4 }}
+                onInput={(e) => {
+                  e.target.value = e.target.value.replace(/[^0-9]/g, "");
+                }}
               />
             </Grid>
             <Grid item xs={12}>

@@ -35,6 +35,7 @@ export default function ContactForm(props) {
   };
 
   const calcDfee = () => {
+    console.log("ping");
     setShowAlert(false);
     setDeliveryMessage("");
     // if all inputs valid, calculate delivery fee
@@ -57,9 +58,11 @@ export default function ContactForm(props) {
     }
     let success = false;
     // make call to the backend to validate address and calculate distance
+    console.log("pong");
     axios
       .post("/api/distance", parametersJSON)
       .then((res) => {
+        console.log("pung");
         console.log("api reply: ");
         console.log(res.data);
         if (res.data.status === "OK") {
@@ -84,7 +87,13 @@ export default function ContactForm(props) {
       })
       .catch((err) => {
         console.error(err);
+        props.setDeliveryFee(3);
+        setDeliveryMessage(
+          "Something went wrong and we couldn't verify your address. The estimated delivery fee has been set to $3.00"
+        );
+        props.setDfeeCalced(true);
       });
+    console.log("pang");
   };
   useEffect(() => {
     // set delivery fee on first load

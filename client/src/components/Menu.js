@@ -32,6 +32,11 @@ const useStyles = makeStyles((theme) => ({
   text: {
     padding: theme.spacing(1),
   },
+  gridTile: {
+    height: "fixed",
+    margin: theme.spacing(1),
+    padding: theme.spacing(1),
+  },
 }));
 
 function Menu(props) {
@@ -66,7 +71,8 @@ function Menu(props) {
         {Object.keys(props.menu).map((menuCategory, menuIndex) => (
           <GridListTile
             key={menuCategory}
-            style={{ height: "fixed", width: "auto" }}
+            className={classes.gridTile}
+            style={{ height: "auto", width: "fixed" }}
             onClick={() => handleTileClick({ menuCategory })}
           >
             <ListSubheader component='div'>{menuCategory}</ListSubheader>

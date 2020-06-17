@@ -8,6 +8,8 @@ import {
   OrderView,
   ReviewView,
   CheckoutView,
+  ContactView,
+  PaymentView,
 } from "./views/index";
 
 // constants
@@ -72,38 +74,6 @@ export default function OrderSystem(props) {
       setInformation(JSON.parse(sessionStorage.getItem("information")));
     }
   }, []);
-
-  /*
-   * @desc calls twilio API on the backend
-   * @params
-   * @return bool - order sent in successfully or not
-   */
-  const callAPI = () => {
-    // json object to send to backend
-    let orderJSON = {
-      options,
-      order,
-      information,
-      payment,
-      price,
-    };
-    // call API
-    console.log("sending in order: ");
-    console.log(orderJSON);
-    let success = false;
-    axios
-      .post("/api/twilio", orderJSON)
-      .then((res) => {
-        console.log("api reply: " + res.data.msg);
-        success = true;
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-
-    // log
-    return success;
-  };
 
   /*
    * @desc adds item to order
@@ -206,9 +176,9 @@ export default function OrderSystem(props) {
    * @return
    */
   const handleInfoChange = (input) => (e) => {
-    console.log("editing information." + input + " to be " + e.target.value);
     information[input] = e.target.value;
     setInformation(information);
+    setDfeeCalced(false);
   };
   /*
    * @desc edit part of payment
@@ -294,6 +264,7 @@ export default function OrderSystem(props) {
           resetInformationState={resetInformationState}
         />
       );**/
+
     case 1:
       return (
         <OrderView
@@ -320,6 +291,60 @@ export default function OrderSystem(props) {
       );
     case 3:
       return (
+        <ContactView
+          options={options}
+          dfeeCalced={dfeeCalced}
+          resetInformationState={resetInformationState}
+          handleInfoChange={handleInfoChange}
+          information={information}
+          handlePickupDeliveryToggle={handlePickupDeliveryToggle}
+          price={price}
+          setDeliveryFee={setDeliveryFee}
+          setDfeeCalced={setDfeeCalced}
+          nextStep={nextStep}
+          prevStep={prevStep}
+        />
+      );
+    case 4:
+      return (
+        <PaymentView
+          options={options}
+          resetInformationState={resetInformationState}
+          payment={payment}
+          handlePaymentChange={handlePaymentChange}
+          handleCardCashToggle={handleCardCashToggle}
+          nextStep={nextStep}
+          prevStep={prevStep}
+        />
+      );
+    case 5:
+      return (
+        <ConfirmView
+          information={information}
+          payment={payment}
+          order={order}
+          removeFromOrder={removeFromOrder}
+          editInOrder={editInOrder}
+          price={price}
+          handlePriceChange={handlePriceChange}
+          options={options}
+          nextStep={nextStep}
+          prevStep={prevStep}
+        />
+      );
+    case 6:
+      return (
+        <ConfirmedView
+          resetInformationState={resetInformationState}
+          options={options}
+          order={order}
+          information={information}
+          payment={payment}
+          price={price}
+        />
+      );
+    case 3:
+      return (
         <CheckoutView
           options={options}
           handleInfoChange={handleInfoChange}
@@ -330,7 +355,6 @@ export default function OrderSystem(props) {
           handlePaymentChange={handlePaymentChange}
           handleCardCashToggle={handleCardCashToggle}
           order={order}
-          callAPI={callAPI}
           order={order}
           removeFromOrder={removeFromOrder}
           editInOrder={editInOrder}

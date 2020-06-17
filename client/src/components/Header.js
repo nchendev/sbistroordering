@@ -88,6 +88,12 @@ export default function Header(props) {
     props.resetInformationState();
     console.log("logging user out");
   };
+  const handleRegister = (e) => {
+    console.log("register");
+  };
+  const handleLogin = (e) => {
+    console.log("login");
+  };
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -108,42 +114,49 @@ export default function Header(props) {
           <Typography variant='h6' className={classes.title}>
             {props.title}
           </Typography>
-          {auth && (
-            <div>
-              <IconButton
-                aria-label='account of current user'
-                aria-controls='menu-appbar'
-                aria-haspopup='true'
-                onClick={handleMenu}
-                color='inherit'
-              >
-                <AccountCircle fontSize='large' />
-              </IconButton>
+          <div>
+            <IconButton
+              aria-label='account of current user'
+              aria-controls='menu-appbar'
+              aria-haspopup='true'
+              onClick={handleMenu}
+              color='inherit'
+            >
+              <AccountCircle fontSize='large' />
+            </IconButton>
 
-              <Menu
-                id='menu-appbar'
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={open}
-                onClose={handleClose}
-              >
-                <MenuItem disabled={true} divider>
-                  <Typography variant='h6' className={classes.title}>
-                    Hello {name}
-                  </Typography>
-                </MenuItem>
-                <MenuItem onClick={handleLogout}>Logout</MenuItem>
-              </Menu>
-            </div>
-          )}
+            <Menu
+              id='menu-appbar'
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={open}
+              onClose={handleClose}
+            >
+              {auth ? (
+                <div>
+                  <MenuItem disabled={true} divider>
+                    <Typography variant='h6' className={classes.title}>
+                      Hello {name}
+                    </Typography>
+                  </MenuItem>
+                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                </div>
+              ) : (
+                <div>
+                  <MenuItem onClick={handleLogin}>Login</MenuItem>
+                  <MenuItem onClick={handleRegister}>Register</MenuItem>
+                </div>
+              )}
+            </Menu>
+          </div>
         </Toolbar>
       </AppBar>
       <Toolbar />
