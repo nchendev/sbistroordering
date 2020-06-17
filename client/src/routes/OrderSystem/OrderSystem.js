@@ -46,6 +46,7 @@ export default function OrderSystem(props) {
     total: 0,
   });
   const [step, setStep] = React.useState(1);
+  const [dfeeCalced, setDfeeCalced] = React.useState(false);
 
   // runs once page loads
   useEffect(() => {
@@ -338,6 +339,8 @@ export default function OrderSystem(props) {
           pd={options.pd}
           handlePickupDeliveryToggle={handlePickupDeliveryToggle}
           setDeliveryFee={setDeliveryFee}
+          dfeeCalced={dfeeCalced}
+          setDfeeCalced={setDfeeCalced}
         />
       );
   }

@@ -70,13 +70,16 @@ export default function ContactForm(props) {
               " for a delivery distance of " +
               res.data.dist
           );
+          props.setDfeeCalced(true);
         } else if (res.data.status === "FAILURE") {
           props.setDeliveryFee(3);
           setDeliveryMessage(
             "Something went wrong and we couldn't verify your address. The estimated delivery fee has been set to $3.00"
           );
+          props.setDfeeCalced(true);
         } else if (res.data.status === "INVALID") {
           setShowAlert(true);
+          props.setDfeeCalced(false);
         }
       })
       .catch((err) => {

@@ -12,6 +12,10 @@ import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Fab from "@material-ui/core/Fab";
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 import {
   ContactForm,
   PaymentForm,
@@ -95,11 +99,20 @@ export default function Checkout(props) {
 
   // react hooks
   const [activeStep, setActiveStep] = React.useState(0);
-
-  const handleNext = () => {
-    setActiveStep(activeStep + 1);
+  const [open, setOpen] = React.useState(false);
+  const prelims = [props.dfeeCalced, true, true];
+  const handleClose = () => {
+    setOpen(false);
   };
-
+  const handleNext = () => {
+    if (prelims[activeStep]) setActiveStep(activeStep + 1);
+    else if (props.options.pickup) setActiveStep(activeStep + 1);
+    else setOpen(true);
+  };
+  const handleDelivInfoChange = () => {
+    props.setDfeeCalced(false);
+    props.handleInfoChange();
+  };
   const handleBack = () => {
     if (activeStep === 0) props.prevStep();
     else setActiveStep(activeStep - 1);
@@ -111,11 +124,13 @@ export default function Checkout(props) {
         return (
           <ContactForm
             information={props.information}
-            handleInfoChange={props.handleInfoChange}
+            handleInfoChange={handleDelivInfoChange}
             handlePickupDeliveryToggle={props.handlePickupDeliveryToggle}
             options={props.options}
             price={props.price}
             setDeliveryFee={props.setDeliveryFee}
+            dfeeCalced={props.dfeeCalced}
+            setDfeeCalced={props.setDfeeCalced}
           />
         );
       case 1:
@@ -226,6 +241,23 @@ export default function Checkout(props) {
           </Paper>
         </Grid>
       )}
+      {/* dialog */}
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby='alert-dialog-title'
+        aria-describedby='alert-dialog-description'
+      >
+        <DialogTitle id='alert-dialog-title'>
+          {"Delivery Fee not yet calculated!"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id='alert-dialog-description'>
+            Once you've filled our your address, please click the button so we
+            can calculate the delivery fee.
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
     </React.Fragment>
   );
 }
