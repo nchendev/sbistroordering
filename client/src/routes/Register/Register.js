@@ -162,7 +162,6 @@ export default function Register(props) {
                   fullWidth
                   id='firstName'
                   label='First Name'
-                  autoFocus
                   onChange={handleInfoChange("fname")}
                 />
               </Grid>

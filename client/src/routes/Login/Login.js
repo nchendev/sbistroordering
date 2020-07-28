@@ -190,7 +190,6 @@ export default function Login(props) {
               label='Email Address'
               name='email'
               autoComplete='email'
-              autoFocus
               onChange={handleInfoChange("email")}
             />
             <TextField

@@ -89,10 +89,14 @@ export default function Header(props) {
     console.log("logging user out");
   };
   const handleRegister = (e) => {
-    props.history.push("/register");
+    if (window.confirm("Caution: leaving this page will clear your progress")) {
+      props.history.push("/register");
+    }
   };
   const handleLogin = (e) => {
-    props.history.push("/login");
+    if (window.confirm("Caution: leaving this page will clear your progress")) {
+      props.history.push("/login");
+    }
   };
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);

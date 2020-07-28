@@ -10,6 +10,7 @@ import {
   CheckoutView,
   ContactView,
   PaymentView,
+  NotOpenView,
 } from "./views/index";
 import menuJson from "../../assets/menu.json";
 // constants
@@ -52,7 +53,7 @@ export default function OrderSystem(props) {
     dfee: "Not yet calculated",
     total: 0,
   });
-  const [step, setStep] = React.useState(1);
+  const [step, setStep] = React.useState(0);
   const [dfeeCalced, setDfeeCalced] = React.useState(false);
 
   // runs once page loads
@@ -267,17 +268,33 @@ export default function OrderSystem(props) {
     price.dfee = dfee;
     setPrice(price);
   };
+
+  function isOpen() {
+    let date = new Date();
+    let h = date.getHours();
+    let m = date.getMinutes();
+    let d = date.getDay();
+    // M-Th, Sun
+    if (d >= 0 && d <= 4) {
+      if (h < 11 || h > 22) {
+        return false;
+      }
+      return true;
+    }
+    // Fri, Sat
+    else {
+      if (h < 11 || h > 23) {
+        return false;
+      }
+      return true;
+    }
+  }
   // display the appropriate view depending on the current step
   switch (step) {
-    /**case 1:
-      return (
-        <OptionsView
-          options={options}
-          handleoptionsChange={handleoptionsChange}
-          nextStep={nextStep}
-          resetInformationState={resetInformationState}
-        />
-      );**/
+    case 0:
+      // check time
+      if (isOpen()) setStep(1);
+      else return <NotOpenView />;
 
     case 1:
       return (
