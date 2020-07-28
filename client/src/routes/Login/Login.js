@@ -131,6 +131,10 @@ export default function Login(props) {
     props.history.push("/register");
   };
 
+  const handleRedirectToForgot = (e) => {
+    props.history.push("/forgot");
+  };
+
   const handleSuccessfulLogin = (data) => {
     // set localstorage details and clear any existing session details
     if (remember) {
@@ -232,7 +236,7 @@ export default function Login(props) {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href='#' variant='body2'>
+                <Link onClick={(e) => handleRedirectToForgot()} variant='body2'>
                   Forgot password?
                 </Link>
               </Grid>

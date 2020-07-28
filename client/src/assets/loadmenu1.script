@@ -1,0 +1,29 @@
+$(document).ready(function() {
+    $.getJSON("menu.json", function(data) {
+        console.log(data);
+        var content = "Category: "
+        $.each(data, function(key, item) {
+          content += key
+          content += "<br>"
+          content += "<table style=\"border: 1px solid black\">"
+          content += "<tr>"
+          content += "<td>English Name</td><td>Chinese Name</td><td>Spicy?</td><td>Price</td><td>Order</td>"
+          content += "</tr>"
+          $.each(item, function(index, variable) {
+            content += "<tr>"
+            $.each(variable, function(fieldName, value) {
+              content += "<td>"
+              console.log(fieldName,value)
+              content += value
+              content += "</td>"
+            })
+            content += "<td><input type=\"checkbox\" name=\""+variable[0]+"\" /></td>"
+            content += "</tr>"
+          })
+          content += "</table>"
+
+        })
+       
+        $("#menuItems").append(content);
+    });
+});

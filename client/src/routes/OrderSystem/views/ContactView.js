@@ -118,7 +118,7 @@ export default function ContactView(props) {
     } else {
       setDialogHeader("Delivery Fee not yet calculated!");
       setDialogText(
-        "Once you've filled our your address, please click the button so we can calculate the delivery fee."
+        "Once you've filled our your address, please click the button so we can calculate the delivery fee.",
       );
     }
     setOpen(true);
@@ -133,6 +133,7 @@ export default function ContactView(props) {
       <Header
         title='Szechuan Bistro'
         resetInformationState={props.resetInformationState}
+        history={props.history}
       />
       <div>
         <main className={classes.layout}>

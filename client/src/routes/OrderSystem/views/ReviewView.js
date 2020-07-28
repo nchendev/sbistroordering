@@ -81,6 +81,7 @@ export default function ReviewView(props) {
       <Header
         title='Szechuan Bistro'
         resetInformationState={props.resetInformationState}
+        history={props.history}
       />
 
       {/* Order */}

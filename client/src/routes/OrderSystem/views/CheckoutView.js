@@ -162,6 +162,7 @@ export default function Checkout(props) {
       <Header
         title='Szechuan Bistro'
         resetInformationState={props.resetInformationState}
+        history={props.history}
       />
       <div>
         <main className={classes.layout}>

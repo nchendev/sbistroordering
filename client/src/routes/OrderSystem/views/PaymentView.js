@@ -122,6 +122,7 @@ export default function PaymentView(props) {
       <Header
         title='Szechuan Bistro'
         resetInformationState={props.resetInformationState}
+        history={props.history}
       />
       <div>
         <main className={classes.layout}>

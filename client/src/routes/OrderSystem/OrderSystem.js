@@ -11,7 +11,7 @@ import {
   ContactView,
   PaymentView,
 } from "./views/index";
-
+import menuJson from "../../assets/menu.json";
 // constants
 const TAXRATE = 0.09;
 
@@ -54,10 +54,11 @@ export default function OrderSystem(props) {
   useEffect(() => {
     console.log("trigger use effect hook");
     // load menu
-    axios
+    /**axios
       .get("https://www.neckch.in/sbistro/menu.json")
       .then((res) => setMenu(res.data));
-
+    **/
+    setMenu(menuJson);
     // load information, if logged in
     // local storage
     if (
@@ -150,7 +151,7 @@ export default function OrderSystem(props) {
         "; amount: " +
         amountChange +
         ", note: " +
-        note
+        note,
     );
     // calculate change to price
     let subtotal =
@@ -274,6 +275,7 @@ export default function OrderSystem(props) {
           resetInformationState={resetInformationState}
           prevStep={prevStep}
           nextStep={nextStep}
+          history={props.history}
         />
       );
     case 2:
@@ -287,6 +289,7 @@ export default function OrderSystem(props) {
           resetInformationState={resetInformationState}
           prevStep={prevStep}
           nextStep={nextStep}
+          history={props.history}
         />
       );
     case 3:
@@ -303,6 +306,7 @@ export default function OrderSystem(props) {
           setDfeeCalced={setDfeeCalced}
           nextStep={nextStep}
           prevStep={prevStep}
+          history={props.history}
         />
       );
     case 4:
@@ -315,6 +319,7 @@ export default function OrderSystem(props) {
           handleCardCashToggle={handleCardCashToggle}
           nextStep={nextStep}
           prevStep={prevStep}
+          history={props.history}
         />
       );
     case 5:
@@ -330,6 +335,7 @@ export default function OrderSystem(props) {
           options={options}
           nextStep={nextStep}
           prevStep={prevStep}
+          history={props.history}
         />
       );
     case 6:
@@ -341,6 +347,7 @@ export default function OrderSystem(props) {
           information={information}
           payment={payment}
           price={price}
+          history={props.history}
         />
       );
     case 3:
@@ -365,6 +372,7 @@ export default function OrderSystem(props) {
           setDeliveryFee={setDeliveryFee}
           dfeeCalced={dfeeCalced}
           setDfeeCalced={setDfeeCalced}
+          history={props.history}
         />
       );
   }

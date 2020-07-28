@@ -1,0 +1,175 @@
+Category,Number (ID),Spicy,English,Chinese,Price,Limited Availability
+Appetizer,1,0,Egg Roll (1pc),蛋卷 (1),2.25,0
+Appetizer,2,0,Spring Roll (4pc),春卷 (4),3.95,0
+Appetizer,3,0,Sesame Shrimp Roll (2pc),芝麻虾卷 (2),4.95,0
+Appetizer,4,0,Steamed Pork Dumplings (6pc),肉饺子 (6),6.25,0
+Appetizer,5,0,Pan Fried Pork Dumplings (6pc),锅贴 (6),6.25,0
+Appetizer,6,0,Steamed Vegetable Dumplings (6pc),菜饺子 (6),6.25,0
+Appetizer,7,0,Steamed Chicken Dumplings (6pc),鸡饺子 (6),6.25,0
+Appetizer,8,1,Chicken Dumplings in Hot Sauce (6pc),饺辣鸡子 (6),6.25,0
+Appetizer,9,0,Fried Chicken Wings (8pc),炸鸡翅 (8),6.25,0
+Appetizer,10,1,Hot Spicy Chicken Wings (8pc),辣鸡翅 (8),6.25,0
+Appetizer,11,0,Chicken Skew (4pc),鸡串 (4),6.25,0
+Appetizer,12,0,Crab Rangoon (6pc),蟹饺 (6),4.95,0
+Appetizer,13,0,Minced Chicken in Lettuce Wrap,n/a,9.00,0
+Appetizer,14,0,Minced Shrimp in Lettuce Wrap,n/a,9.45,0
+Appetizer,15,0,Minced Chiken & Shrimp in Lettuce Wrap,n/a,9.45,0
+Appetizer,15a,0,Wakame Salad,日本海带沙拉,5.55,0
+Appetizer,15b,0,Edamame,毛豆,4.95,0
+Appetizer,15d,1,Cold Noodle in Spicy Sauce,凉面,6.45,0
+Appetizer,15e,0,Fried Squid,炸鱿鱼,6.45,0
+Soup,16a,0,Wonton Soup (S),馄饨汤 (小),2.50,0
+Soup,16b,0,Wonton Soup (L),馄饨汤 (大),5.00,0
+Soup,17a,0,Egg Drop Soup (S),蛋花汤 (小）,2.50,0
+Soup,17b,0,Egg Drop Soup (L),蛋花汤 (大）,5.00,0
+Soup,18a,1,Hot & Sour Soup (S),酸辣汤 (小）,2.95,0
+Soup,18b,1,Hot & Sour Soup (L),酸辣汤 (大）,5.50,0
+Soup,19a,1,Seafood Soup (S),海鲜汤 (小）,5.95,0
+Soup,19b,1,Seafood Soup (L),海鲜汤 (大）,9.95,0
+Soup,20a,1,Shrimp Soup (S),虾汤 (小),5.95,0
+Soup,20b,1,Shrimp Soup (L),虾汤 (大),9.50,0
+Soup,21,1,Spicy Beef & Fish Soup,n/a,9.50,0
+Soup,22,0,House Vegetable Soup,n/a,9.50,0
+Chef's Spicy Noodle Soup (Soft Noodle),23,1,Chicken Noodle Soup,鸡汤面,10.25,0
+Chef's Spicy Noodle Soup (Soft Noodle),24,1,Beef Noodle Soup,牛汤面,10.25,0
+Chef's Spicy Noodle Soup (Soft Noodle),25,1,Shrimp Noodle,虾汤面,10.45,0
+Chef's Spicy Noodle Soup (Soft Noodle),26,1,Beef & Shrimp Noodle Soup,n/a,10.45,0
+Chef's Spicy Noodle Soup (Soft Noodle),27,1,Beef & Fish Noodle Soup,n/a,10.45,0
+Chef's Spicy Noodle Soup (Soft Noodle),28,1,"Combination Noodle Soup (chicken, shrimp, beef)",n/a,10.75,0
+Chef's Spicy Noodle Soup (Soft Noodle),29,1,Seafood Noodle Soup,海鲜汤面,11.00,0
+Fried Rice,30,1,Vegetable Fried Rice (curry style),咖喱菜炒饭,9.75,0
+Fried Rice,31,0,Chicken Fried Rice,鸡炒饭,9.95,0
+Fried Rice,32,0,Beef Fried Rice,牛炒饭,9.95,0
+Fried Rice,33,0,Shrimp Fried Rice,虾炒饭,10.25,0
+Fried Rice,34,0,Roast Pork Fried Rice,肉炒饭,9.95,0
+Fried Rice,35,0,"House Special Fried Rice (chicken, shrimp, roast pork)",n/a,10.75,0
+Chow Mein,35a,0,Vegetable Chow Mein,菜炒面,10.50,0
+Chow Mein,35b,0,Chicken Chow Mein,鸡炒面,11.50,0
+Chow Mein,35c,0,Beef Chow Mein,牛炒面,12.50,0
+Chow Mein,35d,0,Shrimp Chow Mein,虾炒面,12.50,0
+Chow Mein,35e,0,Pork Chow Mein,肉炒面,11.50,0
+Chow Mein,35f,0,"House Special Chow Mein (chicken, shrimp, roast pork)",n/a,12.50,0
+Lo Mein (Soft Noodles),36,0,Vegetable Lo Mein,菜捞面,9.95,0
+Lo Mein (Soft Noodles),37,0,Chicken Lo Mein,鸡捞面,10.25,0
+Lo Mein (Soft Noodles),38,0,Beef Lo Mein,牛捞面,10.25,0
+Lo Mein (Soft Noodles),39,0,Shrimp Lo Mein,虾捞面,10.50,0
+Lo Mein (Soft Noodles),40,0,Fresh Pork Lo Mein,肉捞面,10.25,0
+Lo Mein (Soft Noodles),41,0,House Special Lo Mein,n/a,10.95,0
+Chow Mein Fun (Thin Rice Noodles),42,0,Taiwanese Chow Mein Fun,台湾炒米粉,10.45,0
+Chow Mein Fun (Thin Rice Noodles),43,1,Singapore Chow Mein FUn,新加坡炒米粉,10.45,0
+Fried Seafood Platters,44,0,Fried Catfish Fillet (3pc),n/a,12.45,0
+Fried Seafood Platters,45,0,Fried Redfish Fillet (3pc),n/a,12.45,0
+Fried Seafood Platters,47a,0,Fried Jumbo Shrimp (6pc),n/a,11.45,0
+Fried Seafood Platters,47b,0,Fried Jumbo Shrimp (9pc),n/a,14.45,0
+Fried Seafood Platters,48,0,Fried Catfish Fillet and Jumbo Shrimp (2pc fish; 3pc shrimp),n/a,13.45,0
+Fried Seafood Platters,49,0,Fried Shrimp and Redfish Fillet (6pc shrimp; 2pc fish),n/a,13.45,0
+Fried Seafood Platters,50,0,"Fried Fishman's Platter (2pc redfish; 3 pc scallop, 3pc shrimp)",n/a,14.45,0
+House Specialties,51,0,Fresh Whole Red Snapper in Hot Bean Paste,n/a,n/a,1
+House Specialties,52,2,Fresh Whole Red Snapper with Chef's Hot Sauce,n/a,n/a,1
+House Specialties,53,0,Fried Whole Red Snapper,n/a,n/a,1
+House Specialties,54,0,Grilled Whole Red Snapper,n/a,n/a,1
+House Specialties,55,0,Grilled Salmon Fillet,n/a,14.50,0
+House Specialties,56a,0,Grilled Jumbo Shrimp (6pc),n/a,13.25,0
+House Specialties,56b,0,Grilled Jumbo Shrimp (9pc),n/a,15.00,0
+House Specialties,57,0,Grilled Chicken Steak,n/a,13.50,0
+House Specialties,58,0,Grilled Redfish Fillet (3pc),n/a,13.95,0
+House Specialties,59,0,Grilled Jumbo Shrimp (4pc) & Redfish Fillet (1pc),n/a,13.95,0
+House Specialties,60,0,Grilled Salmon Fillet (1pc) & Jumbo Shrimp (4pc),n/a,14.50,0
+Chicken,61,0,Chicken with Broccoli,芥兰鸡,12.50,0
+Chicken,62,0,Chicken with Asparagus,芦笋鸡,12.75,0
+Chicken,63,0,Chicken with Mixed Vegetables,n/a,12.50,0
+Chicken,64,0,Shredded Chicken with String Bean,四季豆鸡,12.50,0
+Chicken,65,0,Moo Goo Gai Pan,蘑菇鸡,12.50,0
+Chicken,66,1,Mango Chicken in Garlic Sauce,芒果鸡,12.50,0
+Chicken,67,1,Chicken with Garlic Sauce,鱼香鸡,12.50,0
+Chicken,68,1,Chicken with Eggplant in Garlic Sauce,鱼香茄子鸡,12.75,0
+Chicken,69,1,General Tso's Chicken,左宗鸡,12.50,0
+Chicken,70,1,Orange Chicken,橙皮鸡,12.50,0
+Chicken,71,0,Sesame Chicken,芝麻鸡,12.50,0
+Chicken,72,1,Kung Pao Chicken,宫保鸡丁,13.95,0
+Chicken,73,1,Hunan Style Chicken,湖南鸡,12.50,0
+Chicken,74,1,Szechuan Style Shredded Chicken,四川鸡,12.50,0
+Chicken,75,0,Sweet & Sour Chicken,甜酸鸡,12.50,0
+Beef,76,0,Beef with Broccoli,芥兰牛,13.45,0
+Beef,77,0,Beef with Asparagus,芦笋牛,13.45,0
+Beef,78,0,Beef with Mixed Vegetables,n/a,13.45,0
+Beef,79,0,Shredded Beef with String Bean,四季豆牛,13.45,0
+Beef,80,0,Pepper Steak,青椒牛,13.45,0
+Beef,81,1,Orange Beef,橙皮牛,13.45,0
+Beef,82,0,Sesame Beef,芝麻牛,13.45,0
+Beef,83,1,Kung Pao Shredded Beef,宫保牛,13.45,0
+Beef,84,1,Hunan Style Beef,湖南牛,13.45,0
+Beef,85,1,Szechuan Style Shredded Beef,四川牛,13.45,0
+Shrimp,86,0,Jumbo Shrimp with Broccoli,芥兰虾,14.50,0
+Shrimp,87,0,Jumbo Shrimp with Asparagus,芦笋虾,14.50,0
+Shrimp,88,0,Jumbo Shrimp with Mixed Vegetables,n/a,14.50,0
+Shrimp,89,1,Jumbo Shrimp with Mango in Garlic Sauce,芒果虾,14.50,0
+Shrimp,90,1,Jumbo Shrimp in Garlic Sauce,鱼香虾,14.50,0
+Shrimp,91,1,Hunan Style Jumbo Shrimp,湖南虾,14.50,0
+Shrimp,92,0,Sauteed Baby Shrimp & Chicken in Brown Sauce,n/a,14.50,0
+Shrimp,93,0,Sesame Jumbo Shrimp,芝麻虾,14.50,0
+Shrimp,94,1,General Tso's Jumbo Shrimp,左宗虾,14.50,0
+Shrimp,95,1,Szechuan Style Jumbo Shrimp,四川虾,15.95,0
+Shrimp,96,1,Double Delight (Jumbo shrimp & scallop in garlic sauce),n/a,15.50,0
+Pork,97,0,Sweet & Sour Pork,甜酸肉,12.50,0
+Pork,98,0,Shredded Pork with String Bean,n/a,12.50,0
+Pork,99,1,Shredded Pork in Garlic Sauce,鱼香肉,13.95,0
+Vegetables,100,0,Sauteed Mixed Vegetables,n/a,11.25,0
+Vegetables,101,0,Dried Sauteed String Bean,干煸四季豆,11.75,0
+Vegetables,102,1,Vegetable Triple in Garlic Sauce,鱼香三素,11.50,0
+Vegetables,103,1,Chinese Eggplant in Garlic Sauce,鱼香茄子,11.95,0
+Vegetables,104,1,Szechuan Style Bean Curd (with minced beef),磨破豆腐,11.75,0
+Vegetables,105,1,General Tso's Bean Curd,左宗豆腐,11.75,0
+Vegetables,106,0,Sesame Bean Curd,芝麻豆腐,11.75,0
+Diet Dish,107,0,Steamed Mixed Vegetables,n/a,11.25,0
+Diet Dish,108,0,Steamed Chicken with Broccoli,n/a,12.50,0
+Diet Dish,109,0,Steam Chicken with Mixed Vegetables,n/a,12.50,0
+Diet Dish,110,0,Steamed Jumbo Shrimp with Broccoli,n/a,14.50,0
+Diet Dish,111,0,Steamed Jumbo Shrimp with Mixed Vegetables,n/a,14.50,0
+Diet Dish,112,0,Steamed Jumbo Shrimp & Scallop with Asparagus,n/a,15.95,0
+Sizzling Platters,113,0,Bean Curd on Sizzling Platters,铁板豆腐,11.95,0
+Sizzling Platters,114,0,Chicken on Sizzling Platters,铁板鸡,12.75,0
+Sizzling Platters,115,0,Beef on Sizzling Platters,铁板牛,13.45,0
+Sizzling Platters,116,0,Jumbo Shrimp on Sizzling Platters,铁板虾,14.95,0
+Sizzling Platters,117,0,"Triple Delight on Sizzling Platters (chicken, shrimp, scallop)",n/a,15.45,0
+Clay Pot,118,0,Mixed Vegetables with Bean Curd in Clay Pot,蔬菜豆腐煲,11.95,0
+Clay Pot,119,0,Chicken & Jumbo Shrimp in Clay Pot,鸡虾煲,14.95,0
+Clay Pot,120,1,Jumbo Shrimp & Eggplant in Clay POt,茄子虾煲,14.95,0
+Clay Pot,121,1,Chicken & Jumbo Shrimp with Curry Coconut,鸡虾椰子煲,14.95,0
+Clay Pot,122,0,Triple Delight in Clay Pot,n/a,15.95,0
+Clay Pot,123,1,Home Style Trio with Eggplant in Clay Pot,n/a,15.95,0
+Lunch Specials,L1,0,Sauteed Mixed Vegetables,n/a,7.95,n/a
+Lunch Specials,L2,0,Chicken with Broccoli,芥兰鸡,8.95,n/a
+Lunch Specials,L3,0,Chicken with Asparagus,芦笋鸡,9.20,n/a
+Lunch Specials,L4,0,Chicken with Mixed Vegetables,n/a,8.95,n/a
+Lunch Specials,L5,0,Shredded Chicken with String Bean,四季豆鸡,8.95,n/a
+Lunch Specials,L6,1,Kung Pao Chicken,宫保鸡,8.95,n/a
+Lunch Specials,L7,1,Mango Chicken in Garlic Sauce,芒果鸡,8.95,n/a
+Lunch Specials,L8,1,Chicken with Garlic Sauce,鱼香鸡,8.95,n/a
+Lunch Specials,L9,1,Chicken with Eggplant in Garlic Sauce,鱼香茄子鸡,9.20,n/a
+Lunch Specials,L10,1,Hunan Style Chicken,湖南鸡,8.95,n/a
+Lunch Specials,L11,0,Sweet & Sour Chicken,甜酸鸡,8.95,n/a
+Lunch Specials,L12,0,Sesame Chicken,芝麻鸡,9.20,n/a
+Lunch Specials,L13,1,General Tso's Chicken,左宗鸡,9.20,n/a
+Lunch Specials,L14,1,Orange Chicken,橙皮鸡,9.20,n/a
+Lunch Specials,L15,0,Beef with Broccoli,芥兰牛,9.20,n/a
+Lunch Specials,L16,0,Beef with Asparagus,芦笋牛,9.40,n/a
+Lunch Specials,L17,0,Beef with Mixed Vegetables,n/a,9.20,n/a
+Lunch Specials,L18,0,Pepper Steak,青椒牛,9.20,n/a
+Lunch Specials,L19,1,Hunan Style Beef,湖南牛,9.20,n/a
+Lunch Specials,L20,1,Szechuan Style Shredded Beef,四川牛,9.20,n/a
+Lunch Specials,L21,0,Sesame Beef,芝麻牛,9.40,n/a
+Lunch Specials,L22,0,Orange Beef,橙皮牛,9.40,n/a
+Lunch Specials,L23,0,Shredded Pork in Garlic Sauce,鱼香肉丝,8.95,n/a
+Lunch Specials,L24,0,Shredded Pork with String Bean,四季豆肉丝,8.95,n/a
+Lunch Specials,L25,0,Sweet & Sour Pork,甜酸肉,8.95,n/a
+Lunch Specials,L26,0,Jumbo Shrimp with Broccoli,芥兰虾,9.40,n/a
+Lunch Specials,L27,0,Jumbo Shrimp with Mixed Vegetables,n/a,9.40,n/a
+Lunch Specials,L28,1,Jumbo Shrimp with Mango in Garlic Sauce,芒果虾,9.40,n/a
+Lunch Specials,L29,1,Jumbo Shrimp with Garlic Sauce,鱼香虾,9.40,n/a
+Lunch Specials,L30,1,Hunan Style Jumbo Shrimp,湖南虾,9.40,n/a
+Lunch Specials,L31,0,Sauteed Baby Shrimp & Chicken in Brown Sauce,n/a,9.40,n/a
+Lunch Specials,L32,0,Grilled Redfish Fillet (2pc),n/a,9.90,n/a
+Lunch Specials,L33,0,Grilled Jumbo Shrimp (5pc),n/a,9.90,n/a
+Lunch Specials,L34,0,Fried Catfish Fillet (2pc),n/a,9.90,n/a
+Lunch Specials,L35,0,Chicken Chow Mein,鸡炒面,8.95,n/a

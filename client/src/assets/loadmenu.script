@@ -1,0 +1,47 @@
+$(document).ready(function() {
+    $.getJSON("menu.json", function(data) {
+        console.log(data);
+        $.each(data, function(key, item) {
+          var content = "Category: "
+          content += key
+          content += "<br>"
+          $("#menuItems").append(content);
+          var table = $('<table>').addClass('table').addClass('table-sm').css("border", "1px solid black");
+          var row = "<tr><td>Spice Level</td><td>English Name</td><td>Chinese Name</td><td>Price</td><td>Order</td><td colspan=\"2\">Notes (Modifications may be subject to extra charge)</td></tr>"
+          table.append(row)
+          $.each(item, function(index, variable) {
+            var row = $('<tr>')
+            $.each(variable, function(fieldName, value) {
+              console.log(fieldName,value)
+              var column =  $('<td>')
+              if (fieldName == "spicy") {
+                if (parseInt(value) > 0) {
+                  console.log("type of value is " + typeof(value))
+                  var spicy = "";
+                  for(let i = 0; i < parseInt(value); i++) {
+                    spicy += "<i class=\"fa fa-fire\" style=\"color:red;\"></i>"
+                  column.append(spicy)
+                  }
+                } else {
+                  column.text(" ")
+                }
+              }  else {
+                column.text(value)
+                console.log(value)
+              }
+              
+              row.append(column)
+            })
+            // note index might be index of current category
+            var column = $('<td>').append("<input type=\"checkbox\" name=\""+index+"\" />")
+            row.append(column)
+            var column = $('<td colspan=\"2\">').append("<input type=\"text\" name=\""+index+"\" style=\"width:100%;\"/>")
+            row.append(column)
+            table.append(row)
+          })
+          $("#menuItems").append(table);
+
+        })
+       
+    });
+});

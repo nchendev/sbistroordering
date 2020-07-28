@@ -74,6 +74,7 @@ export default function OrderView(props) {
         <Header
           title='Szechuan Bistro'
           resetInformationState={props.resetInformationState}
+          history={props.history}
         />
 
         {/** Content **/}

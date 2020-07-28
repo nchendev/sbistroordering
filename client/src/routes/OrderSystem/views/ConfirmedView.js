@@ -94,7 +94,7 @@ export default function ConfirmedView(props) {
       <Typography variant='h5' gutterBottom>
         Processing Order...
       </Typography>
-    </div>
+    </div>,
   );
 
   /*
@@ -130,7 +130,7 @@ export default function ConfirmedView(props) {
                 and pickup orders should be ready in 15 minutes. <br /> Thank
                 you for your patronage, we hope to serve you again soon.
               </Typography>
-            </React.Fragment>
+            </React.Fragment>,
           );
         } else {
           setContent("something unexpected");
@@ -144,7 +144,7 @@ export default function ConfirmedView(props) {
               Sorry, but something went wrong and your order wasn't placed!
               Please try again, or give us a call at 405 752 8889.
             </Typography>
-          </div>
+          </div>,
         );
       });
 
@@ -159,6 +159,7 @@ export default function ConfirmedView(props) {
       <Header
         title='Szechuan Bistro'
         resetInformationState={props.resetInformationState}
+        history={props.history}
       />
       <div>
         <main className={classes.layout}>

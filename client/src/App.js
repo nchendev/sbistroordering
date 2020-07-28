@@ -19,6 +19,7 @@ import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import Grid from "@material-ui/core/Grid";
 import Login from "./routes/Login/Login";
+import Forgot from "./routes/Forgot/Forgot";
 import OrderSystem from "./routes/OrderSystem/OrderSystem";
 import Register from "./routes/Register/Register";
 import Link from "@material-ui/core/Link";
@@ -51,6 +52,7 @@ function App() {
           Copyright={Copyright}
         />
         <Route path='/register' component={Register} Copyright={Copyright} />
+        <Route path='/forgot' component={Forgot} Copyright={Copyright} />
         <Route path='/' component={Login} Copyright={Copyright} />
       </Switch>
     </Router>

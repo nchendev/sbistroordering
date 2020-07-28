@@ -62,7 +62,7 @@ router.post("/register", (req, res) => {
           email: ans.email,
           password: ans.password,
           information: {
-            name: fname,
+            name: ans.fname,
             address: "",
             phone: "",
           },
@@ -87,7 +87,7 @@ router.post("/register", (req, res) => {
                   error,
                 });
               });
-          })
+          }),
         );
         console.log("user registered");
       }
@@ -100,7 +100,7 @@ router.post("/login", (req, res, next) => {
   passport.authenticate("local", { session: false }, function (
     err,
     user,
-    info
+    info,
   ) {
     if (err) {
       console.log("Found unexpectederror");
@@ -115,5 +115,13 @@ router.post("/login", (req, res, next) => {
       res.send({ msg: "success", information: user.information });
     }
   })(req, res, next);
+});
+
+// process forgot attempt
+router.post("/forgot", (req, res, next) => {
+  const ans = req.body;
+  User.deleteMany({ email: ans.email }).then(() => {
+    res.send({ msg: "success" });
+  });
 });
 module.exports = router;

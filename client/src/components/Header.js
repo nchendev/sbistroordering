@@ -89,10 +89,10 @@ export default function Header(props) {
     console.log("logging user out");
   };
   const handleRegister = (e) => {
-    console.log("register");
+    props.history.push("/register");
   };
   const handleLogin = (e) => {
-    console.log("login");
+    props.history.push("/login");
   };
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -151,6 +151,9 @@ export default function Header(props) {
                 </div>
               ) : (
                 <div>
+                  <Typography variant='h6' className={classes.title}>
+                    Hello Guest
+                  </Typography>
                   <MenuItem onClick={handleLogin}>Login</MenuItem>
                   <MenuItem onClick={handleRegister}>Register</MenuItem>
                 </div>

@@ -17,6 +17,9 @@ import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
+import Alert from "@material-ui/lab/Alert";
+import Snackbar from "@material-ui/core/Snackbar";
+import AlertTitle from "@material-ui/lab/Alert";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
@@ -74,12 +77,19 @@ export default function Register(props) {
     password2: "",
   });
   const [registerErrors, setRegisterErrors] = React.useState("");
+  const [alertDisplay, setAlertDisplay] = React.useState(false);
 
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setAlertDisplay(false);
+  };
   const handleRedirectToLogin = (e) => {
     props.history.push("/");
     //return <Redirect to='/OrderingSystem' />;
   };
-
   const handleRegisterSubmit = (e) => {
     var registerJSON = ans;
     // call API
@@ -98,12 +108,24 @@ export default function Register(props) {
             console.log("error: " + error);
             errors += error + "\n";
           });
+          setAlertDisplay(false);
         }
         // if there were no errors
         else {
           // green mui alert successfully registered
+          setAlertDisplay(true);
           // clear form
+          setAns({
+            fname: "",
+            lname: "",
+            email: "",
+            password: "",
+            password2: "",
+          });
           console.log("there were no errors");
+          setTimeout(function () {
+            handleRedirectToLogin();
+          }, 5000);
         }
         setRegisterErrors(errors);
       })
@@ -219,6 +241,15 @@ export default function Register(props) {
                 </Link>
               </Grid>
             </Grid>
+            <Snackbar
+              open={alertDisplay}
+              autoHideDuration={6000}
+              onClose={handleClose}
+            >
+              <Alert severity='success'>
+                Registration Success. You may now log in
+              </Alert>
+            </Snackbar>
           </form>
         </div>
       </Grid>
