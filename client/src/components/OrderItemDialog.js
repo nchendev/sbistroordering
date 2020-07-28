@@ -23,7 +23,7 @@ export default function OrderItemDialog(props) {
 
   const initAmount = props.amount;
   // react hooks
-  const [amount, setAmount] = React.useState(props.amount);
+  const [amount, setAmount] = React.useState(initAmount);
   const [note, setNote] = React.useState(props.note);
 
   const handleClose = (e) => {
@@ -39,7 +39,11 @@ export default function OrderItemDialog(props) {
     setNote(e.target.value);
   };
   const handleEditInOrder = (e) => {
-    props.editInOrder(props.itemIndex, amount - initAmount, note);
+    props.editInOrder(
+      props.itemIndex,
+      parseInt(amount) - parseInt(initAmount),
+      note,
+    );
     handleClose();
   };
   const handleRemoveFromOrder = (e) => {

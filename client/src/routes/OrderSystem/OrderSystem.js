@@ -161,7 +161,8 @@ export default function OrderSystem(props) {
     );
     // calculate change to price
     let subtotal =
-      price.subtotal + amountChange * parseFloat(order[itemIndex].price);
+      parseFloat(price.subtotal) +
+      amountChange * parseFloat(order[itemIndex].price);
     let tax = subtotal * TAXRATE;
     let dfee = price.dfee;
     let total = subtotal + tax;
@@ -170,7 +171,7 @@ export default function OrderSystem(props) {
 
     // edit item in order
     let cpy = order[itemIndex];
-    cpy.amount += amountChange;
+    cpy.amount = parseInt(cpy.amount) + amountChange;
     cpy.note = note;
     order[itemIndex] = cpy;
     setOrder(order);
