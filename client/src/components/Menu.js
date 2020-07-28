@@ -34,8 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
   gridTile: {
     height: "fixed",
-    margin: theme.spacing(1),
-    padding: theme.spacing(1),
+    backgroundColor: "GhostWhite",
   },
 }));
 
