@@ -151,9 +151,12 @@ export default function Header(props) {
                 </div>
               ) : (
                 <div>
-                  <Typography variant='h6' className={classes.title}>
-                    Hello Guest
-                  </Typography>
+                  <MenuItem disabled={true} divider>
+                    <Typography variant='h6' className={classes.title}>
+                      Hello Guest
+                    </Typography>
+                  </MenuItem>
+
                   <MenuItem onClick={handleLogin}>Login</MenuItem>
                   <MenuItem onClick={handleRegister}>Register</MenuItem>
                 </div>
