@@ -26,13 +26,18 @@ export default function OrderSystem(props) {
   const [menu, setMenu] = React.useState({});
   const [order, setOrder] = React.useState([]);
   const [information, setInformation] = React.useState({
+    email: "",
     fname: "",
     lname: "",
-    phone: "",
     address: "",
     city: "",
     state: "OK",
     zip: "",
+    phone: "",
+    driverNotes: "",
+    cc: "",
+    exp: "",
+    cvv: "",
     driverNotes: "",
   });
   const [payment, setPayment] = React.useState({
@@ -59,6 +64,7 @@ export default function OrderSystem(props) {
       .then((res) => setMenu(res.data));
     **/
     setMenu(menuJson);
+
     // load information, if logged in
     // local storage
     if (
@@ -238,13 +244,19 @@ export default function OrderSystem(props) {
    */
   const resetInformationState = () => {
     setInformation({
-      name: "",
+      email: "",
+      fname: "",
+      lname: "",
       address: "",
+      city: "",
+      state: "",
+      zip: "",
       phone: "",
       driverNotes: "",
       cc: "",
       exp: "",
       cvv: "",
+      driverNotes: "",
     });
   };
   const setDeliveryFee = (dfee) => {

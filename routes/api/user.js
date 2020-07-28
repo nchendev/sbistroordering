@@ -62,9 +62,14 @@ router.post("/register", (req, res) => {
           email: ans.email,
           password: ans.password,
           information: {
-            name: ans.fname,
-            address: "",
+            email: ans.email,
+            fname: ans.fname,
+            lname: ans.lname,
             phone: "",
+            address: "",
+            city: "",
+            state: "OK",
+            zip: "",
           },
         });
 
@@ -124,4 +129,22 @@ router.post("/forgot", (req, res, next) => {
     res.send({ msg: "success" });
   });
 });
+
+// process update user info attempt
+router.post("/updateinfo", (req, res, next) => {
+  const updatedInfo = req.body;
+  const email = updatedInfo.email;
+  User.findOneAndUpdate({ email }, { information: updatedInfo })
+    .then(() => {
+      res.send({ msg: "success" });
+    })
+    .catch((error) => {
+      console.log(err);
+      res.json({
+        errors: "Failed to add new user. PLease try again",
+        error,
+      });
+    });
+});
+
 module.exports = router;

@@ -15,14 +15,14 @@ export default function ContactForm(props) {
   // react hooks
   const [showAlert, setShowAlert] = React.useState(false);
   const [pickupSelected, setPickupSelected] = React.useState(
-    props.options.pickup
+    props.options.pickup,
   );
   React.useState(pickupSelected ? "primary" : "default");
   const [pickupButtonColor, setPickupButtonColor] = React.useState(
-    pickupSelected ? "primary" : "default"
+    pickupSelected ? "primary" : "default",
   );
   const [deliveryButtonColor, setDeliveryButtonColor] = React.useState(
-    !pickupSelected ? "primary" : "default"
+    !pickupSelected ? "primary" : "default",
   );
   const [deliveryMessage, setDeliveryMessage] = React.useState("");
   const togglePickupDelivery = (e) => {
@@ -34,6 +34,41 @@ export default function ContactForm(props) {
     props.handlePickupDeliveryToggle();
   };
 
+  const updateUserInformation = () => {
+    const updatedInfoJson = {
+      email: props.information.email,
+      fname: props.information.fname,
+      lname: props.information.lname,
+      phone: props.information.phone,
+      address: props.information.address,
+      city: props.information.city,
+      state: props.information.state,
+      zip: props.information.zip,
+    };
+    // update database information
+    axios
+      .post("/api/user/updateinfo", updatedInfoJson)
+      .then((res) => {
+        console.log("user information updated");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+    // update localstorage/sessionstorage information
+    if (
+      localStorage.getItem("information") !== "undefined" &&
+      localStorage.getItem("information") !== null
+    ) {
+      localStorage.setItem("information", JSON.stringify(updatedInfoJson)); // replace with JWT token later
+    }
+    // session storage
+    if (
+      sessionStorage.getItem("information") !== "undefined" &&
+      sessionStorage.getItem("information") !== null
+    ) {
+      sessionStorage.setItem("information", JSON.stringify(updatedInfoJson)); // replace with JWT token later
+    }
+  };
   const calcDfee = () => {
     console.log("ping");
     setShowAlert(false);
@@ -41,6 +76,8 @@ export default function ContactForm(props) {
     // if all inputs valid, calculate delivery fee
     // query backend for delivery fee
     let parametersJSON = {
+      fname: props.information.fname,
+      lname: props.information.lname,
       address: props.information.address,
       city: props.information.city,
       state: props.information.state,
@@ -48,10 +85,12 @@ export default function ContactForm(props) {
     };
     // check to make sure all fields are filled in
     if (
-      (parametersJSON.address === "" ||
-        parametersJSON.city === "" ||
-        parametersJSON.state == "",
-      parametersJSON.zip == "")
+      parametersJSON.fname === "" ||
+      parametersJSON.lname === "" ||
+      parametersJSON.address === "" ||
+      parametersJSON.city === "" ||
+      parametersJSON.state == "" ||
+      parametersJSON.zip == ""
     ) {
       setShowAlert(true);
       return;
@@ -71,15 +110,17 @@ export default function ContactForm(props) {
             "The estimated delivery fee is $" +
               res.data.dfee +
               " for a delivery distance of " +
-              res.data.dist
+              res.data.dist,
           );
           props.setDfeeCalced(true);
+          updateUserInformation();
         } else if (res.data.status === "FAILURE") {
           props.setDeliveryFee(3);
           setDeliveryMessage(
-            "Something went wrong and we couldn't verify your address. The estimated delivery fee has been set to $3.00"
+            "Something went wrong and we couldn't verify your address. The estimated delivery fee has been set to $3.00",
           );
           props.setDfeeCalced(true);
+          updateUserInformation();
         } else if (res.data.status === "INVALID") {
           setShowAlert(true);
           props.setDfeeCalced(false);
@@ -89,7 +130,7 @@ export default function ContactForm(props) {
         console.error(err);
         props.setDeliveryFee(3);
         setDeliveryMessage(
-          "Something went wrong and we couldn't verify your address. The estimated delivery fee has been set to $3.00"
+          "Something went wrong and we couldn't verify your address. The estimated delivery fee has been set to $3.00",
         );
         props.setDfeeCalced(true);
       });
